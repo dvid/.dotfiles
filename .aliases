@@ -1,8 +1,6 @@
 
 # ssh
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'";
-alias sshdev="ssh fpfis@fpfis-dev"  #"ssh polidod@phpdev2.nwf"
-alias sshplay="ssh fpfis@fpfis-mgmt.cc.cec.eu.int"
 
 # Behat
 alias behathelp="bin/behat -di | less -R"
