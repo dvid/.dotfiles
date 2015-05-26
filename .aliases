@@ -9,11 +9,12 @@ alias sss="selenium-server -p 4444"
 # Enable aliases to be sudo’ed
 alias sudo='sudo'
 
+# Tools
 alias s='open -a "Sublime Text 3"'
+alias chat="open weechat"
 
 # MacOSX
 alias sleep="pmset sleepnow"
-alias chat="open weechat"
 alias f='open -a Finder ./'
 spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }                         # spotlight: Search for a file using MacOS Spotlight's metadata
 alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"                 # Recursively delete .DS_Store files
