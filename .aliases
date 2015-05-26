@@ -1,0 +1,110 @@
+
+# ssh
+alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'";
+alias sshdev="ssh fpfis@fpfis-dev"  #"ssh polidod@phpdev2.nwf"
+alias sshplay="ssh fpfis@fpfis-mgmt.cc.cec.eu.int"
+
+# Behat
+alias behathelp="bin/behat -di | less -R"
+alias sss="selenium-server -p 4444"
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo'
+
+alias s='open -a "Sublime Text 3"'
+
+# MacOSX
+alias sleep="pmset sleepnow"
+alias chat="open weechat"
+alias f='open -a Finder ./'
+spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }                         # spotlight: Search for a file using MacOS Spotlight's metadata
+alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"                 # Recursively delete .DS_Store files
+alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'      #   finderShowHidden:   Show hidden files in Finder
+alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'     #   finderHideHidden:   Hide hidden files in Finder
+alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"     # Clean up LaunchServices to remove duplicates in the "Open With" menu
+alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'                                            # Run a screensaver on the Desktop
+
+# DevTools 
+alias memcaches="sh /Volumes/Vault/Dev/Scripts/Dev/VRT/startmemcached.sh"
+alias sassr1="sass --watch sites/all/themes/benny/scss/:sites/all/themes/benny/css/"
+alias cpwr1="compass watch /www/vrt/radio1/htdocs/sites/all/themes/benny"
+
+# Colored up cat!
+# You must install Pygments first - "sudo easy_install Pygments"
+alias c='pygmentize -O style=monokai -f console256 -g'
+
+# Terminal
+alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
+alias ..='cd ../'                           # Go back 1 directory level
+alias ...='cd ../../'                       # Go back 2 directory levels
+alias .3='cd ../../../'                     # Go back 3 directory levels
+alias .4='cd ../../../../'                  # Go back 4 directory levels
+alias .5='cd ../../../../../'               # Go back 5 directory levels
+alias .6='cd ../../../../../../'            # Go back 6 directory levels
+alias which='type -all'
+alias path='echo -e ${PATH//:/\\n}'
+alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
+alias ttop="top -R -F -s 10 -o rsize"       # Recommended 'top' invocation to minimize resources
+
+# Search
+alias qfind="find . -name "                 # qfind:    Quickly search for file
+ff () { /usr/bin/find . -name "$@" ; }      # ff:       Find file under the current directory
+ffs () { /usr/bin/find . -name "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
+ffe () { /usr/bin/find . -name '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
+alias numFiles='echo $(ls -1 | wc -l)'      # numFiles:     Count of non-hidden files in current dir
+
+# Alias
+alias zshconf="s ~/.zshrc"
+alias ohmyzsh="s ~/.oh-my-zsh"
+
+# Projects
+alias www="cd /www"
+alias cdec="cd /www/ec"
+alias cdcwt="cd /www/ec/cwt"
+alias beta="cd /www/ec/beta"
+
+# drush 
+alias db="drush @beta.local"
+alias dby="drush @beta.local -y"
+alias dbcc="drush @beta.local cc all -y"
+
+# phpcs
+alias dcs="phpcs --standard=Drupal"
+#alias phpcs="~/.composer/vendor/bin/phpcs"
+#alias phpcs="/usr/local/Cellar/php55/5.5.17/bin/phpcs"
+
+# Git
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m' # requires to type a commit message
+alias gam='git commit --amend -m' # requires to type a commit message
+alias gp='git push'
+alias gmt='git mergetool -t opendiff'
+alias gac="git reset --soft HEAD~1"
+alias gacc="git commit -c ORIG_HEAD"
+alias grh="git revert HEAD" #If you have already made your commits public, you will want to create a new commit which will "revert" the changes you made in your previous commit (current HEAD).
+alias gso="git remote show origin"
+
+# Networking
+alias myip='curl ip.appspot.com'                    # myip:         Public facing IP Address
+alias netCons='lsof -i'                             # netCons:      Show all open TCP/IP sockets
+alias flushDNS='dscacheutil -flushcache'            # flushDNS:     Flush out the DNS Cache
+alias lsock='sudo /usr/sbin/lsof -i -P'             # lsock:        Display open sockets
+alias lsockU='sudo /usr/sbin/lsof -nP | grep UDP'   # lsockU:       Display only open UDP sockets
+alias lsockT='sudo /usr/sbin/lsof -nP | grep TCP'   # lsockT:       Display only open TCP sockets
+alias ipInfo0='ipconfig getpacket en0'              # ipInfo0:      Get info on connections for en0
+alias ipInfo1='ipconfig getpacket en1'              # ipInfo1:      Get info on connections for en1
+alias openPorts='sudo lsof -i | grep LISTEN'        # openPorts:    All listening connections
+alias showBlocked='sudo ipfw list'                  # showBlocked:  All ipfw rules inc/ blocked IPs
+
+# Web Dev Conf
+alias aedit='sudo edit /etc/httpd/httpd.conf'
+alias arestart='sudo apachectl graceful'
+alias mysqlstart='mysql.server start'
+alias mysqlstop='mysql.server stop'
+alias emysql='vi /usr/local/opt/mysql/my.cnf'
+alias ehosts='sudo vi /etc/hosts'
+alias evhosts="sudo vi /etc/apache2/extra/httpd-vhosts.conf"
+alias httplog='tail /var/log/httpd/error_log'
+alias apacheLogs="less +F /var/log/apache2/error_log"
+alias ephpini="sudo vi /usr/local/etc/php/5.5/php.ini"
