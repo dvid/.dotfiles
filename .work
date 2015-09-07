@@ -1,0 +1,4 @@
+
+# Env
+alias sshdev="ssh fpfis@fpfis-dev"  #"ssh polidod@phpdev2.nwf"
+alias sshplay="ssh fpfis@fpfis-mgmt.cc.cec.eu.int"

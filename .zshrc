@@ -9,7 +9,18 @@
 
 #export ZSH=$HOME/.oh-my-zsh
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="cobalt2"
+COMPLETION_WAITING_DOTS="true"
+
+# 10 second before you can confirm a wildcard deletion
+setopt RM_STAR_WAIT
+
+# History
+export HISTSIZE=32768;
+export HISTFILESIZE=$HISTSIZE;
+export HISTCONTROL=ignoredups;
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -75,7 +86,9 @@ PATH=${PATH}:/sbin
 PATH=${PATH}:/usr/local/sbin
 PATH=${PATH}:~/.composer/vendor/bin
 PATH=${PATH}:/usr/local/Cellar/php55/5.5.17/bin
-
+PATH=${PATH}:/usr/local/src/composer/bin
+PATH=${PATH}:/usr/local/src/composer/
+PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
 export PATH=${PATH}
 
 # export MANPATH="/usr/local/man:$MANPATH"

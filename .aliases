@@ -1,10 +1,16 @@
+# Edit alias file :)
+alias vialias="vi ~/.dotfiles/.aliases"
 
 # ssh
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'";
+alias sshhim="ssh root@188.166.64.75"
+alias sshdev="ssh fpfis@fpfis-dev"  #"ssh polidod@phpdev2.nwf"
+alias sshplay="ssh fpfis@fpfis-mgmt.cc.cec.eu.int"
 
 # Behat
 alias behathelp="bin/behat -di | less -R"
 alias sss="selenium-server -p 4444"
+alias bt="bin/behat -c tests/behat.yml"
 
 # Enable aliases to be sudo’ed
 alias sudo='sudo'
@@ -18,8 +24,8 @@ alias sleep="pmset sleepnow"
 alias f='open -a Finder ./'
 spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }                         # spotlight: Search for a file using MacOS Spotlight's metadata
 alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"                 # Recursively delete .DS_Store files
-alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'      #   finderShowHidden:   Show hidden files in Finder
-alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'     #   finderHideHidden:   Hide hidden files in Finder
+alias showHidden="defaults write com.apple.finder AppleShowAllFiles YES"
+alias hideHidden="defaults write com.apple.finder AppleShowAllFiles NO"
 alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"     # Clean up LaunchServices to remove duplicates in the "Open With" menu
 alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'                                            # Run a screensaver on the Desktop
 
@@ -27,6 +33,8 @@ alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resou
 alias memcaches="sh /Volumes/Vault/Dev/Scripts/Dev/VRT/startmemcached.sh"
 alias sassr1="sass --watch sites/all/themes/benny/scss/:sites/all/themes/benny/css/"
 alias cpwr1="compass watch /www/vrt/radio1/htdocs/sites/all/themes/benny"
+alias blocal="/usr/local/src/BrowserStackLocal TxEm8yuEmqp8RUZKLfpg"
+alias composerpwd="/usr/local/Cellar/composer/1.0.0-alpha9/bin/composer"
 
 # Colored up cat!
 # You must install Pygments first - "sudo easy_install Pygments"
@@ -44,6 +52,8 @@ alias which='type -all'
 alias path='echo -e ${PATH//:/\\n}'
 alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
 alias ttop="top -R -F -s 10 -o rsize"       # Recommended 'top' invocation to minimize resources
+#sort /Users/admin/Desktop/invit.txt  | uniq -c | grep -v '^ *1 '
+alias ffind="find . -name .svn -exec rm -r -f {} +"
 
 # Search
 alias qfind="find . -name "                 # qfind:    Quickly search for file
@@ -63,9 +73,13 @@ alias cdcwt="cd /www/ec/cwt"
 alias beta="cd /www/ec/beta"
 
 # drush 
+alias delbtu="drush --yes @beta.local -l beta.local user-cancel abceditortestuser --delete-content"
+alias dup="drush @beta.local upwd --password='pass' 'admin'"
 alias db="drush @beta.local"
 alias dby="drush @beta.local -y"
 alias dbcc="drush @beta.local cc all -y"
+#drush @beta.local  sql-query "UPDATE system SET schema_version = '7101' WHERE name = 'dt_priority'" 
+#mysql -u root -p ec_beta < /Users/admin/Downloads/dev-beta-beta6yl7gzyycb-2015-06-01.sql
 
 # phpcs
 alias dcs="phpcs --standard=Drupal"
@@ -73,16 +87,22 @@ alias dcs="phpcs --standard=Drupal"
 #alias phpcs="/usr/local/Cellar/php55/5.5.17/bin/phpcs"
 
 # Git
+alias gco='git checkout'
+alias gcod='git checkout develop'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit -m' # requires to type a commit message
-alias gam='git commit --amend -m' # requires to type a commit message
+alias gca='git commit --amend -m' # requires to type a commit message
 alias gp='git push'
+alias grh='git reset --hard'
 alias gmt='git mergetool -t opendiff'
 alias gac="git reset --soft HEAD~1"
 alias gacc="git commit -c ORIG_HEAD"
-alias grh="git revert HEAD" #If you have already made your commits public, you will want to create a new commit which will "revert" the changes you made in your previous commit (current HEAD).
-alias gso="git remote show origin"
+alias grhe="git revert HEAD" #If you have already made your commits public, you will want to create a new commit which will "revert" the changes you made in your previous commit (current HEAD).
+alias grso="git remote show origin"
+#alias gfo='git fetch origin develop' && 'git merge FETCH_HEAD'
+#git pull origin develop #from branch pull all changes and merge #git merge develop
+#git fetch origin develop && git merge FETCH_HEAD 
 
 # Networking
 alias myip='curl ip.appspot.com'                    # myip:         Public facing IP Address
@@ -107,3 +127,15 @@ alias evhosts="sudo vi /etc/apache2/extra/httpd-vhosts.conf"
 alias httplog='tail /var/log/httpd/error_log'
 alias apacheLogs="less +F /var/log/apache2/error_log"
 alias ephpini="sudo vi /usr/local/etc/php/5.5/php.ini"
+alias emycnf="sudo vi /usr/local/Cellar/mysql/5.6.21/my.cnf"
+alias mysqll="launchctl load ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias mysqlu="launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+
+# Helper
+#telnet 0 11211
+#stats
+#stats item
+#stats items
+
+# Memcache config
+# /usr/local/etc/php/5.5/conf.d/ext-memcache.ini 
