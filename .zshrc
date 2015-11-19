@@ -89,6 +89,7 @@ PATH=${PATH}:/usr/local/Cellar/php55/5.5.17/bin
 PATH=${PATH}:/usr/local/src/composer/bin
 PATH=${PATH}:/usr/local/src/composer/
 PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
+PATH=$PATH:$HOME/.composer/vendor/bin
 export PATH=${PATH}
 
 # export MANPATH="/usr/local/man:$MANPATH"
