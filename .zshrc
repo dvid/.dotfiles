@@ -1,29 +1,73 @@
-#                   ██
-#                  ░██
-#    ██████  ██████░██      ██████  █████
-#   ░░░░██  ██░░░░ ░██████ ░░██░░█ ██░░░██
-#      ██  ░░█████ ░██░░░██ ░██ ░ ░██  ░░
-#     ██    ░░░░░██░██  ░██ ░██   ░██   ██
-#    ██████ ██████ ░██  ░██░███   ░░█████
-#   ░░░░░░ ░░░░░░  ░░   ░░ ░░░     ░░░░░
+#export TERM="xterm-256color"
 
-#export ZSH=$HOME/.oh-my-zsh
-ZSH=$HOME/.oh-my-zsh
+# Path to your oh-my-zsh installation.
+ZSH=/home/david/.oh-my-zsh
+
+# Z
+. /home/david/z.sh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+
+#WARNING! Your terminal appears to support less than 256 colors!
+#If your terminal supports 256 colors, please export the appropriate environment variable
+#_before_ loading this theme in your ~/.zshrc. In most terminal emulators, putting
+#export TERM="xterm-256color" at the top of your ~/.zshrc is sufficient.
+
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="cobalt2"
-COMPLETION_WAITING_DOTS="true"
+#ZSH_THEME="cobalt2"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
-# 10 second before you can confirm a wildcard deletion
-setopt RM_STAR_WAIT
+POWERLEVEL9K_MODE='awesome-fontconfig'
+POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+POWERLEVEL9K_LINUX_ICON=$'\uF201'
+POWERLEVEL9K_LOAD_ICON=''
+POWERLEVEL9K_HOME_ICON=''
+POWERLEVEL9K_HOME_SUB_ICON=''
+POWERLEVEL9K_FOLDER_ICON=''
+POWERLEVEL9K_VCS_BRANCH_ICON=$'\UF126 '
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status os_icon dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time load)
+POWERLEVEL9K_STATUS_VERBOSE=false
+POWERLEVEL9K_STATUS_OK_BACKGROUND='022'
+POWERLEVEL9K_TIME_FOREGROUND='000'
+POWERLEVEL9K_TIME_BACKGROUND='007'
+#POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND="black"
+#POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND="white"
+#POWERLEVEL9K_LOAD_WARNING_BACKGROUND="black"
+#POWERLEVEL9K_LOAD_WARNING_FOREGROUND="white"
+#POWERLEVEL9K_LOAD_NORMAL_BACKGROUND="black"
+#POWERLEVEL9K_LOAD_NORMAL_FOREGROUND="white"
 
-# History
-export HISTSIZE=32768;
-export HISTFILESIZE=$HISTSIZE;
-export HISTCONTROL=ignoredups;
-export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
+#vi /home/david/.oh-my-zsh/custom/themes/powerlevel9k/functions/icons.zsh
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+#GOTHAM_SHELL="$HOME/.oh-my-zsh/custom/themes/gotham.sh"
+#[[ -s $GOTHAM_SHELL ]] && source $GOTHAM_SHELL
+
+#autoload -Uz colors && colors
+#autoload -U compinit colors zcalc
+#compinit
+#colors
+
+setopt correct          # Auto correct mistakes
+setopt extendedglob     # Extended globbing
+setopt nocaseglob       # Case insensitive globbing
+setopt rcexpandparam    # Array expension with parameters
+#setopt nocheckjobs      # Don't warn about running processes when exiting
+setopt numericglobsort  # Sort filenames numerically when it makes sense
+#setopt nohup            # Don't kill processes when exiting
+#setopt nobeep           # No beep
+setopt appendhistory    # Immediately append history instead of overwriting
+setopt histignorealldups #If a new command is a duplicate, remove the older one
+setopt autocd 
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -47,49 +91,167 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
-ZSH_HIGHLIGHT_PATTERNS=('rm -rf *' 'fg=white,bold,bg=red')
+# User configuration
 
-# Plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(
-    brew
-    brew-cask
-    catimg
-    git
-    git-extras
-    github
-    git-prompt
-    lol
-    nyan
-    osx
-    parbs-sites
-    sublime
-    vagrant
-    z
-    zsh-syntax-highlighting
-)
-
-source $ZSH/oh-my-zsh.sh
-source ~/.dotfiles/.aliases
-source ~/.dotfiles/.functions
-source ~/.dotfiles/.exports
-test -f ~/.dotfiles/.secret && source ~/.dotfiles/.secret
-test -f ~/.dotfiles/.work && source ~/.dotfiles/.work
-
-PATH=${PATH}:/usr/local/src
-PATH=${PATH}:/usr/local/bin
-PATH=${PATH}:/usr/bin
-PATH=${PATH}:/bin
-PATH=${PATH}:/usr/sbin
-PATH=${PATH}:/sbin
-PATH=${PATH}:/usr/local/sbin
-PATH=${PATH}:~/.composer/vendor/bin
-PATH=${PATH}:/usr/local/Cellar/php55/5.5.17/bin
-PATH=${PATH}:/usr/local/src/composer/bin
-PATH=${PATH}:/usr/local/src/composer/
-PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
-PATH=$PATH:$HOME/.composer/vendor/bin
-export PATH=${PATH}
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/share/webapps/composer/bin"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+export PHP_INI='/etc/php/php.ini'
+export DRUSH_INI='/usr/local/share/drush/drush.ini'
+export PHP_OPTIONS='-d memory_limit="1024M"'
+export DRUSH_NOCOLOR=FALSE
+tput init
 
 # export MANPATH="/usr/local/man:$MANPATH"
+
+source $ZSH/oh-my-zsh.sh
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Alias
+alias vi="vim"
+alias sudovi="sudo vim"
+alias grep='grep --color=auto'
+alias soz='. ~/.zshrc'
+
+# Files Edit
+alias ezsh="vi ~/.zshrc"
+alias evim="vi ~/.vimrc"
+alias ei3="vi ~/.config/i3/config"
+alias ei3="vi ~/.config/i3/config"
+alias emycnf="sudovi /etc/mysql/my.cnf"
+alias ehosts="sudovi /etc/hosts"
+alias ephpini="sudovi /etc/php/php.ini"
+alias ehttpd="sudovi /etc/httpd/conf/httpd.conf"
+alias evhosts="sudovi /etc/httpd/conf/extra/httpd-vhosts.conf"
+alias eenv="sudovi /etc/environment"
+
+# Launcher
+alias pstorm="/usr/local/bin/pstorm"
+alias aconftest="apachectl configtest"
+alias astatus="systemctl status httpd.service"
+#alias arestart="sudo systemctl restart httpd"
+alias arestart="sudo apachectl restart"
+alias sshs="sudo systemctl start sshd.service"
+alias sshd="sudo systemctl enable sshd.service"
+alias sshdev="ssh isa@s-cnect-isadru"
+
+# Manjaro updates
+alias linstalk="mhwd-kernel -li" 		#list installed kernels
+alias llk="mhwd-kernel -l" 				#list linux kernels available
+alias ilk="sudo mhwd-kernel -i linux"	#install linux kernel version ex:linux41
+alias ums="sudo pacman -Syu"
+
+# Git
+alias gs="git status"
+
+# Proxy
+assignProxy(){
+   PROXY_ENV="http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY"
+   for envar in $PROXY_ENV
+   do
+     export $envar=$1
+   done
+   for envar in "no_proxy NO_PROXY"
+   do
+      export $envar=$2
+   done
+ }
+
+ clrProxy(){
+   assignProxy "" # This is what 'unset' does.
+ }
+
+ activeP(){
+   #user=YourUserName
+   #read -p "Password: " -s pass &&  echo -e " "
+   proxy_value="http://polidda:enjoyFreedom001@psbru.cec.eu.int:8012"
+   no_proxy_value=".local,.dev,localhost,127.0.0.1,localaddress,.localdomain.com,.ec.europa.eu"
+   assignProxy $proxy_value $no_proxy_value
+ }
+
+alias pbcopy="xclip -selection c" 
+alias pbpaste="xclip -selection clipboard -o"
+alias timer="echo n7Dv23kh | pbcopy && xdg-open 'https://webgate.ec.europa.eu/fpfis/timeclock/timeclock.php'"
+
+alias hvimium="echo '
+Vimium shortcuts:
+
+h       scroll left
+j       scroll down
+k       scroll up
+l       scroll right
+gg      scroll to top of the page
+G       scroll to bottom of the page
+f       activate link hints mode to open in current tab
+F       activate link hints mode to open in new tab
+r       reload
+gf      view source
+zi      zoom in
+zo      zoom out
+/       enter find mode -- esc to cancel
+n       cycle forward to the next find match
+N       cycle backward to the previous find match
+i       enter insert mode -- esc to exit
+yy      copy the current url to the clipboard
+ba      go back in history
+fw      go forward in history
+J       go one tab left
+K       go one tab right
+t       create tab
+d       close current tab
+u       restore closed tab (unwind the 'd' command)
+'"
+
+# Plugins 
+
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.oh-my-zsh/custom/plugins/zsh-256color/zsh-256color.plugin.zsh
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+    git
+    zsh-syntax-highlighting
+    zsh-256color
+)
+
+# Functions
+
+# ex - archive extractor
+# usage: ex <file>
+ex() {
+  if [ -f $1 ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf $1   ;;
+      *.tar.gz)    tar xzf $1   ;;
+      *.bz2)       bunzip2 $1   ;;
+      *.rar)       unrar x $1     ;;
+      *.gz)        gunzip $1    ;;
+      *.tar)       tar xf $1    ;;
+      *.tbz2)      tar xjf $1   ;;
+      *.tgz)       tar xzf $1   ;;
+      *.zip)       unzip $1     ;;
+      *.Z)         uncompress $1;;
+      *.7z)        7z x $1      ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
