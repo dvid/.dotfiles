@@ -1,19 +1,21 @@
 
 "--------------------------  Settings  ---------------------------"
+set nocompatible            " be iMproved, get rid of Vi compatibility mode. required!
+let mapleader = "," 	 	" default leader is \ but , is my prefered choice	
+
 
 "--------------------------  Files  ---------------------------"
 so ~/.vim/plugins.vim
 
-set nocompatible          	" get rid of Vi compatibility mode. SET FIRST!
-filetype plugin indent on 	" filetype detection[ON] plugin[ON] indent[ON]
+
+"--------------------------  Theming  ---------------------------"
+
+colorscheme gotham256
+set background=dark
 set t_Co=256              	" enable 256-color mode.
 syntax enable             	" enable syntax highlighting (previously syntax on).
-set background=dark
-colorscheme gotham256
-"colorscheme vividchalk
 set nonumber				" set number  		
 set laststatus=2          	" last window always has a statusline
-filetype indent on        	" activates indenting for files
 set ruler                 	" Always show info along bottom.
 set autoindent            	" auto-indent
 set tabstop=4             	" tab spacing
@@ -24,8 +26,6 @@ set expandtab             	" use spaces instead of tabs
 set smarttab              	" use tabs at the start of a line, spaces elsewhere
 set nowrap                	" don't wrap text
 set paste                 	" allow pasting without indentation
-
-let mapleader = "," 	 	" default leader is \ but , is my prefered choice	
 
 
 "-------------------------- Search ---------------------------"
@@ -43,13 +43,15 @@ nmap <Leader>ev :tabedit $MYVIMRC<cr>
 " Hide highlight after searching phrases
 nmap <Leader><space> :nohlsearch<cr>
 
+" Tab close
+nmap <leader>tc :tabc<cr>
 
 "-------------------------- Auto-commands ---------------------------"
 
 " Source .vimrc file when saving it
 augroup autosourcing
-		autocmd!
-		autocmd BufWritePost .vimrc source %
+        autocmd!
+        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim source % | :colorscheme gotham256
 augroup END
 
 
@@ -60,3 +62,7 @@ augroup END
 " gg						top
 " :tabc						close current tab
 " :bd						buffer delete
+" :bp                       buffer previous
+" Next tab: gt
+" Prior tab: gT
+" Numbered tab: nnngt
