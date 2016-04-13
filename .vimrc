@@ -1,6 +1,9 @@
 
 "--------------------------  Settings  ---------------------------"
 
+"--------------------------  Files  ---------------------------"
+so ~/.vim/plugins.vim
+
 set nocompatible          	" get rid of Vi compatibility mode. SET FIRST!
 filetype plugin indent on 	" filetype detection[ON] plugin[ON] indent[ON]
 set t_Co=256              	" enable 256-color mode.
