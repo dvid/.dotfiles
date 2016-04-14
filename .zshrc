@@ -185,7 +185,7 @@ assignProxy(){
 
 alias pbcopy="xclip -selection c" 
 alias pbpaste="xclip -selection clipboard -o"
-alias timer="echo n7Dv23kh | pbcopy && xdg-open 'https://webgate.ec.europa.eu/fpfis/timeclock/timeclock.php'"
+alias timer="echo n7Dv23kh | pbcopy && firefox 'https://webgate.ec.europa.eu/fpfis/timeclock/timeclock.php'"
 
 alias hvimium="echo '
 Vimium shortcuts:
