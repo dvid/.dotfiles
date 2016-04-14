@@ -10,3 +10,5 @@ vim +PluginInstall +qall
 
 # Create symlinks calling it from within .dot/ with a symlinks folder containing all files to be symlinked in the home directory
 #stow symlinks
+
+# ohmyzsh plugins
