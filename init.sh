@@ -12,3 +12,5 @@ vim +PluginInstall +qall
 #stow symlinks
 
 # ohmyzsh plugins
+
+# fc-cache -fv ~/.fonts
