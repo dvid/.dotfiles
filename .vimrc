@@ -46,6 +46,9 @@ nmap <Leader><space> :nohlsearch<cr>
 " Tab close
 nmap <leader>tc :tabc<cr>
 
+" Toggle line number
+:nnoremap <leader>N :setlocal number!<cr>
+
 "-------------------------- Auto-commands ---------------------------"
 
 " Source .vimrc file when saving it
