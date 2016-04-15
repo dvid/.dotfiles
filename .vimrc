@@ -58,7 +58,7 @@ augroup autosourcing
 augroup END
 
 
-"-------------------------- Shortcuts ---------------------------"
+"-------------------------- Cheatsheet ---------------------------"
 
 " zz 						Center the screen on your cursor
 " G							bottom
@@ -66,6 +66,7 @@ augroup END
 " :tabc						close current tab
 " :bd						buffer delete
 " :bp                       buffer previous
-" Next tab: gt
-" Prior tab: gT
-" Numbered tab: nnngt
+" :gt                       Next tab
+" :gT                       Prior tab
+" :nnngt                    Numbered tab:
+" :sort                     Sort selected lines

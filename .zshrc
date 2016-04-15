@@ -157,6 +157,7 @@ alias ums="sudo pacman -Syu"
 
 # Git
 alias gs="git status"
+alias gfh="git log -p"                  #let git generate the patches for each log entry
 
 # Proxy
 assignProxy(){
