@@ -1,7 +1,7 @@
 "--------------------------  Leader ---------------------------"
 
 set nocompatible            " be iMproved, get rid of Vi compatibility mode. required!
-let mapleader = "," 	 	" default leader is \ but , is my prefered choice	
+let mapleader = "," 	 	" default leader is \ but , is my prefered choice
 
 "--------------------------  Files  ---------------------------"
 
@@ -17,40 +17,39 @@ colorscheme override
 set background=dark
 set t_Co=256
 syntax enable               " enable syntax highlighting (previously syntax on).
-set nonumber				" set number  		
-set ruler                 	" Always show info along bottom.
-set autoindent            	" auto-indent
-set tabstop=4             	" tab spacing
-set softtabstop=4         	" unify
-set shiftwidth=4          	" indent/outdent by 4 columns
-set shiftround            	" always indent/outdent to the nearest tabstop
-set expandtab             	" use spaces instead of tabs
-set smarttab              	" use tabs at the start of a line, spaces elsewhere
-set nowrap                	" don't wrap text
-set paste                 	" allow pasting without indentation
+set nonumber                " set number
+set ruler                   " Always show info along bottom.
+set autoindent              " auto-indent
+set tabstop=4               " tab spacing
+set softtabstop=4           " unify
+set shiftwidth=4            " indent/outdent by 4 columns
+set shiftround              " always indent/outdent to the nearest tabstop
+set expandtab               " use spaces instead of tabs
+set smarttab                " use tabs at the start of a line, spaces elsewhere
+set nowrap                  " don't wrap text
+set paste                   " allow pasting without indentation
 set guioptions+=c           " GUI Vim will not pop up a dialog box
 set listchars=tab:▸\ ,eol:¬ " Define invisible symbols
 
 "--------------------------  Status Line  ---------------------------"
 
-set laststatus=2        " last window always has a statusline
-
-set statusline=%t       "tail of the filename
+set laststatus=2            "last window always has a statusline
+set statusline=%m           "modified flag
+set statusline+=%t          "tail of the filename
 set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
-set statusline+=%{&ff}] "file format
-set statusline+=%h      "help file flag
-set statusline+=%m      "modified flag
-set statusline+=%r      "read only flag
-set statusline+=%y      "filetype
+set statusline+=%{&ff}]     "file format
+set statusline+=%h          "help file flag
+set statusline+=%r          "read only flag
+set statusline+=%y          "filetype
 set statusline+=\ %F       "tail of the filename
-set statusline+=%=      "left/right separator
-set statusline+=%c,     "cursor column
-set statusline+=%l/%L   "cursor line/total lines
-set statusline+=\ %P    "percent through file
+set statusline+=%=          "left/right separator
+set statusline+=%c,         "cursor column
+set statusline+=%l/%L       "cursor line/total lines
+set statusline+=\ %P        "percent through file
 
 "-------------------------- Search ---------------------------"
 
-set hlsearch 				" highlight searched phrases.
+set hlsearch                " highlight searched phrases.
 set incsearch               " But do highlight as you type your search.
 set ignorecase              " Make searches case-insensitive.
 
@@ -132,12 +131,8 @@ endfunction
 " To compare two paths outside a working tree:
 " usage: git diff [--no-index] <path> <path>
 function! IsModified()
-    if &modified
         silent !clear
         execute "!" . "git diff " . expand("%:p")
-    else
-        echom "No edit!"
-    endif
 endfunction
 
 " potionbytecode
