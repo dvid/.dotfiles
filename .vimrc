@@ -73,7 +73,82 @@ nmap <Leader><space> :nohlsearch<cr>
 nmap <leader>tc :tabc<cr>
 
 " Toggle line number
-:nnoremap <leader>N :setlocal number!<cr>
+nnoremap <leader>N :setlocal number!<cr>
+
+" Toggle autowriteall
+nmap <leader>S :call AutoSaveFiles()<cr>
+
+" Save file if modified
+nmap <leader>s :call SaveCurrentFile()<cr>
+
+" Show diff if file is modified
+nmap <leader>d :call IsModified()<cr><cr>
+
+" Show diff if file is modified
+nmap <leader>D :call ShowDiff()<cr><cr>
+
+" Surround word with double quotes
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+
+" Copy selected to clipboard
+map <C-c> y:e ~/clipsongzboard<CR>P:w !pbcopy<CR><CR>:bdelete!<CR>
+
+"-------------------------- Functions ---------------------------"
+
+" Save current file if edited
+function! SaveCurrentFile()
+    if &modified
+        echohl Question
+        echo "Save file [y/n]?"
+        echohl None
+
+        let response = nr2char(getchar())
+        if response ==? "y"
+            w
+            echom "File saved"
+        endif
+    else
+        echom "No Edit!"
+    endif
+endfunction
+
+" Save files when switching buffer
+function! AutoSaveFiles()
+    if &autowriteall
+        set noautowriteall
+    else
+        set autowriteall
+    endif
+    echom   'autowriteall ' &autowriteall
+endfunction
+
+" If file has been modified do a git diff
+" @TODO
+" To compare two paths outside a working tree:
+" usage: git diff [--no-index] <path> <path>
+function! IsModified()
+    if &modified
+        silent !clear
+        execute "!" . "git diff " . expand("%:p")
+    else
+        echom "No edit!"
+    endif
+endfunction
+
+" potionbytecode
+function! ShowDiff()
+    " Get the bytecode.
+    let bytecode = system("git diff " . expand("%:p") . " 2>&1")
+
+    " Open a new split and set it up.
+    vsplit %.diff
+    normal! ggdG
+    setlocal buftype=nofile noswapfile
+    set filetype=on filetype=enabled syntax=diff
+
+    " Insert the bytecode.
+    call append(0, split(bytecode, '\v\n'))
+endfunction
 
 "-------------------------- Auto-commands ---------------------------"
 
