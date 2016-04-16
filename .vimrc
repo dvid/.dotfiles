@@ -12,8 +12,16 @@ so ~/.vim/plugins.vim
 
 colorscheme gotham256
 set background=dark
-set t_Co=256              	" enable 256-color mode.
-syntax enable             	" enable syntax highlighting (previously syntax on).
+set t_Co=256
+
+" Function has to be called before syntax enable
+" Autosourcing file won't alter colors
+function! AfterColor()
+    highlight Identifier ctermfg=Green guifg=#006F00
+endfunction
+:call AfterColor()
+
+syntax enable               " enable syntax highlighting (previously syntax on).
 set nonumber				" set number  		
 set laststatus=2          	" last window always has a statusline
 set ruler                 	" Always show info along bottom.
@@ -54,7 +62,7 @@ nmap <leader>tc :tabc<cr>
 " Source .vimrc file when saving it
 augroup autosourcing
         autocmd!
-        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim source % | :colorscheme gotham256
+        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim source $MYVIMRC | colorscheme gotham256 | :call AfterColor()
 augroup END
 
 
