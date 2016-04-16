@@ -1,12 +1,15 @@
+"--------------------------  Leader ---------------------------"
 
-"--------------------------  Settings  ---------------------------"
 set nocompatible            " be iMproved, get rid of Vi compatibility mode. required!
 let mapleader = "," 	 	" default leader is \ but , is my prefered choice	
 
-
 "--------------------------  Files  ---------------------------"
+
 so ~/.vim/plugins.vim
 
+"--------------------------  Settings  ---------------------------"
+
+set autoread
 
 "--------------------------  Theming  ---------------------------"
 
@@ -58,7 +61,6 @@ set hlsearch 				" highlight searched phrases.
 set incsearch               " But do highlight as you type your search.
 set ignorecase              " Make searches case-insensitive.
 
-
 "-------------------------- Mappings ---------------------------"
 
 " Edit .vimrc file
@@ -81,16 +83,23 @@ augroup autosourcing
         autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim source $MYVIMRC | colorscheme gotham256 | :call AfterColor()
 augroup END
 
+"autocmd BufNewFile,BufRead *.diff set syntax=diff
+"au! syntax diff source ~/.vim/syntax/diff_up.vim
 
 "-------------------------- Cheatsheet ---------------------------"
 
 " zz 						Center the screen on your cursor
 " G							bottom
 " gg						top
+" D                         delete to end of line = d$
+" dw                        delete until end of word
 " :tabc						close current tab
 " :bd						buffer delete
 " :bp                       buffer previous
 " :gt                       Next tab
 " :gT                       Prior tab
 " :nnngt                    Numbered tab:
+" <C-W>h/l/j/k              Move through panes
+" <C-W>w                    Toggle pane
+" :viw                      Select word
 " :sort                     Sort selected lines
