@@ -23,7 +23,6 @@ endfunction
 
 syntax enable               " enable syntax highlighting (previously syntax on).
 set nonumber				" set number  		
-set laststatus=2          	" last window always has a statusline
 set ruler                 	" Always show info along bottom.
 set autoindent            	" auto-indent
 set tabstop=4             	" tab spacing
@@ -34,7 +33,24 @@ set expandtab             	" use spaces instead of tabs
 set smarttab              	" use tabs at the start of a line, spaces elsewhere
 set nowrap                	" don't wrap text
 set paste                 	" allow pasting without indentation
+set guioptions+=c           " GUI Vim will not pop up a dialog box
 
+"--------------------------  Status Line  ---------------------------"
+
+set laststatus=2        " last window always has a statusline
+
+set statusline=%t       "tail of the filename
+set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=%y      "filetype
+set statusline+=\ %F       "tail of the filename
+set statusline+=%=      "left/right separator
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
 
 "-------------------------- Search ---------------------------"
 
