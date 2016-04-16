@@ -7,6 +7,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-vinegar'
+Plugin 'ntpeters/vim-better-whitespace'
 
 call vundle#end()            " required
 

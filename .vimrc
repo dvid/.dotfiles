@@ -65,6 +65,9 @@ nmap <Leader><space> :nohlsearch<cr>
 " Tab close
 nmap <leader>tc :tabc<cr>
 
+" Toggle `set list`
+nmap <leader>l :set list!<CR>
+
 " Toggle line number
 nnoremap <leader>N :setlocal number!<cr>
 
@@ -85,6 +88,15 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 
 " Copy selected to clipboard
 map <C-c> y:e ~/clipsongzboard<CR>P:w !pbcopy<CR><CR>:bdelete!<CR>
+
+" Toggle white space
+nmap <leader>w :ToggleWhitespace<cr>
+
+" Clean extra whitespace, call:
+nmap <leader>W :StripWhitespace<cr>
+
+" Clean Whitespace on save
+nmap <leader>$ :ToggleStripWhitespaceOnSave<cr>
 
 "-------------------------- Functions ---------------------------"
 
@@ -179,3 +191,4 @@ augroup END
 " <C-W>w                    Toggle pane
 " :viw                      Select word
 " :sort                     Sort selected lines
+" :set list                 Show invisibles
