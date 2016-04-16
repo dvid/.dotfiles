@@ -13,17 +13,9 @@ set autoread
 
 "--------------------------  Theming  ---------------------------"
 
-colorscheme gotham256
+colorscheme override
 set background=dark
 set t_Co=256
-
-" Function has to be called before syntax enable
-" Autosourcing file won't alter colors
-function! AfterColor()
-    highlight Identifier ctermfg=Green guifg=#006F00
-endfunction
-:call AfterColor()
-
 syntax enable               " enable syntax highlighting (previously syntax on).
 set nonumber				" set number  		
 set ruler                 	" Always show info along bottom.
@@ -37,6 +29,7 @@ set smarttab              	" use tabs at the start of a line, spaces elsewhere
 set nowrap                	" don't wrap text
 set paste                 	" allow pasting without indentation
 set guioptions+=c           " GUI Vim will not pop up a dialog box
+set listchars=tab:▸\ ,eol:¬ " Define invisible symbols
 
 "--------------------------  Status Line  ---------------------------"
 
@@ -150,15 +143,23 @@ function! ShowDiff()
     call append(0, split(bytecode, '\v\n'))
 endfunction
 
+" Call any function opening a new buffer
+"augroup InitBuffer
+"    autocmd!
+"    autocmd BufEnter,WinEnter * call FunctionName()
+"augroup END
+
 "-------------------------- Auto-commands ---------------------------"
 
 " Source .vimrc file when saving it
 augroup autosourcing
         autocmd!
-        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim source $MYVIMRC | colorscheme gotham256 | :call AfterColor()
+        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim source $MYVIMRC | colorscheme override
 augroup END
 
+" Enable syntax by file type
 "autocmd BufNewFile,BufRead *.diff set syntax=diff
+" Specify syntax file
 "au! syntax diff source ~/.vim/syntax/diff_up.vim
 
 "-------------------------- Cheatsheet ---------------------------"
