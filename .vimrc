@@ -6,6 +6,7 @@ let mapleader = "," 	 	" default leader is \ but , is my prefered choice
 "--------------------------  Files  ---------------------------"
 
 so ~/.vim/plugins.vim
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 "--------------------------  Settings  ---------------------------"
 
@@ -33,19 +34,23 @@ set listchars=tab:▸\ ,eol:¬ " Define invisible symbols
 
 "--------------------------  Status Line  ---------------------------"
 
-set laststatus=2            "last window always has a statusline
-set statusline=%m           "modified flag
-set statusline+=%t          "tail of the filename
-set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
-set statusline+=%{&ff}]     "file format
-set statusline+=%h          "help file flag
-set statusline+=%r          "read only flag
-set statusline+=%y          "filetype
-set statusline+=\ %F       "tail of the filename
-set statusline+=%=          "left/right separator
-set statusline+=%c,         "cursor column
-set statusline+=%l/%L       "cursor line/total lines
-set statusline+=\ %P        "percent through file
+set laststatus=2            " Always display the statusline in all windows
+set showtabline=2           " Always display the tabline, even if there is only one tab
+set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+
+" Status line without powerline
+"set statusline=%m           "modified flag
+"set statusline+=%t          "tail of the filename
+"set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
+"set statusline+=%{&ff}]     "file format
+"set statusline+=%h          "help file flag
+"set statusline+=%r          "read only flag
+"set statusline+=%y          "filetype
+"set statusline+=\ %F       "tail of the filename
+"set statusline+=%=          "left/right separator
+"set statusline+=%c,         "cursor column
+"set statusline+=%l/%L       "cursor line/total lines
+"set statusline+=\ %P        "percent through file
 
 "-------------------------- Search ---------------------------"
 
@@ -150,24 +155,39 @@ function! ShowDiff()
     call append(0, split(bytecode, '\v\n'))
 endfunction
 
+"-------------------------- Commands ---------------------------"
+
+" Add powerline commands
+command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
+
+" Add whitespace command
+command! ToggleStripWhitespaceOnSave call ToggleStripWhitespaceOnSave()
+
+"-------------------------- Auto-commands ---------------------------"
+
+" Source .vimrc file when saving it with a nested call
+" Avoid issue with the powerline plug-in
+augroup autosourcing
+        autocmd!
+        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim nested source $MYVIMRC | colorscheme override
+        autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
+augroup END
+
+
 " Call any function opening a new buffer
 "augroup InitBuffer
 "    autocmd!
 "    autocmd BufEnter,WinEnter * call FunctionName()
 "augroup END
 
-"-------------------------- Auto-commands ---------------------------"
-
-" Source .vimrc file when saving it
-augroup autosourcing
-        autocmd!
-        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim source $MYVIMRC | colorscheme override
-augroup END
-
 " Enable syntax by file type
 "autocmd BufNewFile,BufRead *.diff set syntax=diff
 " Specify syntax file
 "au! syntax diff source ~/.vim/syntax/diff_up.vim
+" Set a filetype if the filetype was not detected at all
+"au BufRead,BufNewFile *.foo setfiletype php
+"To override any filetype which was already detected, use this instead (note the 'set filetype=' syntax):
+"au BufRead,BufNewFile *.module set filetype=php
 
 "-------------------------- Cheatsheet ---------------------------"
 
