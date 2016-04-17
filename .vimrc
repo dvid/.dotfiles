@@ -160,19 +160,22 @@ endfunction
 " Add powerline commands
 command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
 
-" Add whitespace command
-command! ToggleStripWhitespaceOnSave call ToggleStripWhitespaceOnSave()
-
 "-------------------------- Auto-commands ---------------------------"
 
 " Source .vimrc file when saving it with a nested call
 " Avoid issue with the powerline plug-in
+" See also `autocmd-nested
 augroup autosourcing
         autocmd!
         autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim nested source $MYVIMRC | colorscheme override
         autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
 augroup END
 
+" Whitespace default
+let g:better_whitespace_verbosity=1
+autocmd BufReadPre,FileReadPre * EnableWhitespace
+" Strip whitespaces on save
+"autocmd BufWritePre * StripWhitespace
 
 " Call any function opening a new buffer
 "augroup InitBuffer
