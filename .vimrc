@@ -165,6 +165,7 @@ command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
 " Source .vimrc file when saving it with a nested call
 " Avoid issue with the powerline plug-in
 " See also `autocmd-nested
+" https://github.com/powerline/powerline/commit/5173246a939f1a665d1908c536be6f04e6717ef1
 augroup autosourcing
         autocmd!
         autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim nested source $MYVIMRC | colorscheme override
