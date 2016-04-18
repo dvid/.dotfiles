@@ -22,3 +22,4 @@ filetype plugin indent on    " required
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
 " vim-airline/vim-airline
+" scrooloose/syntastic
