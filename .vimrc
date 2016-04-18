@@ -22,7 +22,8 @@ set errorbells              " error bells
 set visualbell              " Flash the screen insteal of beeping on errors
 set t_vb=                   " And then disable even the flashing
 set backupdir-=.            " Removes the current directory from the backup directory list
-set backupdir^=~/tmp,/tmp   " Attempt to save backups to ~/tmp, or to /tmp or try backupdir^=$TEMP
+set backupdir^=~/.vim/backup    " Attempt to save backups
+set directory=~/.vim/backup     " swp files
 
 "--------------------------  Theming  ---------------------------"
 
