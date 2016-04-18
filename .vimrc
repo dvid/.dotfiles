@@ -1,3 +1,10 @@
+
+" "   Y8b Y88888P ,e,
+" "    Y8b Y888P   "  888 888 8e  888,8,  e88'888
+" "     Y8b Y8P   888 888 888 88b 888 "  d888  '8
+" "      Y8b Y    888 888 888 888 888    Y888   ,
+" "       Y8P     888 888 888 888 888     "88,e8'
+
 "--------------------------  Leader ---------------------------"
 
 set nocompatible            " be iMproved, get rid of Vi compatibility mode. required!
