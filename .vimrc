@@ -26,6 +26,34 @@ set backupdir^=~/.vim/backup    " Attempt to save backups
 set directory=~/.vim/backup     " swp files
 set clipboard=unnamed       " Enable default clipboard to system clipboard
 
+"--------------------------  Hostname  ---------------------------"
+
+" Switch hostname
+" To view the key code of a corresponding key combination your terminal is sending to vim:
+" $ sed -n l
+" ^[^[[D = Alt Left  = <Esc><Esc>[D
+" ^[^[[C = Alt Right = <Esc><Esc>[C
+let machine = substitute(system('hostname'), "\n", "", "")
+if 		machine == "Manjaro"
+
+	let dotvimrc="~/.dotfiles/.vimrc"
+	let altleft="<Esc>[1;3D"
+	let altright="<Esc>[1;3C"
+
+elseif 	machine == "octogone"
+
+	let dotvimrc="~/.dot/.vimrc"
+	let altleft="<Esc><Esc>[D"
+	let altright="<Esc><Esc>[C"
+
+else
+	
+	let dotvimrc="~/.vimrc"
+	let altleft="<A-left>"
+	let altright="<A-right>"
+
+endif
+
 "--------------------------  Theming  ---------------------------"
 
 colorscheme override
@@ -275,31 +303,6 @@ command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
 
 " @TODO hide powerline in insert mode
 
-" Switch hostname
-" To view the key code of a corresponding key combination your terminal is sending to vim:
-" $ sed -n l
-" ^[^[[D = Alt Left  = <Esc><Esc>[D
-" ^[^[[C = Alt Right = <Esc><Esc>[C
-let machine = substitute(system('hostname'), "\n", "", "")
-if 		machine == "Manjaro"
-
-	let dotvimrc="~/.dotfiles/.vimrc"
-	let altleft="<Esc>[1;3D"
-	let altright="<Esc>[1;3C"
-
-elseif 	machine == "octogone"
-
-	let dotvimrc="~/.dot/.vimrc"
-	let altleft="<Esc><Esc>[D"
-	let altright="<Esc><Esc>[C"
-
-else
-	
-	let dotvimrc="~/.vimrc"
-	let altleft="<A-left>"
-	let altright="<A-right>"
-
-endif
 " Source .vimrc file when saving it with a nested call
 " Avoid issue with the powerline plug-in
 " See also `autocmd-nested
@@ -386,9 +389,11 @@ endfunction
 " This is for opening new tabs or
 " switching between tabs {
     nnoremap <C-t> :tabnew<CR>
+    "@TODO ctrl t in insert mode not working in linux nor mac
     inoremap <C-t> <Esc>:tabnew<CR>i
 	:execute "nnoremap " . altleft . " :tabprevious<CR>"
 	:execute "nnoremap " . altright . " :tabnext<CR>"
+    "@TODO alt left / right not working in linux only
 	:execute "inoremap " . altleft . " <Esc>:tabprevious<CR>i"
 	:execute "inoremap " . altright . " <Esc>:tabnext<CR>i"
 "}
