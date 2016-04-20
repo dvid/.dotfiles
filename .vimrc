@@ -36,19 +36,16 @@ set clipboard=unnamed       " Enable default clipboard to system clipboard
 let machine = substitute(system('hostname'), "\n", "", "")
 if 		machine == "Manjaro"
 
-	let dotvimrc="~/.dotfiles/.vimrc"
 	let altleft="<Esc>[1;3D"
 	let altright="<Esc>[1;3C"
 
 elseif 	machine == "octogone"
 
-	let dotvimrc="~/.dot/.vimrc"
 	let altleft="<Esc><Esc>[D"
 	let altright="<Esc><Esc>[C"
 
 else
 	
-	let dotvimrc="~/.vimrc"
 	let altleft="<A-left>"
 	let altright="<A-right>"
 
@@ -309,7 +306,7 @@ command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
 " https://github.com/powerline/powerline/commit/5173246a939f1a665d1908c536be6f04e6717ef1
 augroup autosourcing
         autocmd!
-        autocmd BufWritePost $MYVIMRC,dotvimrc,~/.vim/*.vim nested source $MYVIMRC | colorscheme override
+        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim nested source $MYVIMRC | colorscheme override
         autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
 augroup END
 
