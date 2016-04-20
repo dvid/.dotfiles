@@ -275,16 +275,38 @@ command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
 
 " @TODO hide powerline in insert mode
 
-" Switch machine
-" let hostname=system('hostname -s')
+" Switch hostname
+" To view the key code of a corresponding key combination your terminal is sending to vim:
+" $ sed -n l
+" ^[^[[D = Alt Left  = <Esc><Esc>[D
+" ^[^[[C = Alt Right = <Esc><Esc>[C
+let machine = substitute(system('hostname'), "\n", "", "")
+if 		machine == "Manjaro"
 
+	let dotvimrc="~/.dotfiles/.vimrc"
+	let altleft="<Esc>[1;3D"
+	let altright="<Esc>[1;3C"
+
+elseif 	machine == "octogone"
+
+	let dotvimrc="~/.dot/.vimrc"
+	let altleft="<Esc><Esc>[D"
+	let altright="<Esc><Esc>[C"
+
+else
+	
+	let dotvimrc="~/.vimrc"
+	let altleft="<A-left>"
+	let altright="<A-right>"
+
+endif
 " Source .vimrc file when saving it with a nested call
 " Avoid issue with the powerline plug-in
 " See also `autocmd-nested
 " https://github.com/powerline/powerline/commit/5173246a939f1a665d1908c536be6f04e6717ef1
 augroup autosourcing
         autocmd!
-        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim nested source $MYVIMRC | colorscheme override
+        autocmd BufWritePost $MYVIMRC,dotvimrc,~/.vim/*.vim nested source $MYVIMRC | colorscheme override
         autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
 augroup END
 
@@ -363,16 +385,12 @@ endfunction
 
 " This is for opening new tabs or
 " switching between tabs {
-    " Start by viewing the key code your terminal is sending to vim:
-    " $ sed -n l
-    " ^[^[[D = Alt Left  = <Esc><Esc>[D
-    " ^[^[[C = Alt Right = <Esc><Esc>[C
-    nnoremap <Esc><Esc>[D :tabprevious<CR>
-    nnoremap <Esc><Esc>[C :tabnext<CR>
     nnoremap <C-t> :tabnew<CR>
-    inoremap <Esc><Esc>[D <Esc>:tabprevious<CR>i
-    inoremap <Esc><Esc>[C <Esc>:tabnext<CR>i
-    inoremap <C-t> <Esc>:tabnew<CR>
+    inoremap <C-t> <Esc>:tabnew<CR>i
+	:execute "nnoremap " . altleft . " :tabprevious<CR>"
+	:execute "nnoremap " . altright . " :tabnext<CR>"
+	:execute "inoremap " . altleft . " <Esc>:tabprevious<CR>i"
+	:execute "inoremap " . altright . " <Esc>:tabnext<CR>i"
 "}
 
 " ctrl-I to switch between vertical or

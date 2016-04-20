@@ -128,10 +128,23 @@ alias grep='grep --color=auto'
 alias soz='. ~/.zshrc'
 
 # Files Edit
-alias ezsh="vi ~/.zshrc"
-alias evim="vi ~/.vimrc"
-alias ei3="vi ~/.config/i3/config"
-alias ei3="vi ~/.config/i3/config"
+case $HOST in
+  "Manjaro") 	alias ezsh="vi ~/.dotfiles/.zshrc"
+    			alias evim="vi ~/.dotfiles/.vimrc"
+    			alias ei3="vi ~/.dotfiles/.config/i3/config"
+				;;
+  "octogone") 	alias ezsh="vi ~/.dot/.zshrc"
+    			alias evim="vi ~/.dot/.vimrc"
+    			alias ei3="vi ~/.dot/.config/i3/config"
+				;;
+  *)			echo "No Host defined"
+  				alias ezsh="vi ~/.zshrc"
+				alias evim="vi ~/.vimrc"
+				alias ei3="vi ~/.config/i3/config"
+				;;
+esac
+
+alias szsh=". ~/.zshrc"
 alias emycnf="sudovi /etc/mysql/my.cnf"
 alias ehosts="sudovi /etc/hosts"
 alias ephpini="sudovi /etc/php/php.ini"
