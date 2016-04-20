@@ -160,10 +160,12 @@ function! SaveCurrentFile()
     else
         echom "No Edit!"
     endif
+
 endfunction
 
 " Save files when switching buffer
 function! AutoSaveFiles()
+
     if &autowriteall
         set noautowriteall
     else
@@ -175,6 +177,7 @@ endfunction
 " If file has been modified do a git diff on its state in buffer
 " with last saved file state
 function! IsModified()
+
     if &modified
         " If you have a symlink of your .vimrc in the $HOME path
         " git diff on that file will create output for both files
@@ -199,6 +202,7 @@ function! IsModified()
     else
       echom "No Edit!"
     endif
+
 endfunction
 
 " Run git diff in terminal
@@ -209,6 +213,7 @@ endfunction
 
 " Git diff from VCS for actual file in a vertical split
 function! ShowGitDiff()
+
     " Get the diff.
     let bytecode = system("git diff " . expand("%:p") . " 2>&1")
 
@@ -232,9 +237,23 @@ function! ShowGitDiff()
     setlocal buftype=nofile noswapfile
     set filetype=on filetype=enabled syntax=diff
 
-    " Insert the bytecode.
-    call append(0, split(bytecode, '\v\n'))
+" Auto tabular on space
+" tpope's cucumbertables gist:
+" https://gist.github.com/tpope/287147
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+  let p = '^\s*|\s.*\s|\s*$'
+  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+    Tabularize/|/l1
+    normal! 0
+    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+  endif
 endfunction
+
+" @TODO search in dir
 
 "-------------------------- Commands ---------------------------"
 
@@ -242,6 +261,8 @@ endfunction
 command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
 
 "-------------------------- Auto-commands ---------------------------"
+
+" @TODO hide powerline in insert mode
 
 " Switch machine
 " let hostname=system('hostname -s')
@@ -450,9 +471,9 @@ endfunction
 " ap                        paste it from register a
 " :m 'a                     move current line to after line with mark a (see using marks)
 " :m 'a-1                   move current line to before line with mark a
-" :m '}-1                   move current line to the end of the current paragraph 
+" :m '}-1                   move current line to the end of the current paragraph
 " :5,7m 21                  move lines 5, 6 and 7 to after line 21
 " :5,7m 0                   move lines 5, 6 and 7 to before first line
 " :5,7m $                   move lines 5, 6 and 7 to after last line
 " :.,.+4m 21                move 5 lines starting at current line to after line 21
-" :,+4m14                   same (. for current line is assumed) 
+" :,+4m14                   same (. for current line is assumed)
