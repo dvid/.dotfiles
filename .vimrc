@@ -172,6 +172,37 @@ function! AutoSaveFiles()
         set autowriteall
     endif
     echom   'autowriteall ' &autowriteall
+
+endfunction
+
+" Run git diff in terminal
+function! OpenSplit(bytecode)
+
+        " Parse split list and look if splitted buffer already exists
+        " from previous call and :bd on it before opening another one
+        let s:bufNr = bufnr("$")
+        while s:bufNr > 0
+            if buflisted(s:bufNr)
+                if (matchstr(bufname(s:bufNr), ".diff$") == ".diff")
+                    if getbufvar(s:bufNr, '&modified') == 0
+                        execute "bd ".s:bufNr
+                    endif
+                endif
+            endif
+            let s:bufNr = s:bufNr-1
+        endwhile
+
+        " Open a new split and set it up.
+        vsplit %.diff
+        normal! ggdG
+        setlocal buftype=nofile noswapfile
+        set filetype=on filetype=enabled syntax=diff
+
+        " Insert the bytecode.
+        call append(0, split(a:bytecode, '\v\n'))
+
+        " Close buffer with :bd or Ctl+w then q to avoid keeping tab open.
+
 endfunction
 
 " If file has been modified do a git diff on its state in buffer
@@ -189,16 +220,8 @@ function! IsModified()
         let bytecode = system("git diff --no-index " . expand("%:p") . " " . expand("%:p") . ".blob")
         execute "!" . "rm " . expand("%:p").".blob"
 
-        " Open a new split and set it up.
-        vsplit %.diff
-        normal! ggdG
-        setlocal buftype=nofile noswapfile
-        set filetype=on filetype=enabled syntax=diff
+        call OpenSplit(bytecode)
 
-        " Insert the bytecode.
-        call append(0, split(bytecode, '\v\n'))
-
-        " Close buffer with :bd or Ctl+w then q to avoid keeping tab open.
     else
       echom "No Edit!"
     endif
@@ -207,35 +230,23 @@ endfunction
 
 " Run git diff in terminal
 function! ShowDiff()
-    "silent !clear
-    "execute "!" . "git diff " . expand("%:p")
+    silent !clear
+    execute "!" . "git diff " . expand("%:p")
 endfunction
 
+" @TODO Line ranges
+" command! -range Linediff      call linediff#Linediff(<line1>, <line2>)
+" command! -bang  LinediffReset call linediff#LinediffReset(<q-bang>)
 " Git diff from VCS for actual file in a vertical split
 function! ShowGitDiff()
 
     " Get the diff.
     let bytecode = system("git diff " . expand("%:p") . " 2>&1")
 
-    " Parse split list and look if splitted buffer already exists
-    " from previous call and :bd on it before opening another one
-    let s:bufNr = bufnr("$")
-    while s:bufNr > 0
-        if buflisted(s:bufNr)
-            if (matchstr(bufname(s:bufNr), ".diff$") == ".diff")
-                if getbufvar(s:bufNr, '&modified') == 0
-                    execute "bd ".s:bufNr
-                endif
-            endif
-        endif
-        let s:bufNr = s:bufNr-1
-    endwhile
 
-    " Open a new split and set it up.
-    vsplit %.diff
-    normal! ggdG
-    setlocal buftype=nofile noswapfile
-    set filetype=on filetype=enabled syntax=diff
+    call OpenSplit(bytecode)
+
+endfunction
 
 " Auto tabular on space
 " tpope's cucumbertables gist:
