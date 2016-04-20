@@ -10,6 +10,10 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'majutsushi/tagbar'
 Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'airblade/vim-gitgutter'
+Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-surround'
+Plugin 'Raimondi/delimitMate'
 
 call vundle#end()            " required
 
@@ -23,3 +27,5 @@ filetype plugin indent on    " required
 
 " vim-airline/vim-airline
 " scrooloose/syntastic
+" tpope/vim-fugitive
+" Valloric/YouCompleteMe

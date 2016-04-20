@@ -24,6 +24,7 @@ set t_vb=                   " And then disable even the flashing
 set backupdir-=.            " Removes the current directory from the backup directory list
 set backupdir^=~/.vim/backup    " Attempt to save backups
 set directory=~/.vim/backup     " swp files
+set clipboard=unnamed       " Enable default clipboard to system clipboard
 
 "--------------------------  Theming  ---------------------------"
 
@@ -43,6 +44,10 @@ set smarttab                " use tabs at the start of a line, spaces elsewhere
 set nowrap                  " don't wrap text
 set paste                   " allow pasting without indentation
 set guioptions+=c           " GUI Vim will not pop up a dialog box
+set guioptions-=l           " scrollbars
+set guioptions-=L
+set guioptions-=r
+set guioptions-=R
 set listchars=tab:▸\ ,eol:¬ " Define invisible symbols
 
 "--------------------------  Status Line  ---------------------------"
@@ -86,7 +91,7 @@ nmap <leader>tc :tabc<cr>
 nmap <leader>l :set list!<CR>
 
 " Toggle line number
-nnoremap <leader>N :setlocal number!<cr>
+nnoremap <leader>n :setlocal number!<cr>
 
 " Toggle autowriteall
 nmap <leader>S :call AutoSaveFiles()<cr>
@@ -119,10 +124,29 @@ nmap <leader>$ :ToggleStripWhitespaceOnSave<cr>
 vnoremap > >gv
 vnoremap < <gv
 
+" wincmd in insert mode
+:imap <C-w> <C-o><C-w>
+
+" resize windows
+:map _ <C-W>-
+:map + <C-W>+
+
+" Move blocks
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" Tagbar
+nmap <F8> :TagbarToggle<CR>
+
 "-------------------------- Functions ---------------------------"
 
 " Save current file if edited
 function! SaveCurrentFile()
+
     if &modified
         echohl Question
         echo "Save file [y/n]?"
@@ -269,8 +293,39 @@ autocmd FileType conf,fstab       let b:comment_leader = '# '
 autocmd FileType tex              let b:comment_leader = '% '
 autocmd FileType mail             let b:comment_leader = '> '
 autocmd FileType vim              let b:comment_leader = '" '
-noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+noremap <silent> <leader>@ :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> <leader># :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+
+"-------------------------- Splits ---------------------------"
+
+" Splits
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+map <C-H> <C-W>h<C-W>_
+map <C-L> <C-W>l<C-W>_
+
+" Switch splits mappings /*{{{*/
+nnoremap <A-Up> :normal <c-r>=SwitchWindow('+')<CR><CR>
+nnoremap <A-Down> :normal <c-r>=SwitchWindow('-')<CR><CR>
+nnoremap <A-Left> :normal <c-r>=SwitchWindow('<')<CR><CR>
+nnoremap <A-Right> :normal <c-r>=SwitchWindow('>')<CR><CR>
+
+function! SwitchWindow(dir)
+  let this = winnr()
+  if '+' == a:dir
+    execute "normal \<c-w>k"
+    elseif '-' == a:dir
+    execute "normal \<c-w>j"
+    elseif '>' == a:dir
+    execute "normal \<c-w>l"
+    elseif '<' == a:dir
+    execute "normal \<c-w>h"
+  else
+    echo "oops. check your ~/.vimrc"
+    return ""
+  endif
+endfunction
+" /*}}}*/
 
 "-------------------------- Tabs ---------------------------"
 
@@ -283,8 +338,8 @@ noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<
     nnoremap <Esc><Esc>[D :tabprevious<CR>
     nnoremap <Esc><Esc>[C :tabnext<CR>
     nnoremap <C-t> :tabnew<CR>
-    inoremap <F2> <Esc>:tabprevious<CR>i
-    inoremap <F3> <Esc>:tabnext<CR>i
+    inoremap <Esc><Esc>[D <Esc>:tabprevious<CR>i
+    inoremap <Esc><Esc>[C <Esc>:tabnext<CR>i
     inoremap <C-t> <Esc>:tabnew<CR>
 "}
 
@@ -389,3 +444,15 @@ noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<
 " %                         Jump to corresponding item, e.g. from an open brace to its matching closing brace.
 " Shift left right up down  In insert mode
 " Cmd Shift D               vsplit terminal
+" Cw | / Cw=                show / hide split
+" Cw T                      Move any open window to it's own tab
+" add                       delete it to register a / add as many in register a
+" ap                        paste it from register a
+" :m 'a                     move current line to after line with mark a (see using marks)
+" :m 'a-1                   move current line to before line with mark a
+" :m '}-1                   move current line to the end of the current paragraph 
+" :5,7m 21                  move lines 5, 6 and 7 to after line 21
+" :5,7m 0                   move lines 5, 6 and 7 to before first line
+" :5,7m $                   move lines 5, 6 and 7 to after last line
+" :.,.+4m 21                move 5 lines starting at current line to after line 21
+" :,+4m14                   same (. for current line is assumed) 
