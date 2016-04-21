@@ -28,12 +28,13 @@ set clipboard=unnamed       " Enable default clipboard to system clipboard
 
 "--------------------------  Hostname  ---------------------------"
 
-" Switch hostname
-" To view the key code of a corresponding key combination your terminal is sending to vim:
-" $ sed -n l
-" ^[^[[D = Alt Left  = <Esc><Esc>[D
-" ^[^[[C = Alt Right = <Esc><Esc>[C
+" Get hostname
 let machine = substitute(system('hostname'), "\n", "", "")
+        " To view the key code of a corresponding key combination
+        " your terminal is sending to vim:
+        " $ sed -n l
+        " Alt Left = ^[^[[D = <Esc><Esc>[D
+        " Alt Right = ^[^[[C = <Esc><Esc>[C
 if 		machine == "Manjaro"
 
 	let altleft="<Esc>[1;3D"
@@ -45,7 +46,7 @@ elseif 	machine == "octogone"
 	let altright="<Esc><Esc>[C"
 
 else
-	
+
 	let altleft="<A-left>"
 	let altright="<A-right>"
 
@@ -73,6 +74,7 @@ set guioptions-=l           " scrollbars
 set guioptions-=L
 set guioptions-=r
 set guioptions-=R
+set scrolloff=999           " lines you would like to see above and below the cursor
 set listchars=tab:▸\ ,eol:¬ " Define invisible symbols
 
 "--------------------------  Status Line  ---------------------------"
@@ -106,14 +108,15 @@ set ignorecase              " Make searches case-insensitive.
 " Edit .vimrc file
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 
+" jump 10 lines
+noremap <Up> 10k
+noremap <Down> 10j
+
 " Hide highlight after searching phrases
 nmap <Leader><space> :nohlsearch<cr>
 
 " Tab close
 nmap <leader>tc :tabc<cr>
-
-" Toggle `set list`
-nmap <leader>l :set list!<CR>
 
 " Toggle line number
 nnoremap <leader>n :setlocal number!<cr>
@@ -136,6 +139,9 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 " Copy selected to clipboard
 map <C-c> y:e ~/clipsongzboard<CR>P:w !pbcopy<CR><CR>:bdelete!<CR>
 
+" Toggle `set list`
+nmap <leader>l :set list!<CR>
+
 " Toggle white space
 nmap <leader>w :ToggleWhitespace<cr>
 
@@ -150,19 +156,15 @@ vnoremap > >gv
 vnoremap < <gv
 
 " wincmd in insert mode
-:imap <C-w> <C-o><C-w>
-
-" resize windows
-:map _ <C-W>-
-:map + <C-W>+
+"imap <C-w> <C-o><C-w>
 
 " Move blocks
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+" nnoremap <A-j> :m .+1<CR>==
+" nnoremap <A-k> :m .-2<CR>==
+" inoremap <A-j> <Esc>:m .+1<CR>==gi
+" inoremap <A-k> <Esc>:m .-2<CR>==gi
+" vnoremap <A-j> :m '>+1<CR>gv=gv
+" vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
@@ -220,7 +222,7 @@ function! OpenSplit(bytecode)
         " Open a new split and set it up.
         vsplit %.diff
         normal! ggdG
-        setlocal buftype=nofile noswapfile
+        setlocal noswapfile "buftype=nofile
         set filetype=on filetype=enabled syntax=diff
 
         " Insert the bytecode.
@@ -268,7 +270,6 @@ function! ShowGitDiff()
     " Get the diff.
     let bytecode = system("git diff " . expand("%:p") . " 2>&1")
 
-
     call OpenSplit(bytecode)
 
 endfunction
@@ -306,7 +307,7 @@ command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
 " https://github.com/powerline/powerline/commit/5173246a939f1a665d1908c536be6f04e6717ef1
 augroup autosourcing
         autocmd!
-        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim nested source $MYVIMRC | colorscheme override
+        autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim nested source % | colorscheme override
         autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
 augroup END
 
@@ -352,33 +353,57 @@ noremap <silent> <leader># :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,
 
 "-------------------------- Splits ---------------------------"
 
+
+" resize windows
+" map _ <C-W>-
+" map + <C-W>+
+" map <C-=> <C-W><
+" map <C--> <C-W>>
+" noremap <C-h> :vertical resize -1<CR>
+" noremap <C-l> :vertical resize +1<CR>
+"
+" map <C-H> <C-w>h<C-w>\|
+" map <C-L> <C-w>l<C-w>\|
+"
+" " resize current buffer by +/- 5
+" nnoremap <S-left> :vertical resize -5<cr>
+" nnoremap <S-down> :resize +5<cr>
+" nnoremap <S-up> :resize -5<cr>
+" nnoremap <S-right> :vertical resize +5<cr>
+"
 " Splits
-map <C-J> <C-W>j<C-W>_
+" <C-H> vsplit r
+" <C-L> vsplit L
+set winminheight=0
+map <C-J> <C-W>j<C-w>_
 map <C-K> <C-W>k<C-W>_
-map <C-H> <C-W>h<C-W>_
-map <C-L> <C-W>l<C-W>_
+"set winminwidth=0
+"map <C-L> <C-W>h<C-W>|
+"map <C-H> <C-W>l<C-W>|
+" <C-W> =
 
+" @TODO alt map
 " Switch splits mappings /*{{{*/
-nnoremap <A-Up> :normal <c-r>=SwitchWindow('+')<CR><CR>
-nnoremap <A-Down> :normal <c-r>=SwitchWindow('-')<CR><CR>
-nnoremap <A-Left> :normal <c-r>=SwitchWindow('<')<CR><CR>
-nnoremap <A-Right> :normal <c-r>=SwitchWindow('>')<CR><CR>
-
-function! SwitchWindow(dir)
-  let this = winnr()
-  if '+' == a:dir
-    execute "normal \<c-w>k"
-    elseif '-' == a:dir
-    execute "normal \<c-w>j"
-    elseif '>' == a:dir
-    execute "normal \<c-w>l"
-    elseif '<' == a:dir
-    execute "normal \<c-w>h"
-  else
-    echo "oops. check your ~/.vimrc"
-    return ""
-  endif
-endfunction
+" nnoremap <C-=> :normal <c-r>=SwitchWindow('+')<CR><CR>
+" nnoremap <C--> :normal <c-r>=SwitchWindow('-')<CR><CR>
+" nnoremap <C-H> :normal <c-r>=SwitchWindow('<')<CR><CR>
+" nnoremap <C-L> :normal <c-r>=SwitchWindow('>')<CR><CR>
+"
+" function! SwitchWindow(dir)
+"   let this = winnr()
+"   if '+' == a:dir
+"     execute "normal \<c-w>k"
+"     elseif '-' == a:dir
+"     execute "normal \<c-w>j"
+"     elseif '>' == a:dir
+"     execute "normal \<c-w>l"
+"     elseif '<' == a:dir
+"     execute "normal \<c-w>h"
+"   else
+"     echo "oops. check your ~/.vimrc"
+"     return ""
+"   endif
+" endfunction
 " /*}}}*/
 
 "-------------------------- Tabs ---------------------------"
@@ -397,11 +422,11 @@ endfunction
 
 " ctrl-I to switch between vertical or
 " horizontal splitted windows {
-    map <C-I> <C-W><C-W>
+    "map <C-I> <C-W><C-W>
 "}
 
 " vim explorer {
-  map <F4> :!ls<CR>:e
+  "map <F4> :!ls<CR>:e
 "}
 
 "-------------------------- Help ---------------------------"
@@ -450,6 +475,14 @@ endfunction
 "let bnr = bufwinnr(expand("%")) | if bnr > 0
 
 "-------------------------- Cheatsheet ---------------------------"
+
+" Function key + up /down   Scroll page up / down
+" Function key + L / R      Begin / End of line
+" Ctrl + L / R              Switch desktops
+" Alt + L /R                Switch tabs
+" cmd
+" Shift + up /down          Move 10lines up / down
+" Shift + / -               Split + /-
 
 " zz/ZZ 					Save and quit
 " z. / zt / zb              Center the screen on your cursor
