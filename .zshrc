@@ -153,6 +153,7 @@ alias evhosts="sudovi /etc/httpd/conf/extra/httpd-vhosts.conf"
 alias eenv="sudovi /etc/environment"
 
 # Launcher
+alias clock="tty-clock -c -s"
 alias pstorm="/usr/local/bin/pstorm"
 alias aconftest="apachectl configtest"
 alias astatus="systemctl status httpd.service"
