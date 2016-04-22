@@ -14,6 +14,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
+Plugin 'vim-scripts/utl.vim'
 
 call vundle#end()            " required
 

@@ -1,0 +1,31 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "b8ffb8466a2da5f663b49bad83931c26",
+    "packages": [
+        {
+            "name": "macvim-dev/macvim",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/macvim-dev/macvim",
+                "reference": "origin/master"
+            },
+            "type": "library",
+            "time": "2016-04-21 03:30:02"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "macvim-dev/macvim": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

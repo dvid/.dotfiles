@@ -17,14 +17,19 @@ set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 "--------------------------  Settings  ---------------------------"
 
-set autoread
-set errorbells              " error bells
-set visualbell              " Flash the screen insteal of beeping on errors
-set t_vb=                   " And then disable even the flashing
-set backupdir-=.            " Removes the current directory from the backup directory list
-set backupdir^=~/.vim/backup    " Attempt to save backups
-set directory=~/.vim/backup     " swp files
-set clipboard=unnamed       " Enable default clipboard to system clipboard
+set autoread                                    " Auto loading files when externally edited
+set errorbells                                  " error bells
+set visualbell                                  " Flash the screen insteal of beeping on errors
+set t_vb=                                       " And then disable even the flashing
+
+set backupskip=/tmp/*,/private/tmp/*"           " Make Vim able to edit crontab files again.
+set backupdir-=.                                " Removes the current directory from the backup directory list
+set backupdir^=~/.vim/backup                    " Attempt to save backups
+set directory=~/.vim/backup                     " swp files
+set clipboard=unnamed                           " Enable default clipboard to system clipboard
+set notimeout                                   " Time out on key codes but not mappings.
+set ttimeout                                    " Basically this makes terminal Vim work sanely.
+set ttimeoutlen=10                              " see bitbucket.org/sjl/dotfiles 
 
 "--------------------------  Hostname  ---------------------------"
 
@@ -155,6 +160,9 @@ nmap <leader>$ :ToggleStripWhitespaceOnSave<cr>
 vnoremap > >gv
 vnoremap < <gv
 
+"execute "nnoremap " . <C-M> . " :wincmd |<CR>"
+nnoremap <C-A>m  :wincmd |<CR>
+
 " wincmd in insert mode
 "imap <C-w> <C-o><C-w>
 
@@ -170,6 +178,9 @@ vnoremap < <gv
 nmap <F8> :TagbarToggle<CR>
 
 "-------------------------- Functions ---------------------------"
+
+" @TODO ? shows help (mappings)
+" @TODO b add it to bookmarks
 
 " Save current file if edited
 function! SaveCurrentFile()
@@ -301,6 +312,9 @@ command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
 
 " @TODO hide powerline in insert mode
 
+" Resize splits when the window is resized
+au VimResized * :wincmd =
+
 " Source .vimrc file when saving it with a nested call
 " Avoid issue with the powerline plug-in
 " See also `autocmd-nested
@@ -312,6 +326,17 @@ augroup autosourcing
 augroup END
 
 " @TODO Source .zshrc in terminal when saving it
+
+" Cursorline {{{
+" Only show cursorline in the current window and in normal mode.
+
+augroup cline
+    au!
+    au WinLeave,InsertEnter * set nocursorline
+    au WinEnter,InsertLeave * set cursorline
+augroup END
+
+" }}}
 
 " Enable Whitespace by default
 let g:better_whitespace_verbosity=1
@@ -413,11 +438,11 @@ map <C-K> <C-W>k<C-W>_
     nnoremap <C-t> :tabnew<CR>
     "@TODO ctrl t in insert mode not working in linux nor mac
     inoremap <C-t> <Esc>:tabnew<CR>i
-	:execute "nnoremap " . altleft . " :tabprevious<CR>"
-	:execute "nnoremap " . altright . " :tabnext<CR>"
+	execute "nnoremap " . altleft . " :tabprevious<CR>"
+	execute "nnoremap " . altright . " :tabnext<CR>"
     "@TODO alt left / right not working in linux only
-	:execute "inoremap " . altleft . " <Esc>:tabprevious<CR>i"
-	:execute "inoremap " . altright . " <Esc>:tabnext<CR>i"
+	execute "inoremap " . altleft . " <Esc>:tabprevious<CR>i"
+	execute "inoremap " . altright . " <Esc>:tabnext<CR>i"
 "}
 
 " ctrl-I to switch between vertical or

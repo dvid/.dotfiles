@@ -1,0 +1,25 @@
+{
+    "name": "dvid/.dot",
+    "description": ".dotfiles",
+    "require": {
+        "macvim-dev/macvim": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "macvim-dev/macvim",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/macvim-dev/macvim",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+            }
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor",
+        "bin-dir": "bin/"
+    }
+}

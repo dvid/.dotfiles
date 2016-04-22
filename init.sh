@@ -14,3 +14,7 @@ vim +PluginInstall +qall
 # ohmyzsh plugins
 
 # fc-cache -fv ~/.fonts
+
+# make distclean
+# /configure --enable-pythoninterp=dynamic --with-python-config-dir=/usr/lib/python2.7/config
+# make
