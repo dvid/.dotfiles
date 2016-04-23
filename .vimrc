@@ -7,13 +7,13 @@
 
 "--------------------------  Leader ---------------------------"
 
-set nocompatible            " be iMproved, get rid of Vi compatibility mode. required!
-let mapleader = "," 	 	" default leader is \ but , is my prefered choice. NOTICE: set this before any mappings
+set nocompatible            					" be iMproved, get rid of Vi compatibility mode. required!
+let mapleader = ","
 
 "--------------------------  Files  ---------------------------"
 
 so ~/.vim/plugins.vim
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
 
 "--------------------------  Settings  ---------------------------"
 
@@ -21,7 +21,6 @@ set autoread                                    " Auto loading files when extern
 set errorbells                                  " error bells
 set visualbell                                  " Flash the screen insteal of beeping on errors
 set t_vb=                                       " And then disable even the flashing
-
 set backupskip=/tmp/*,/private/tmp/*"           " Make Vim able to edit crontab files again.
 set backupdir-=.                                " Removes the current directory from the backup directory list
 set backupdir^=~/.vim/backup                    " Attempt to save backups
@@ -29,17 +28,17 @@ set directory=~/.vim/backup                     " swp files
 set clipboard=unnamed                           " Enable default clipboard to system clipboard
 set notimeout                                   " Time out on key codes but not mappings.
 set ttimeout                                    " Basically this makes terminal Vim work sanely.
-set ttimeoutlen=10                              " see bitbucket.org/sjl/dotfiles 
+set ttimeoutlen=10                              " see bitbucket.org/sjl/dotfiles
 
 "--------------------------  Hostname  ---------------------------"
 
-" Get hostname
+" Switch hostname
 let machine = substitute(system('hostname'), "\n", "", "")
-        " To view the key code of a corresponding key combination
-        " your terminal is sending to vim:
-        " $ sed -n l
-        " Alt Left = ^[^[[D = <Esc><Esc>[D
-        " Alt Right = ^[^[[C = <Esc><Esc>[C
+		" To view the key code of a corresponding key combination
+		" your terminal is sending to vim:
+		" $ sed -n l
+		" Alt Left  = ^[^[[D = <Esc><Esc>[D
+		" Alt Right = ^[^[[C = <Esc><Esc>[C
 if 		machine == "Manjaro"
 
 	let altleft="<Esc>[1;3D"
@@ -47,8 +46,44 @@ if 		machine == "Manjaro"
 
 elseif 	machine == "octogone"
 
-	let altleft="<Esc><Esc>[D"
-	let altright="<Esc><Esc>[C"
+    if has("gui_running")
+        set macligatures
+        set guicursor+=a:blinkon0
+        " :set guifont=*						" Open typo gui
+        " :set guifont? 						" Show actual font
+        set guifont=Menlo\ Regular:h18
+        let g:onedark_termcolors=256
+        let g:onedark_terminal_italics=1
+        " set fuoptions="1920,1200"
+        set fullscreen
+        set guioptions+=c       				" GUI Vim will not pop up a dialog box
+        set guioptions-=l       				" scrollbars
+        set guioptions-=L
+        set guioptions-=r
+        set guioptions-=R
+        set guioptions-=e						" no guitabs
+        " Map alt key
+        let altleft="<A-Left>"
+        let altright="<A-Right>"
+    else
+        let altleft="<Esc><Esc>[D"
+        let altright="<Esc><Esc>[C"
+
+        " Status line without powerline
+        set statusline=%m           			"modified flag
+        set statusline+=%t          			"tail of the filename
+        set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
+        set statusline+=%{&ff}]     			"file format
+        set statusline+=%h          			"help file flag
+        set statusline+=%r          			"read only flag
+        set statusline+=%y          			"filetype
+        set statusline+=\ %F       				"tail of the filename
+        set statusline+=%=          			"left/right separator
+        set statusline+=%c,         			"cursor column
+        set statusline+=%l/%L       			"cursor line/total lines
+        set statusline+=\ %P        			"percent through file
+
+    endif
 
 else
 
@@ -59,9 +94,9 @@ endif
 
 "--------------------------  Theming  ---------------------------"
 
-colorscheme override
+set t_Co=256				" enable 256 colors in vim before setting the theme
+colorscheme override		" enable override wich loads gotham256 & overrides it
 set background=dark
-set t_Co=256
 syntax enable               " enable syntax highlighting (previously syntax on).
 set nonumber                " set number
 set ruler                   " Always show info along bottom.
@@ -74,11 +109,6 @@ set expandtab               " use spaces instead of tabs
 set smarttab                " use tabs at the start of a line, spaces elsewhere
 set nowrap                  " don't wrap text
 set paste                   " allow pasting without indentation
-set guioptions+=c           " GUI Vim will not pop up a dialog box
-set guioptions-=l           " scrollbars
-set guioptions-=L
-set guioptions-=r
-set guioptions-=R
 set scrolloff=999           " lines you would like to see above and below the cursor
 set listchars=tab:▸\ ,eol:¬ " Define invisible symbols
 
@@ -88,20 +118,6 @@ set laststatus=2            " Always display the statusline in all windows
 set showtabline=2           " Always display the tabline, even if there is only one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
-" Status line without powerline
-"set statusline=%m           "modified flag
-"set statusline+=%t          "tail of the filename
-"set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
-"set statusline+=%{&ff}]     "file format
-"set statusline+=%h          "help file flag
-"set statusline+=%r          "read only flag
-"set statusline+=%y          "filetype
-"set statusline+=\ %F       "tail of the filename
-"set statusline+=%=          "left/right separator
-"set statusline+=%c,         "cursor column
-"set statusline+=%l/%L       "cursor line/total lines
-"set statusline+=\ %P        "percent through file
-
 "-------------------------- Search ---------------------------"
 
 set hlsearch                " highlight searched phrases.
@@ -110,12 +126,15 @@ set ignorecase              " Make searches case-insensitive.
 
 "-------------------------- Mappings ---------------------------"
 
+" To test if your keys are already mapped:
+" :map <A-key>
+
 " Edit .vimrc file
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 
 " jump 10 lines
-noremap <Up> 10k
-noremap <Down> 10j
+noremap <S-Up> 10k
+noremap <S-Down> 10j
 
 " Hide highlight after searching phrases
 nmap <Leader><space> :nohlsearch<cr>
@@ -156,12 +175,19 @@ nmap <leader>W :StripWhitespace<cr>
 " Clean Whitespace on save
 nmap <leader>$ :ToggleStripWhitespaceOnSave<cr>
 
+" Drush cc all
+nnoremap <leader>dc :execute 'silent !drush cc all &' | redraw!
+
+" Uppercase
+nnoremap <C-u> gUiw
+inoremap <C-u> <ESC>gUiwea
+
 " Indentation of visual blocks
 vnoremap > >gv
 vnoremap < <gv
 
 "execute "nnoremap " . <C-M> . " :wincmd |<CR>"
-nnoremap <C-A>m  :wincmd |<CR>
+"nnoremap <C-A>m  :wincmd |<CR>
 
 " wincmd in insert mode
 "imap <C-w> <C-o><C-w>
@@ -306,7 +332,7 @@ endfunction
 "-------------------------- Commands ---------------------------"
 
 " Add powerline commands
-command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
+" command! PowerlineReloadColorscheme call Pl#ReloadColorscheme()
 
 "-------------------------- Auto-commands ---------------------------"
 
@@ -322,7 +348,7 @@ au VimResized * :wincmd =
 augroup autosourcing
         autocmd!
         autocmd BufWritePost $MYVIMRC,~/.dot/.vimrc,~/.vim/*.vim nested source % | colorscheme override
-        autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
+        "autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
 augroup END
 
 " @TODO Source .zshrc in terminal when saving it
@@ -341,6 +367,10 @@ augroup END
 " Enable Whitespace by default
 let g:better_whitespace_verbosity=1
 autocmd BufReadPre,FileReadPre * EnableWhitespace
+
+" Colored statusline in insert mode
+au InsertEnter * hi StatusLine guibg=#0B4C5F
+au InsertLeave * hi StatusLine guibg=#0A1B2A
 
 " Strip whitespaces on save
 "autocmd BufWritePre * StripWhitespace
@@ -378,6 +408,11 @@ noremap <silent> <leader># :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,
 
 "-------------------------- Splits ---------------------------"
 
+" Splits
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+map <C-H> <C-W>h<C-W>_
+map <C-L> <C-W>l<C-W>_
 
 " resize windows
 " map _ <C-W>-
@@ -471,6 +506,16 @@ map <C-K> <C-W>k<C-W>_
 ":echo expand("%.:h:h")                     relative path dirname dirname
 ":echo expand("<sfile>:p")                  absolute path to [this] vimscript
 
+" Use MacVim to edit Git commit messages
+" Add the following line to the file ~/.profile:
+" export EDITOR='mvim -f --nomru -c "au VimLeave * !open -a Terminal"'
+
+" Force MacVim to use my shell PATH?
+" The problem is that MacOS uses zshenv incorrectly, forcing system paths for non-login shell calls. This can be fixed by moving zshenv to zprofile:
+" sudo mv /etc/zshenv /etc/zprofile
+
+" Auto source file in var
+"autocmd BufWritePost *vimrc execute "source " . expand("<afile>")
 
 " [[ vimrc structure ]] {{{
 "
@@ -501,6 +546,7 @@ map <C-K> <C-W>k<C-W>_
 
 "-------------------------- Cheatsheet ---------------------------"
 
+"							http://bencrowder.net/files/vim-fu/
 " Function key + up /down   Scroll page up / down
 " Function key + L / R      Begin / End of line
 " Ctrl + L / R              Switch desktops
