@@ -1,3 +1,4 @@
+
 #                   ██
 #                  ░██
 #    ██████  ██████░██      ██████  █████
@@ -80,6 +81,7 @@ source ~/.dotfiles/.functions
 source ~/.dotfiles/.exports
 test -f ~/.dotfiles/.secret && source ~/.dotfiles/.secret
 test -f ~/.dotfiles/.work && source ~/.dotfiles/.work
+# source ~/.dot/vendor/powerline/powerline/powerline/bindings/zsh/powerline.zsh
 
 PATH=${PATH}:/usr/local/src
 PATH=${PATH}:/usr/local/bin
@@ -88,6 +90,7 @@ PATH=${PATH}:/bin
 PATH=${PATH}:/usr/sbin
 PATH=${PATH}:/sbin
 PATH=${PATH}:/usr/local/sbin
+PATH=${PATH}:/usr/local/share/python
 PATH=${PATH}:~/.dot/vendor/macvim-dev/macvim/src/MacVim/build/Release/MacVim.app/Contents/MacOS
 PATH=${PATH}:~/.dot/vendor/bin
 PATH=${PATH}:~/.composer/vendor/bin
@@ -98,8 +101,23 @@ PATH="$(brew --prefix homebrew/php/php55)/bin:$PATH"
 PATH=$PATH:$HOME/.composer/vendor/bin
 export PATH=${PATH}
 
+# PATH=${PATH}:/Library/Frameworks/Python.framework/Versions/3.5/bin
+
+# Notice both bin: 
+# vi or vim are os native
+# Vim or Macvim
+# ~/.dot/vendor/macvim-dev/macvim/src/MacVim/build/Release/MacVim.app/Contents/MacOS/Macvim
+# ~/.dot/vendor/macvim-dev/macvim/src/MacVim/build/Release/MacVim.app/Contents/MacOS/Vim
 # export MANPATH="/usr/local/man:$MANPATH"
+
 export VIM_APP_DIR='/Users/admin/.dot/vendor/macvim-dev/macvim/src/MacVim/build/Release'
+
+# Make mvim default vim
+# alias vim='mvim -v'
+# alias vim="/Users/user/Applications/MacVim.app/Contents/MacOS/Vim"
+# PATH="/Users/user/Applications/MacVim.app/Contents/MacOS/Vim:${PATH}"
+# export PATH
+alias mvim="mvim --remote-tab-silent"
 
 #permissions
 #sudo chown -R username.www-data /var/www

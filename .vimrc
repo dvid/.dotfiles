@@ -13,7 +13,6 @@ let mapleader = ","
 "--------------------------  Files  ---------------------------"
 
 so ~/.vim/plugins.vim
-set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
 
 "--------------------------  Settings  ---------------------------"
 
@@ -34,11 +33,13 @@ set ttimeoutlen=10                              " see bitbucket.org/sjl/dotfiles
 
 " Switch hostname
 let machine = substitute(system('hostname'), "\n", "", "")
+
 		" To view the key code of a corresponding key combination
 		" your terminal is sending to vim:
 		" $ sed -n l
 		" Alt Left  = ^[^[[D = <Esc><Esc>[D
 		" Alt Right = ^[^[[C = <Esc><Esc>[C
+
 if 		machine == "Manjaro"
 
 	let altleft="<Esc>[1;3D"
@@ -47,6 +48,11 @@ if 		machine == "Manjaro"
 elseif 	machine == "octogone"
 
     if has("gui_running")
+
+        " Map alt key
+        let altleft="<A-Left>"
+        let altright="<A-Right>"
+
         set macligatures
         set guicursor+=a:blinkon0
         " :set guifont=*						" Open typo gui
@@ -62,12 +68,6 @@ elseif 	machine == "octogone"
         set guioptions-=r
         set guioptions-=R
         set guioptions-=e						" no guitabs
-        " Map alt key
-        let altleft="<A-Left>"
-        let altright="<A-Right>"
-    else
-        let altleft="<Esc><Esc>[D"
-        let altright="<Esc><Esc>[C"
 
         " Status line without powerline
         set statusline=%m           			"modified flag
@@ -82,6 +82,18 @@ elseif 	machine == "octogone"
         set statusline+=%c,         			"cursor column
         set statusline+=%l/%L       			"cursor line/total lines
         set statusline+=\ %P        			"percent through file
+
+	   let macvim_hig_shift_movement = 1		"see macvim gvimrc
+	   let macvim_skip_cmd_opt_movement = 1		"see macvim gvimrc
+
+	else
+
+        " Map alt key
+		let altleft="<Esc><Esc>[D"
+		let altright="<Esc><Esc>[C"
+
+		" Powerline is only set vim
+        set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
 
     endif
 
@@ -183,8 +195,8 @@ nnoremap <C-u> gUiw
 inoremap <C-u> <ESC>gUiwea
 
 " Indentation of visual blocks
-vnoremap > >gv
-vnoremap < <gv
+vnoremap < >gv
+vnoremap > <gv
 
 "execute "nnoremap " . <C-M> . " :wincmd |<CR>"
 "nnoremap <C-A>m  :wincmd |<CR>
@@ -372,6 +384,9 @@ autocmd BufReadPre,FileReadPre * EnableWhitespace
 au InsertEnter * hi StatusLine guibg=#0B4C5F
 au InsertLeave * hi StatusLine guibg=#0A1B2A
 
+" Disable tabs with cmd tabo wich will open all buffers in same tab
+"autocmd BufWinEnter,BufNewFile * silent tabo
+
 " Strip whitespaces on save
 "autocmd BufWritePre * StripWhitespace
 
@@ -482,7 +497,7 @@ map <C-K> <C-W>k<C-W>_
 
 " ctrl-I to switch between vertical or
 " horizontal splitted windows {
-    "map <C-I> <C-W><C-W>
+    map <C-I> <C-W><C-W>
 "}
 
 " vim explorer {
