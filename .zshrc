@@ -132,9 +132,9 @@ alias soz='. ~/.zshrc'
 
 # Files Edit
 case $HOST in
-  "Manjaro") 	alias ezsh="vi ~/.dotfiles/.zshrc"
-    			alias evim="vi ~/.dotfiles/.vimrc"
-    			alias ei3="vi ~/.dotfiles/.config/i3/config"
+  "Manjaro") 	alias ezsh="vi ~/.dot/.zshrc"
+    			alias evim="vi ~/.dot/.vimrc"
+    			alias ei3="vi ~/.dot/.config/i3/config"
 				;;
   "octogone") 	alias ezsh="vi ~/.dot/.zshrc"
     			alias evim="vi ~/.dot/.vimrc"
