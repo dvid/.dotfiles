@@ -239,14 +239,14 @@ vnoremap > <gv
 nmap <F8> :TagbarToggle<CR>
 
 " @TODO 80 char mode
-"let &colorcolumn=join(range(81,999),",")
-"highlight ColorColumn ctermbg=235 guibg=#2c2d27
-"let &colorcolumn="80,".join(range(120,999),",")
+nmap <leader>l :call EightyColumnRule()<cr>
 
 "-------------------------- Functions ---------------------------"
 
 " @TODO ? shows help (mappings)
 " @TODO b add it to bookmarks
+" @TODO diff two windows
+" @TODO search in dir
 
 " Save current file if edited
 function! SaveCurrentFile()
@@ -278,6 +278,32 @@ function! AutoSaveFiles()
     echom   'autowriteall ' &autowriteall
 
 endfunction
+
+" 80 characters line length
+let g:eightyrule = 1
+function! EightyColumnRule()
+
+    if g:eightyrule
+		let g:eightyrule=0
+		let &colorcolumn=""
+    else
+		let g:eightyrule=1
+		let &colorcolumn=join(range(81,999),",")
+		" if colorcolumn highlight hasn't been specified yet:
+		" highlight ColorColumn ctermbg=235 guibg=#2c2d27
+		let &colorcolumn="80,".join(range(120,999),",")
+    endif
+
+endfunction
+
+" CURSOR COLOUR When in terminal
+" change the color of the cursor to white in command mode,and orange in insert mode
+" if &term =~ "xterm\\|rxvt"
+" :silent !echo -ne "\033]12;white\007"
+" let &t_SI = "\033]12;orange\007"
+" let &t_EI = "\033]12;white\007"
+" autocmd VimLeave * :!echo -ne "\033]12;white\007"
+" endif 
 
 " Run git diff in terminal
 function! OpenSplit(bytecode)
