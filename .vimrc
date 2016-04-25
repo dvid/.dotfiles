@@ -109,15 +109,6 @@ elseif 	machine == "octogone"
 		" Powerline is only set vim
         set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
         
-        "CURSOR COLOUR When in terminal
-        " change the color of the cursor to white in command mode,and orange in insert mode
-"         if &term =~ "xterm\\|rxvt"
-"         :silent !echo -ne "\033]12;white\007"
-"         let &t_SI = "\033]12;orange\007"
-"         let &t_EI = "\033]12;white\007"
-"         autocmd VimLeave * :!echo -ne "\033]12;white\007"
-"         endif 
-
     endif
 
 else
@@ -393,8 +384,6 @@ function! s:align()
   endif
 endfunction
 
-" @TODO search in dir
-
 "-------------------------- Commands ---------------------------"
 
 " Add powerline commands
@@ -560,6 +549,41 @@ map <C-K> <C-W>k<C-W>_
 
 "-------------------------- Help ---------------------------"
 
+" [[ vimrc structure ]] {{{
+"
+" .vimrc -- global settings
+" .vim/
+"   after/  -- files that are loaded after sourced system plugins. override
+"               system settings.
+"       ftplugin/
+"       plugin/
+"       syntax/
+"       ...
+"   autoload/ -- automatically loaded scripts.
+"   colors/   -- custom color schemes.
+"   doc/      -- plugin documentation.
+"   ftdetect/ -- filetype detection scripts.
+"   ftplugin/ -- filetype plugins (load before system files, override by system)
+"   indent/   -- indent scripts.
+"   plugin/   -- plugins.
+"   syntax/   -- syntax scripts.
+"
+" }}}
+
+" Modes
+" n	Normal mode
+" v	Visual mode
+" ve	Visual mode with 'selection' "exclusive" (same as 'v',
+"     if not specified)
+" o	Operator-pending mode
+" i	Insert mode
+" r	Replace mode
+" c	Command-line Normal (append) mode
+" ci	Command-line Insert mode
+" cr	Command-line Replace mode
+" sm	showmatch in Insert mode
+" a	all modes
+
 ":help filename-modifiers
 ":help expand
 ":echo @%                   def/my.txt      directory/name of file (relative to the current working directory of /abc)
@@ -585,27 +609,6 @@ map <C-K> <C-W>k<C-W>_
 
 " Auto source file in var
 "autocmd BufWritePost *vimrc execute "source " . expand("<afile>")
-
-" [[ vimrc structure ]] {{{
-"
-" .vimrc -- global settings
-" .vim/
-"   after/  -- files that are loaded after sourced system plugins. override
-"               system settings.
-"       ftplugin/
-"       plugin/
-"       syntax/
-"       ...
-"   autoload/ -- automatically loaded scripts.
-"   colors/   -- custom color schemes.
-"   doc/      -- plugin documentation.
-"   ftdetect/ -- filetype detection scripts.
-"   ftplugin/ -- filetype plugins (load before system files, override by system)
-"   indent/   -- indent scripts.
-"   plugin/   -- plugins.
-"   syntax/   -- syntax scripts.
-"
-" }}}
 
 " Execute cmd in every buffer
 " bufdo execute "normal! @a" | update
