@@ -122,7 +122,13 @@ export LANG=en_US.UTF-8
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 # Alias
-alias vi="vim"
+# Vim Quick edit mode
+# Used also by git
+vi(){
+	vim $*
+    echo -e \\033c
+}
+
 alias sudovi="sudo vim"
 alias grep='grep --color=auto'
 alias soz='. ~/.zshrc'
@@ -249,34 +255,6 @@ plugins=(
     zsh-syntax-highlighting
     zsh-256color
 )
-
-
- # Convert 8 bit r,g,b,a (0-255) to 16 bit r,g,b,a (0-65535)
- # to set terminal background.
- # r, g, b, a values default to 255
- set_bg () {
-
-  #   osascript -e "tell application \"Terminal\" to set background color of window 1 to {$r, $g, $b, $a}"
-     osascript -e "tell application \"iTerm\"
-     set current_terminal to (current terminal)
-     tell current_terminal
-       set current_session to (current session)
-       tell current_session
-         set background color to $1
-       end tell
-     end tell
-   end tell"
-
-     reset
- }
-
- # Wrapping vi cmd to set background same as vim
- vi(){
-     {set_bg "{0,0,0}" &} &> /dev/null
-     vim $*
-     {set_bg "{23130, 21074, 40092}" &} &> /dev/null
-     echo -e \\033c
- }
 
  #
  #
