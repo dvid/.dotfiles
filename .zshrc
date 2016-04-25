@@ -250,33 +250,39 @@ plugins=(
     zsh-256color
 )
 
+# Convert 8 bit r,g,b,a (0-255) to 16 bit r,g,b,a (0-65535)
+# to set terminal background.
+# r, g, b, a values default to 255
+set_bg () {
 
- # Convert 8 bit r,g,b,a (0-255) to 16 bit r,g,b,a (0-65535)
- # to set terminal background.
- # r, g, b, a values default to 255
- set_bg () {
+ #   osascript -e "tell application \"Terminal\" to set background color of window 1 to {$r, $g, $b, $a}"
+	osascript -e > /dev/null "tell application \"iTerm\"
+        set current_terminal to (current terminal)
+        tell current_terminal
+            set current_session to (current session)
+            tell current_session
+                set background color to $1
+            end tell
+        end tell
+    end tell
+    return"
+}
 
-  #   osascript -e "tell application \"Terminal\" to set background color of window 1 to {$r, $g, $b, $a}"
-     osascript -e "tell application \"iTerm\"
-     set current_terminal to (current terminal)
-     tell current_terminal
-       set current_session to (current session)
-       tell current_session
-         set background color to $1
-       end tell
-     end tell
-   end tell"
+# Set terminal background same as vim
+# to avoid margins
+vip(){
+	set_bg "{0,0,0}"
+	vim $* 
+  	set_bg "{0,0,0}"
+	echo -e \\033c
+}
 
-     reset
- }
-
- # Wrapping vi cmd to set background same as vim
- vi(){
-     {set_bg "{0,0,0}" &} &> /dev/null
-     vim $*
-     {set_bg "{23130, 21074, 40092}" &} &> /dev/null
-     echo -e \\033c
- }
+# Vim Quick edit mode
+# Used also by git
+vi(){
+	vim --noplugin $*
+    echo -e \\033c
+}
 
  #
  #

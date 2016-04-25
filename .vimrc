@@ -137,6 +137,7 @@ set nowrap                  " don't wrap text
 set paste                   " allow pasting without indentation
 set scrolloff=999           " lines you would like to see above and below the cursor
 set listchars=tab:▸\ ,eol:¬ " Define invisible symbols
+set winminheight=0
 
 "--------------------------  Status Line  ---------------------------"
 
@@ -238,6 +239,7 @@ nmap <leader>l :call EightyColumnRule()<cr>
 " @TODO b add it to bookmarks
 " @TODO diff two windows
 " @TODO search in dir
+" @TODO git edit in split mode to count and update line numbers
 
 " Save current file if edited
 function! SaveCurrentFile()
@@ -492,7 +494,6 @@ map <C-L> <C-W>l<C-W>_
 " Splits
 " <C-H> vsplit r
 " <C-L> vsplit L
-set winminheight=0
 map <C-J> <C-W>j<C-w>_
 map <C-K> <C-W>k<C-W>_
 "set winminwidth=0
