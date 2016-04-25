@@ -22,3 +22,10 @@ highlight Identifier ctermfg=Green guifg=#006F00
 highlight ExtraWhitespace ctermbg=Green
 highlight Cursor guifg=#ffffff guibg=#d86020
 highlight iCursor guifg=#ffffff guibg=#AAFF00
+
+" Default state of cursor:
+" n-v-c:block-Cursor/lCursor,
+" ve:ver35-Cursor,
+" o:hor50-Cursor,
+" i-ci:ver25-Cursor/lCursor,
+" r-cr:hor20-Cursor/lCursor

@@ -59,10 +59,13 @@ elseif 	machine == "octogone"
         " :set guifont=*						" Open typo gui
         " :set guifont? 						" Show actual font
         set guifont=Menlo\ Regular:h18
+
         let g:onedark_termcolors=256
         let g:onedark_terminal_italics=1
+
         " set fuoptions="1920,1200"
         set fullscreen
+
         set guioptions+=c       				" GUI Vim will not pop up a dialog box
         set guioptions-=l       				" scrollbars
         set guioptions-=L
@@ -72,6 +75,7 @@ elseif 	machine == "octogone"
 
         "turn blinking off for normal and visual mode
         set guicursor+=n-v-c:blinkon0
+		set guicursor+=i:ver20-iCursor
 
 		set showtabline=1           			" normal tabs 
 
