@@ -15,19 +15,19 @@ vim +PluginInstall +qall
 
 # fc-cache -fv ~/.fonts
 
-# mkdir /usr/local/lib/python3.5/
-# ln -s /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/config-3.5m /usr/local/lib/python3.5/config
-
-# pip install https://github.com/Lokaltog/powerline/tarball/develop
+# Not needed, already a composer dependency
 # pip install --user git+git://github.com/powerline/powerline
+
+mkdir /usr/local/lib/python3.5/
+ln -s /Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/config-3.5m /usr/local/lib/python3.5/config
 
 # cd /Users/admin/.dot/vendor/macvim-dev/macvim/
 # make distclean
 # ./configure --with-features=huge --enable-pythoninterp=dynamic --with-python-config-dir=/usr/lib/python2.7/config --with-compiledby="dvid"
 # ./configure --enable-pythoninterp=dynamic --with-python-config-dir=/usr/lib/python2.7/config vi_cv_path_python=/usr/local/bin/python2.7  --with-compiledby="dvid"
-# ./configure --with-features=huge --enable-python3interp=dynamic --with-python3-config-dir=/usr/local/lib/python3.5/config vi_cv_path_python3=/usr/local/bin/python3.5 --with-compiledby="dvid"
-# make
+./configure --with-features=huge --enable-python3interp=dynamic --with-python3-config-dir=/usr/local/lib/python3.5/config vi_cv_path_python3=/usr/local/bin/python3.5 --with-compiledby="dvid"
+make
 
-# ln -s /Users/admin/.dot/vendor/macvim-dev/macvim/src/MacVim/mvim /usr/local/bin/mvim
+ln -s /Users/admin/.dot/vendor/macvim-dev/macvim/src/MacVim/mvim /usr/local/bin/mvim
 
 # mvim --remote-tab-silent /Users/admin/.dot/vendor/macvim-dev/macvim/src/MacVim/gvimrc

@@ -127,6 +127,9 @@ alias sudovi="sudo vim"
 alias grep='grep --color=auto'
 alias soz='. ~/.zshrc'
 
+# Opens Macvim with open -a, for opening new cmd lines files
+# mvim () { ([[ -z $@ ]] || touch "$@" ) && open -a MacVim "$@"; }
+
 # Files Edit
 case $HOST in
   "Manjaro") 	alias ezsh="vi ~/.dotfiles/.zshrc"
@@ -235,6 +238,7 @@ u       restore closed tab (unwind the 'd' command)
 
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-256color/zsh-256color.plugin.zsh
+source ~/.dot/vendor/powerline/powerline/powerline/bindings/zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -245,6 +249,43 @@ plugins=(
     zsh-syntax-highlighting
     zsh-256color
 )
+
+
+ # Convert 8 bit r,g,b,a (0-255) to 16 bit r,g,b,a (0-65535)
+ # to set terminal background.
+ # r, g, b, a values default to 255
+ set_bg () {
+
+  #   osascript -e "tell application \"Terminal\" to set background color of window 1 to {$r, $g, $b, $a}"
+     osascript -e "tell application \"iTerm\"
+     set current_terminal to (current terminal)
+     tell current_terminal
+       set current_session to (current session)
+       tell current_session
+         set background color to $1
+       end tell
+     end tell
+   end tell"
+
+     reset
+ }
+
+ # Wrapping vi cmd to set background same as vim
+ vi(){
+     {set_bg "{0,0,0}" &} &> /dev/null
+     vim $*
+     {set_bg "{23130, 21074, 40092}" &} &> /dev/null
+     echo -e \\033c
+ }
+
+ #
+ #
+ #    if [ "$#" -eq  "0" ]
+ #    then
+ #        echo "No arguments supplied"
+ #    else
+ #        echo "Hello world"
+ #    fi
 
 # Functions
 

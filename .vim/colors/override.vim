@@ -20,3 +20,5 @@ let g:colors_name = "override"
 
 highlight Identifier ctermfg=Green guifg=#006F00
 highlight ExtraWhitespace ctermbg=Green
+highlight Cursor guifg=#ffffff guibg=#d86020
+highlight iCursor guifg=#ffffff guibg=#AAFF00

@@ -42,6 +42,7 @@ let machine = substitute(system('hostname'), "\n", "", "")
 
 if 		machine == "Manjaro"
 
+	set showtabline=2           " Always display the tabline, even if there is only one tab
 	let altleft="<Esc>[1;3D"
 	let altright="<Esc>[1;3C"
 
@@ -54,7 +55,7 @@ elseif 	machine == "octogone"
         let altright="<A-Right>"
 
         set macligatures
-        set guicursor+=a:blinkon0
+        "set guicursor+=a:blinkon0
         " :set guifont=*						" Open typo gui
         " :set guifont? 						" Show actual font
         set guifont=Menlo\ Regular:h18
@@ -69,7 +70,13 @@ elseif 	machine == "octogone"
         set guioptions-=R
         set guioptions-=e						" no guitabs
 
+        "turn blinking off for normal and visual mode
+        set guicursor+=n-v-c:blinkon0
+
+		set showtabline=1           			" normal tabs 
+
         " Status line without powerline
+        set statusline+=%#warningmsg#
         set statusline=%m           			"modified flag
         set statusline+=%t          			"tail of the filename
         set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
@@ -83,10 +90,13 @@ elseif 	machine == "octogone"
         set statusline+=%l/%L       			"cursor line/total lines
         set statusline+=\ %P        			"percent through file
 
-	   let macvim_hig_shift_movement = 1		"see macvim gvimrc
-	   let macvim_skip_cmd_opt_movement = 1		"see macvim gvimrc
+	    "let macvim_hig_shift_movement = 1		"see macvim gvimrc
+	    let macvim_skip_cmd_opt_movement = 1	" ~/.dot/vendor/macvim-dev/macvim/src/MacVim/gvimrc
+		"behave xterm							"get visual mode work normal again in macvim when selectmode already set
 
 	else
+		
+		set showtabline=2           			" Always display the tabline, even if there is only one tab
 
         " Map alt key
 		let altleft="<Esc><Esc>[D"
@@ -94,6 +104,15 @@ elseif 	machine == "octogone"
 
 		" Powerline is only set vim
         set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
+        
+        "CURSOR COLOUR When in terminal
+        " change the color of the cursor to white in command mode,and orange in insert mode
+"         if &term =~ "xterm\\|rxvt"
+"         :silent !echo -ne "\033]12;white\007"
+"         let &t_SI = "\033]12;orange\007"
+"         let &t_EI = "\033]12;white\007"
+"         autocmd VimLeave * :!echo -ne "\033]12;white\007"
+"         endif 
 
     endif
 
@@ -127,7 +146,6 @@ set listchars=tab:▸\ ,eol:¬ " Define invisible symbols
 "--------------------------  Status Line  ---------------------------"
 
 set laststatus=2            " Always display the statusline in all windows
-set showtabline=2           " Always display the tabline, even if there is only one tab
 set noshowmode              " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 "-------------------------- Search ---------------------------"
@@ -137,6 +155,7 @@ set incsearch               " But do highlight as you type your search.
 set ignorecase              " Make searches case-insensitive.
 
 "-------------------------- Mappings ---------------------------"
+
 
 " To test if your keys are already mapped:
 " :map <A-key>
@@ -215,6 +234,11 @@ vnoremap > <gv
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" @TODO 80 char mode
+"let &colorcolumn=join(range(81,999),",")
+"highlight ColorColumn ctermbg=235 guibg=#2c2d27
+"let &colorcolumn="80,".join(range(120,999),",")
+
 "-------------------------- Functions ---------------------------"
 
 " @TODO ? shows help (mappings)
@@ -286,7 +310,7 @@ endfunction
 function! IsModified()
 
     if &modified
-        " If you have a symlink of your .vimrc in the $HOME path
+        " @TODO If you have a symlink of your .vimrc in the $HOME path
         " git diff on that file will create output for both files
         " symlink and real file. Instead make it a hard link:
         " ln source destination
@@ -627,3 +651,4 @@ map <C-K> <C-W>k<C-W>_
 " :5,7m $                   move lines 5, 6 and 7 to after last line
 " :.,.+4m 21                move 5 lines starting at current line to after line 21
 " :,+4m14                   same (. for current line is assumed)
+" Ctrl wo                   fullscreen current buffer
