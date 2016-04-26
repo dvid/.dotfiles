@@ -50,6 +50,7 @@ elseif 	machine == "octogone"
 
     if has("gui_running")
 
+
         " Map alt key
         let altleft="<A-Left>"
         let altright="<A-Right>"
@@ -72,12 +73,10 @@ elseif 	machine == "octogone"
         set guioptions-=r
         set guioptions-=R
         set guioptions-=e						" no guitabs
-
-        "turn blinking off for normal and visual mode
-        set guicursor+=n-v-c:blinkon0
-		set guicursor+=i:ver20-iCursor
-
-		set showtabline=1           			" normal tabs 
+		set showtabline=1           			" Only show tabs > 1 
+		set guitablabel=\ %t\ %M 
+        set guicursor+=n-v-c:blinkon0			" turn blinking off for normal and visual mode
+		set guicursor+=i:ver20-iCursor			" define icursor as default
 
         " Status line without powerline
         set statusline+=%#warningmsg#
@@ -232,6 +231,13 @@ nmap <F8> :TagbarToggle<CR>
 
 " @TODO 80 char mode
 nmap <leader>l :call EightyColumnRule()<cr>
+
+" The first two lines make possible matches appear as lists. You can use either or both.
+" The third line effectively allows for Tabs to appear in key maps. 
+set wildmenu
+set wildmode=list:full
+set wildcharm=<C-z>
+nnoremap <leader>c :colorscheme <C-z><S-Tab>
 
 "-------------------------- Functions ---------------------------"
 
