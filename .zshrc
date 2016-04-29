@@ -61,7 +61,7 @@ setopt numericglobsort  # Sort filenames numerically when it makes sense
 #setopt nobeep           # No beep
 setopt appendhistory    # Immediately append history instead of overwriting
 setopt histignorealldups #If a new command is a duplicate, remove the older one
-setopt autocd 
+setopt autocd
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
@@ -182,6 +182,9 @@ alias ums="sudo pacman -Syu"
 alias gs="git status"
 alias gfh="git log -p"                  #let git generate the patches for each log entry
 
+# Grep - search string in folder,
+alias ssf="grep -rnw . -e ''"
+
 # Proxy
 assignProxy(){
    PROXY_ENV="http_proxy ftp_proxy https_proxy all_proxy HTTP_PROXY HTTPS_PROXY FTP_PROXY ALL_PROXY"
@@ -207,7 +210,7 @@ assignProxy(){
    assignProxy $proxy_value $no_proxy_value
  }
 
-alias pbcopy="xclip -selection c" 
+alias pbcopy="xclip -selection c"
 alias pbpaste="xclip -selection clipboard -o"
 alias timer="echo n7Dv23kh | pbcopy && firefox 'https://webgate.ec.europa.eu/fpfis/timeclock/timeclock.php'"
 
@@ -240,7 +243,7 @@ d       close current tab
 u       restore closed tab (unwind the 'd' command)
 '"
 
-# Plugins 
+# Plugins
 
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-256color/zsh-256color.plugin.zsh
