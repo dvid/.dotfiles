@@ -163,7 +163,7 @@ noremap <S-Up> 10k
 noremap <S-Down> 10j
 
 " close buffers
-nmap <leader>x :bd!<cr>
+nmap <leader>x :bd<cr>
 
 " Hide highlight after searching phrases
 nmap <Leader><space> :nohlsearch<cr>
@@ -333,7 +333,7 @@ function! OpenSplit(bytecode)
         " Open a new split and set it up.
         vsplit %.diff
         normal! ggdG
-        setlocal noswapfile "buftype=nofile
+        setlocal noswapfile buftype=nofile
         set filetype=on filetype=enabled syntax=diff
 
         " Insert the bytecode.
@@ -733,3 +733,4 @@ map <C-K> <C-W>k<C-W>_
 " d                         New directory
 " R                         Rename
 " s                         Change sort
+" . file                    Delete file
