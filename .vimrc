@@ -307,6 +307,12 @@ endfunction
 " autocmd VimLeave * :!echo -ne "\033]12;white\007"
 " endif 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let s:current_file_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
 " Run git diff in terminal
 function! OpenSplit(bytecode)
 
@@ -373,11 +379,15 @@ endfunction
 function! ShowGitDiff()
 
     " Get the diff.
-    let bytecode = system("cd " . expand("%:p:h") . " && " . "git diff " . expand("%:t"))
+    let bytecode = system("cd " . s:current_file_path . " && " . "git diff " . expand("%:t"))
 
     call OpenSplit(bytecode)
 
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Auto tabular on space
 " tpope's cucumbertables gist:
@@ -608,6 +618,25 @@ map <C-K> <C-W>k<C-W>_
 ":echo expand("%.:h")                       relative path dirname
 ":echo expand("%.:h:h")                     relative path dirname dirname
 ":echo expand("<sfile>:p")                  absolute path to [this] vimscript
+
+" Relative path of script file:
+"let s:path = expand('<sfile>')
+
+" Absolute path of script file:
+"let s:path = expand('<sfile>:p')
+
+" Absolute path of script file with symbolic links resolved:
+"let s:path = resolve(expand('<sfile>:p'))
+
+" Folder in which script resides: (not safe for symlinks)
+"let s:path = expand('<sfile>:p:h')
+
+" If you're using a symlink to your script, but your resources are in
+" the same directory as the actual script, you'll need to do this:
+"   1: Get the absolute path of the script
+"   2: Resolve all symbolic links
+"   3: Get the folder of the resolved absolute file
+"let s:path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " Use MacVim to edit Git commit messages
 " Add the following line to the file ~/.profile:
