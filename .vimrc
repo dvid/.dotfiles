@@ -8,6 +8,7 @@
 "--------------------------  Leader ---------------------------"
 
 set nocompatible            					" be iMproved, get rid of Vi compatibility mode. required!
+let $MYVIMRC = "~/.dot/.vimrc"
 let mapleader = ","
 
 "--------------------------  Files  ---------------------------"
