@@ -696,3 +696,12 @@ map <C-K> <C-W>k<C-W>_
 " :.,.+4m 21                move 5 lines starting at current line to after line 21
 " :,+4m14                   same (. for current line is assumed)
 " Ctrl wo                   fullscreen current buffer
+"
+" 							Vim Vinegar
+"
+" :Sex                      open netrw in horisontal split
+" Vex                       open netrw in vertical split
+" %                         New file
+" d                         New directory
+" R                         Rename
+" s                         Change sort
