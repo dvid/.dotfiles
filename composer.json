@@ -12,7 +12,7 @@
                 "name": "macvim-dev/macvim",
                 "version": "dev-master",
                 "source": {
-                    "url": "https://github.com/macvim-dev/macvim",
+                    "url": "https://github.com/macvim-dev/macvim.git",
                     "type": "git",
                     "reference": "origin/master"
                 }
@@ -24,7 +24,7 @@
                 "name": "powerline/powerline",
                 "version": "dev-master",
                 "source": {
-                    "url": "https://github.com/powerline/powerline",
+                    "url": "https://github.com/powerline/powerline.git",
                     "type": "git",
                     "reference": "origin/master"
                 }
