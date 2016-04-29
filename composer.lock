@@ -1,28 +1,29 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "97255a9550a3cb71cd6c2d00dabc4f8a",
+    "hash": "d76e2b02ef7027a9f3f549f724e58941",
+    "content-hash": "f6c1922360f8b8cd5c80c8fcf4332a1f",
     "packages": [
         {
             "name": "macvim-dev/macvim",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/macvim-dev/macvim",
+                "url": "https://github.com/macvim-dev/macvim.git",
                 "reference": "origin/master"
             },
             "type": "library",
-            "time": "2016-04-21 03:30:02"
+            "time": "2016-04-29 03:28:24"
         },
         {
             "name": "powerline/powerline",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/powerline/powerline",
+                "url": "https://github.com/powerline/powerline.git",
                 "reference": "origin/master"
             },
             "type": "library",
