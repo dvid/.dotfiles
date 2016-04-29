@@ -163,6 +163,9 @@ nmap <Leader>ev :tabedit $MYVIMRC<cr>
 noremap <S-Up> 10k
 noremap <S-Down> 10j
 
+" close buffers
+nmap <leader>x :bd!<cr>
+
 " Hide highlight after searching phrases
 nmap <Leader><space> :nohlsearch<cr>
 
@@ -371,7 +374,7 @@ endfunction
 function! ShowGitDiff()
 
     " Get the diff.
-    let bytecode = system("git diff " . expand("%:p") . " 2>&1")
+    let bytecode = system("cd " . expand("%:p:h") . " && " . "git diff " . expand("%:t"))
 
     call OpenSplit(bytecode)
 
