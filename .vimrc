@@ -73,8 +73,8 @@ elseif 	machine == "octogone"
         set guioptions-=r
         set guioptions-=R
         set guioptions-=e						" no guitabs
-		set showtabline=1           			" Only show tabs > 1 
-		set guitablabel=\ %t\ %M 
+		set showtabline=1           			" Only show tabs > 1
+		set guitablabel=\ %t\ %M
         set guicursor+=n-v-c:blinkon0			" turn blinking off for normal and visual mode
 		set guicursor+=i:ver20-iCursor			" define icursor as default
 
@@ -98,7 +98,7 @@ elseif 	machine == "octogone"
 		"behave xterm							"get visual mode work normal again in macvim when selectmode already set
 
 	else
-		
+
 		set showtabline=2           			" Always display the tabline, even if there is only one tab
 
         " Map alt key
@@ -107,7 +107,7 @@ elseif 	machine == "octogone"
 
 		" Powerline is only set vim
         set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
-        
+
     endif
 
 else
@@ -165,6 +165,10 @@ noremap <S-Down> 10j
 " close buffers
 nmap <leader>x :bd<cr>
 
+" run python code from page
+nnoremap <F4> :exec '!python' shellescape(@%, 1)<cr>
+":w<CR>:!python %<CR>"
+
 " Hide highlight after searching phrases
 nmap <Leader><space> :nohlsearch<cr>
 
@@ -172,7 +176,8 @@ nmap <Leader><space> :nohlsearch<cr>
 nmap <leader>tc :tabc<cr>
 
 " Toggle line number
-nnoremap <leader>n :setlocal number!<cr>
+"nnoremap <leader>n :setlocal number!<cr>
+nnoremap <leader>n :call SwitchLineNumbers()<cr>
 
 " Toggle autowriteall
 nmap <leader>S :call AutoSaveFiles()<cr>
@@ -236,7 +241,7 @@ nmap <F8> :TagbarToggle<CR>
 nmap <leader>l :call EightyColumnRule()<cr>
 
 " The first two lines make possible matches appear as lists. You can use either or both.
-" The third line effectively allows for Tabs to appear in key maps. 
+" The third line effectively allows for Tabs to appear in key maps.
 set wildmenu
 set wildmode=list:full
 set wildcharm=<C-z>
@@ -298,6 +303,24 @@ function! EightyColumnRule()
 
 endfunction
 
+" Switch between line numbers - relative numbers an no number
+let g:linenumberstate = 1
+function! SwitchLineNumbers()
+
+    if g:linenumberstate == 1
+        let g:linenumberstate = 2
+		setlocal number
+    elseif g:linenumberstate == 2
+        let g:linenumberstate = 3
+		set relativenumber
+    elseif g:linenumberstate == 3
+        let g:linenumberstate = 1
+		setlocal nonumber
+		set norelativenumber
+    endif
+
+endfunction
+
 " CURSOR COLOUR When in terminal
 " change the color of the cursor to white in command mode,and orange in insert mode
 " if &term =~ "xterm\\|rxvt"
@@ -305,7 +328,7 @@ endfunction
 " let &t_SI = "\033]12;orange\007"
 " let &t_EI = "\033]12;white\007"
 " autocmd VimLeave * :!echo -ne "\033]12;white\007"
-" endif 
+" endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
