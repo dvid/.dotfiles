@@ -29,24 +29,18 @@ set notimeout                                   " Time out on key codes but not 
 set ttimeout                                    " Basically this makes terminal Vim work sanely.
 set ttimeoutlen=10                              " see bitbucket.org/sjl/dotfiles
 set splitbelow 									" Make splits default to below... set splitright
-" set title titlestring=""
 
 "--------------------------  Hostname  ---------------------------"
 
 " Switch hostname
 let machine = substitute(system('hostname'), "\n", "", "")
 
-		" To view the key code of a corresponding key combination
-		" your terminal is sending to vim:
-		" $ sed -n l
-		" Alt Left  = ^[^[[D = <Esc><Esc>[D
-		" Alt Right = ^[^[[C = <Esc><Esc>[C
+if machine == "Manjaro"
 
-if 		machine == "Manjaro"
-
-	set showtabline=2           " Always display the tabline, even if there is only one tab
-	let altleft="<Esc>[1;3D"
+	let altleft="<Esc>[1;3D"					" see blow in mappings for details about identifying a key
 	let altright="<Esc>[1;3C"
+
+	set showtabline=2           				" Always display the tabline, even if there is only one tab
 
     " Powerline is only set vim
     set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
@@ -54,7 +48,6 @@ if 		machine == "Manjaro"
 elseif 	machine == "octogone"
 
     if has("gui_running")
-
 
         " Map alt key
         let altleft="<A-Left>"
@@ -80,6 +73,7 @@ elseif 	machine == "octogone"
         set guioptions-=e						" no guitabs
 		set showtabline=1           			" Only show tabs > 1
 		set guitablabel=\ %t\ %M
+		" set title titlestring=""
         set guicursor+=n-v-c:blinkon0			" turn blinking off for normal and visual mode
 		set guicursor+=i:ver20-iCursor			" define icursor as default
 
@@ -122,13 +116,6 @@ else
 
 endif
 
-" "We'll fake a custom left padding for each window.
-" hi LineNr guibg=bg
-" set foldcolumn=2
-" hi foldcolumn guibg=bg
-" "Get rid of ugly split borders.
-" hi vertsplit guifg=bg guibg=bg
-
 "--------------------------  Theming  ---------------------------"
 
 set t_Co=256				" enable 256 colors in vim before setting the theme
@@ -150,6 +137,13 @@ set scrolloff=999           " lines you would like to see above and below the cu
 set listchars=tab:▸\ ,eol:¬ " Define invisible symbols
 set winminheight=0
 
+" "We'll fake a custom left padding for each window.
+" hi LineNr guibg=bg
+" set foldcolumn=2
+" hi foldcolumn guibg=bg
+" "Get rid of ugly split borders.
+" hi vertsplit guifg=bg guibg=bg
+
 "--------------------------  Status Line  ---------------------------"
 
 set laststatus=2            " Always display the statusline in all windows
@@ -163,6 +157,11 @@ set ignorecase              " Make searches case-insensitive.
 
 "-------------------------- Mappings ---------------------------"
 
+" To view the key code of a corresponding key combination
+" your terminal is sending to vim:
+" $ sed -n l
+" Alt Left  = ^[^[[D = <Esc><Esc>[D
+" Alt Right = ^[^[[C = <Esc><Esc>[C
 
 " To test if your keys are already mapped:
 " :map <A-key>
@@ -171,8 +170,8 @@ set ignorecase              " Make searches case-insensitive.
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 
 " jump 10 lines
-noremap <S-Up> 10k
-noremap <S-Down> 10j
+noremap <S-Up> 10k<cr>
+noremap <S-Down> 10j<cr>
 
 " close buffers
 nmap <leader>x :bd<cr>
@@ -188,7 +187,6 @@ nmap <Leader><space> :nohlsearch<cr>
 nmap <leader>tc :tabc<cr>
 
 " Toggle line number
-"nnoremap <leader>n :setlocal number!<cr>
 nnoremap <leader>n :call SwitchLineNumbers()<cr>
 
 " Toggle autowriteall
@@ -298,7 +296,8 @@ function! AutoSaveFiles()
     else
         set autowriteall
     endif
-    echom   'autowriteall ' &autowriteall
+
+    echom 'autowriteall ' &autowriteall
 
 endfunction
 
@@ -346,10 +345,11 @@ endfunction
 " autocmd VimLeave * :!echo -ne "\033]12;white\007"
 " endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""" Diff this """""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Allows symlinks to be expanded to the real file
 let s:current_file_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 " Run git diff in terminal
@@ -382,22 +382,23 @@ function! OpenSplit(bytecode)
 
 endfunction
 
-" If file has been modified do a git diff on its state in buffer
-" with last saved file state
+" If current file has been modified save buffer to blobfile and
+" execute a git diff on it compared with last saved file state.
+" File doesn't need to be in a git repo as the two files to compare
+" are passed as argument.
 function! IsModified()
 
-    if &modified
-        " @TODO If you have a symlink of your .vimrc in the $HOME path
-        " git diff on that file will create output for both files
-        " symlink and real file. Instead make it a hard link:
-        " ln source destination
+   if &modified
+
+		" Define current file and its buffer state
+        let openfile = s:current_file_path . "/" .expand("%:t")
+        let blobfile = s:current_file_path . "/" .expand("%:t").".blob"
 
         " Write BufferState in blob file and delete it after cmd
-        :w %:p.blob
-        let bytecode = system("git diff --no-index " . expand("%:p") . " " . expand("%:p") . ".blob")
-        execute "!" . "rm " . expand("%:p").".blob"
-
-        call OpenSplit(bytecode)
+		execute 'w' fnameescape(blobfile)
+		let bytecode = system("git diff --no-index " . openfile . " " . blobfile)
+       	execute "!" . "rm " . blobfile
+		call OpenSplit(bytecode)
 
     else
       echom "No Edit!"
@@ -424,9 +425,9 @@ function! ShowGitDiff()
 
 endfunction
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Auto tabular on space
 " tpope's cucumbertables gist:
