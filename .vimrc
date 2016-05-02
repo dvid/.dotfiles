@@ -350,7 +350,9 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Allows symlinks to be expanded to the real file
-let s:current_file_path = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+function! GetPathofFile()
+	let s:current_file_path = fnamemodify(resolve(expand('%:p')), ':h')
+endfunction
 
 " Run git diff in terminal
 function! OpenSplit(bytecode)
@@ -378,8 +380,6 @@ function! OpenSplit(bytecode)
         " Insert the bytecode.
         call append(0, split(a:bytecode, '\v\n'))
 
-        " Close buffer with :bd or Ctl+w then q to avoid keeping tab open.
-
 endfunction
 
 " If current file has been modified save buffer to blobfile and
@@ -391,8 +391,8 @@ function! IsModified()
    if &modified
 
 		" Define current file and its buffer state
-        let openfile = s:current_file_path . "/" .expand("%:t")
-        let blobfile = s:current_file_path . "/" .expand("%:t").".blob"
+        let openfile = resolve(expand("%:p"))
+        let blobfile = openfile . ".blob"
 
         " Write BufferState in blob file and delete it after cmd
 		execute 'w' fnameescape(blobfile)
@@ -412,11 +412,14 @@ function! ShowDiff()
     execute "!" . "git diff " . expand("%:p")
 endfunction
 
+" @TODO Compare two buffers
 " @TODO Line ranges
 " command! -range Linediff      call linediff#Linediff(<line1>, <line2>)
 " command! -bang  LinediffReset call linediff#LinediffReset(<q-bang>)
 " Git diff from VCS for actual file in a vertical split
 function! ShowGitDiff()
+
+	call GetPathofFile()
 
     " Get the diff.
     let bytecode = system("cd " . s:current_file_path . " && " . "git diff " . expand("%:t"))
