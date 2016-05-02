@@ -48,6 +48,9 @@ if 		machine == "Manjaro"
 	let altleft="<Esc>[1;3D"
 	let altright="<Esc>[1;3C"
 
+    " Powerline is only set vim
+    set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
+
 elseif 	machine == "octogone"
 
     if has("gui_running")
