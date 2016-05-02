@@ -17,6 +17,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'Raimondi/delimitMate'
 Plugin 'vim-scripts/utl.vim'
 Plugin 'vitorgalvao/autoswap_mac'
+Plugin 'gavinbeatty/dragvisuals.vim'
 
 "--------------------------  Themes  ---------------------------"
 

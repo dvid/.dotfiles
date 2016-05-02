@@ -28,6 +28,8 @@ set clipboard=unnamed                           " Enable default clipboard to sy
 set notimeout                                   " Time out on key codes but not mappings.
 set ttimeout                                    " Basically this makes terminal Vim work sanely.
 set ttimeoutlen=10                              " see bitbucket.org/sjl/dotfiles
+set splitbelow 									" Make splits default to below... set splitright
+" set title titlestring=""
 
 "--------------------------  Hostname  ---------------------------"
 
@@ -55,7 +57,7 @@ elseif 	machine == "octogone"
         let altleft="<A-Left>"
         let altright="<A-Right>"
 
-        set macligatures
+		set macligatures
         "set guicursor+=a:blinkon0
         " :set guifont=*						" Open typo gui
         " :set guifont? 						" Show actual font
@@ -116,6 +118,13 @@ else
 	let altright="<A-right>"
 
 endif
+
+" "We'll fake a custom left padding for each window.
+" hi LineNr guibg=bg
+" set foldcolumn=2
+" hi foldcolumn guibg=bg
+" "Get rid of ugly split borders.
+" hi vertsplit guifg=bg guibg=bg
 
 "--------------------------  Theming  ---------------------------"
 
@@ -247,6 +256,10 @@ set wildmode=list:full
 set wildcharm=<C-z>
 nnoremap <leader>c :colorscheme <C-z><S-Tab>
 
+"Sort PHP use statements
+"http://stackoverflow.com/questions/11531073/how-do-you-sort-a-range-of-lines-by-length
+vmap <Leader>sl ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr>
+
 "-------------------------- Functions ---------------------------"
 
 " @TODO ? shows help (mappings)
@@ -303,7 +316,7 @@ function! EightyColumnRule()
 
 endfunction
 
-" Switch between line numbers - relative numbers an no number
+" Switch between line numbers - relative numbers and no number
 let g:linenumberstate = 1
 function! SwitchLineNumbers()
 
