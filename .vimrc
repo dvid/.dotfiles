@@ -265,9 +265,7 @@ vmap <Leader>sl ! awk '{ print length(), $0 \| "sort -n \| cut -d\\  -f2-" }'<cr
 
 " @TODO ? shows help (mappings)
 " @TODO b add it to bookmarks
-" @TODO diff two windows
 " @TODO search in dir
-" @TODO git edit in split mode to count and update line numbers
 
 " Save current file if edited
 function! SaveCurrentFile()
@@ -346,8 +344,15 @@ endfunction
 " endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""" Diff this """""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""  Changeling  """""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""              """""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" @TODO Diff two buffers
+" @TODO Follow line number over windows while moving in a file
+" @TODO Version all saved buffers states to allow diffs to the actual file
+" @TODO git edit in split mode to count and update line numbers
+" @TODO prevent closing buffer with <D-w> or even <D-q>
 
 " Allows symlinks to be expanded to the real file
 function! GetPathofFile()
@@ -398,6 +403,8 @@ function! IsModified()
 		execute 'w' fnameescape(blobfile)
 		let bytecode = system("git diff --no-index " . openfile . " " . blobfile)
        	execute "!" . "rm " . blobfile
+
+        " create split
 		call OpenSplit(bytecode)
 
     else
@@ -412,22 +419,21 @@ function! ShowDiff()
     execute "!" . "git diff " . expand("%:p")
 endfunction
 
-" @TODO Compare two buffers
-" @TODO Line ranges
-" command! -range Linediff      call linediff#Linediff(<line1>, <line2>)
-" command! -bang  LinediffReset call linediff#LinediffReset(<q-bang>)
 " Git diff from VCS for actual file in a vertical split
 function! ShowGitDiff()
 
-	call GetPathofFile()
+	" Get path of active buffer
+    call GetPathofFile()
 
     " Get the diff.
     let bytecode = system("cd " . s:current_file_path . " && " . "git diff " . expand("%:t"))
 
+    " Create split
     call OpenSplit(bytecode)
 
 endfunction
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -697,6 +703,9 @@ map <C-K> <C-W>k<C-W>_
 
 " Check if a split buffer already exists
 "let bnr = bufwinnr(expand("%")) | if bnr > 0
+
+" command! -range Linediff      call linediff#Linediff(<line1>, <line2>)
+" command! -bang  LinediffReset call linediff#LinediffReset(<q-bang>)
 
 "-------------------------- Cheatsheet ---------------------------"
 
