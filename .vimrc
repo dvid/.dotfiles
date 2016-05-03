@@ -173,6 +173,17 @@ nmap <Leader>ev :tabedit $MYVIMRC<cr>
 noremap <S-Up> 10k<cr>
 noremap <S-Down> 10j<cr>
 
+"noremap <xUp> 10k<cr>
+"noremap <xDown> 10j<cr>
+
+" In terminal type:
+" xmodmap -pke | grep 'Shift'
+" Get code from key
+" search for term mapping: 
+" http://vimdoc.sourceforge.net/htmldoc/term.html
+"exe 'set t_kB=' . nr2char(50) . '[B'
+"exe 'set t_kB=' . nr2char(50) . '[A'
+
 " close buffers
 nmap <leader>x :bd<cr>
 
