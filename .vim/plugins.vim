@@ -18,6 +18,7 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'vim-scripts/utl.vim'
 Plugin 'vitorgalvao/autoswap_mac'
 Plugin 'gavinbeatty/dragvisuals.vim'
+Plugin 'dvid/vim-changeling'
 
 "--------------------------  Themes  ---------------------------"
 
