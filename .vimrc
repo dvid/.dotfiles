@@ -37,6 +37,9 @@ let machine = substitute(system('hostname'), "\n", "", "")
 
 if machine == "Manjaro"
 
+	noremap <C-Up> 10k<cr>
+	noremap <C-Down> 10j<cr>
+
 	let altleft="<Esc>[1;3D"					" see blow in mappings for details about identifying a key
 	let altright="<Esc>[1;3C"
 
@@ -46,6 +49,9 @@ if machine == "Manjaro"
     set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
 
 elseif 	machine == "octogone"
+
+	noremap <S-Up> 10k<cr>
+	noremap <S-Down> 10j<cr>
 
     if has("gui_running")
 
@@ -111,6 +117,9 @@ elseif 	machine == "octogone"
 
 else
 
+	noremap <S-Up> 10k<cr>
+	noremap <S-Down> 10j<cr>
+
 	let altleft="<A-left>"
 	let altright="<A-right>"
 
@@ -159,22 +168,10 @@ set ignorecase              " Make searches case-insensitive.
 
 " To view the key code of a corresponding key combination
 " your terminal is sending to vim:
+" $ cat -v
 " $ sed -n l
 " Alt Left  = ^[^[[D = <Esc><Esc>[D
 " Alt Right = ^[^[[C = <Esc><Esc>[C
-
-" To test if your keys are already mapped:
-" :map <A-key>
-
-" Edit .vimrc file
-nmap <Leader>ev :tabedit $MYVIMRC<cr>
-
-" jump 10 lines
-noremap <S-Up> 10k<cr>
-noremap <S-Down> 10j<cr>
-
-"noremap <xUp> 10k<cr>
-"noremap <xDown> 10j<cr>
 
 " In terminal type:
 " xmodmap -pke | grep 'Shift'
@@ -183,6 +180,20 @@ noremap <S-Down> 10j<cr>
 " http://vimdoc.sourceforge.net/htmldoc/term.html
 "exe 'set t_kB=' . nr2char(50) . '[B'
 "exe 'set t_kB=' . nr2char(50) . '[A'
+
+" To test if your keys are already mapped:
+" :map <A-key>
+
+" Edit .vimrc file
+nmap <Leader>ev :tabedit $MYVIMRC<cr>
+
+" jump 10 lines
+"map <ESC>[A <S-Up>
+"map <ESC>[B <S-Down>
+"noremap <C-Up> 10k<cr>
+"noremap <C-Down> 10j<cr>
+"execute "set <S-Up>=\e[1;*A"
+"execute "set <S-Down>=\e[1;*B"
 
 " close buffers
 nmap <leader>x :bd<cr>
