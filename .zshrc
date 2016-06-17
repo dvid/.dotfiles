@@ -1,4 +1,7 @@
-#export TERM="xterm-256color"
+#WARNING! Your terminal appears to support less than 256 colors!
+#If your terminal supports 256 colors, please export the appropriate environment variable
+#_before_ loading this theme in your ~/.zshrc. In most terminal emulators, putting
+#export TERM="xterm-256color" at the top of your ~/.zshrc is sufficient.
 
 # Path to your oh-my-zsh installation.
 ZSH=/home/david/.oh-my-zsh
@@ -6,15 +9,12 @@ ZSH=/home/david/.oh-my-zsh
 # Z
 . /home/david/z.sh
 
+archey
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-
-#WARNING! Your terminal appears to support less than 256 colors!
-#If your terminal supports 256 colors, please export the appropriate environment variable
-#_before_ loading this theme in your ~/.zshrc. In most terminal emulators, putting
-#export TERM="xterm-256color" at the top of your ~/.zshrc is sufficient.
 
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="cobalt2"
@@ -160,6 +160,7 @@ alias ephpini="sudovi /etc/php/php.ini"
 alias ehttpd="sudovi /etc/httpd/conf/httpd.conf"
 alias evhosts="sudovi /etc/httpd/conf/extra/httpd-vhosts.conf"
 alias eenv="sudovi /etc/environment"
+alias selenium="java -jar /home/david/selenium-server-standalone-2.37.0.jar"
 
 # Launcher
 alias clock="tty-clock -c -s"
