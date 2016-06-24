@@ -1,0 +1,38 @@
+{
+    "name": "dvid/.dot",
+    "description": ".dotfiles",
+    "require": {
+        "macvim-dev/macvim": "dev-master",
+        "powerline/powerline": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "macvim-dev/macvim",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/macvim-dev/macvim.git",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "powerline/powerline",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/powerline/powerline.git",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+            }
+        }
+    ],
+    "config": {
+        "vendor-dir": "vendor",
+        "bin-dir": "bin/"
+    }
+}
