@@ -179,6 +179,10 @@ alias llk="mhwd-kernel -l" 				#list linux kernels available
 alias ilk="sudo mhwd-kernel -i linux"	#install linux kernel version ex:linux41
 alias ums="sudo pacman -Syu"
 
+# Reboot - Shutdown
+alias reboot="sudo shutdown -r now"
+alias shutdown="sudo shutdown -h now"
+
 # Git
 alias gs="git status"
 alias gfh="git log -p"                  #let git generate the patches for each log entry
