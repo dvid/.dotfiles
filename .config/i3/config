@@ -6,7 +6,7 @@
 #
 
 # WallPaper
-#exec --no-startup-id feh --bg-scale /usr/local/share/Wallpapers/world-map-digital-art-hd-wallpaper-2560x1440-2109.jpg 
+#exec --no-startup-id feh --bg-scale /usr/local/share/Wallpapers/world-map-digital-art-hd-wallpaper-2560x1440-2109.jpg
 exec --no-startup-id feh --bg-scale /usr/local/share/Wallpapers/world-map-digital-art-hd-wallpaper-2560x1440-2109.jpg --bg-scale /usr/local/share/Wallpapers/vertical/Astronaut\ Mowing\ wallpapers\ for\ galaxy\ S6.jpg
 
 # i3 config file (v4)
@@ -142,6 +142,15 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# Sleep mode
+#$mod+l
+
+# Reboot
+bindsym $mod+$ exec "reboot -t warning -m 'You pressed the reboot shortcut. Do you really want to?' -b 'Yes, exit' 'reboot'"
+
+# Shutdown
+bindsym $mod+* exec "shutdown -t warning -m 'You pressed the shutdown shortcut. Do you really want to?' -b 'Yes, exit' 'shutdown'"
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -196,7 +205,7 @@ bindsym $mod+Shift+Print exec notify-send 'selection will be saved in ~/Screensh
 
 
 # Open applications on specific workspaces
-assign [class="Firefox"] 5 
+assign [class="Firefox"] 5
 
 # Navigate workspaces next / previous
 #bindsym $mod+m workspace next
@@ -207,11 +216,7 @@ for_window [urgent=latest] focus
 
 # Multimedia Keys
 # Alsamixer
-bindsym $mod+k exec amixer -q set Master 5%+ unmute
-bindsym $mod+j exec amixer -q set Master 5%- unmute
-bindsym $mod+m exec amixer -q set Master mute
-
-
-
-
+bindsym $mod+k exec amixer set Master 5%+
+bindsym $mod+j exec amixer set Master 5%-
+bindsym $mod+m exec amixer set Master toggle
 
