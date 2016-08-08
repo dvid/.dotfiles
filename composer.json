@@ -3,7 +3,9 @@
     "description": ".dotfiles",
     "require": {
         "macvim-dev/macvim": "dev-master",
-        "powerline/powerline": "dev-master"
+        "powerline/powerline": "dev-master",
+		"bhilburn/powerlevel9k": "dev-master",
+		"VundleVim/Vundle.vim": "dev-master"
     },
     "repositories": [
         {
@@ -25,6 +27,30 @@
                 "version": "dev-master",
                 "source": {
                     "url": "https://github.com/powerline/powerline.git",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+            }
+        },
+		{
+            "type": "package",
+            "package": {
+                "name": "bhilburn/powerlevel9k",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/bhilburn/powerlevel9k.git",
+                    "type": "git",
+                    "reference": "origin/master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "VundleVim/Vundle.vim",
+                "version": "dev-master",
+                "source": {
+                    "url": "https://github.com/VundleVim/Vundle.vim",
                     "type": "git",
                     "reference": "origin/master"
                 }
