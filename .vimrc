@@ -37,11 +37,10 @@ let machine = substitute(system('hostname'), "\n", "", "")
 
 if machine == "Manjaro"
 
-	noremap <C-Up> 10k<cr>
-	noremap <C-Down> 10j<cr>
-
-	let altleft="<Esc>[1;3D"					" see blow in mappings for details about identifying a key
-	let altright="<Esc>[1;3C"
+	let shiftup = "<Esc>[b"
+	let shiftdown = "<Esc>[a"
+	let altleft="<Esc><Esc>[D"
+	let altright="<Esc><Esc>[C"
 
 	set showtabline=2           				" Always display the tabline, even if there is only one tab
 
@@ -50,8 +49,8 @@ if machine == "Manjaro"
 
 elseif 	machine == "octogone"
 
-	noremap <S-Up> 10k<cr>
-	noremap <S-Down> 10j<cr>
+	let shiftup = "<S-Up>"
+	let shiftdown = "<S-Down>"
 
     if has("gui_running")
 
@@ -117,9 +116,8 @@ elseif 	machine == "octogone"
 
 else
 
-	noremap <S-Up> 10k<cr>
-	noremap <S-Down> 10j<cr>
-
+	let shiftup = "<S-Up>"
+	let shiftdown = "<S-Down>"
 	let altleft="<A-left>"
 	let altright="<A-right>"
 
@@ -176,7 +174,7 @@ set ignorecase              " Make searches case-insensitive.
 " In terminal type:
 " xmodmap -pke | grep 'Shift'
 " Get code from key
-" search for term mapping: 
+" search for term mapping:
 " http://vimdoc.sourceforge.net/htmldoc/term.html
 "exe 'set t_kB=' . nr2char(50) . '[B'
 "exe 'set t_kB=' . nr2char(50) . '[A'
@@ -184,16 +182,12 @@ set ignorecase              " Make searches case-insensitive.
 " To test if your keys are already mapped:
 " :map <A-key>
 
+" Jump
+execute "noremap " . shiftup . " 10j<CR>"
+execute "noremap " . shiftdown . " 10k<CR>"
+
 " Edit .vimrc file
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
-
-" jump 10 lines
-"map <ESC>[A <S-Up>
-"map <ESC>[B <S-Down>
-"noremap <C-Up> 10k<cr>
-"noremap <C-Down> 10j<cr>
-"execute "set <S-Up>=\e[1;*A"
-"execute "set <S-Down>=\e[1;*B"
 
 " close buffers
 nmap <leader>x :bd<cr>
@@ -418,6 +412,7 @@ augroup END
 
 " Enable Whitespace by default
 let g:better_whitespace_verbosity=1
+let b:better_whitespace_enabled=1
 autocmd BufReadPre,FileReadPre * EnableWhitespace
 
 " Colored statusline in insert mode

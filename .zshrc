@@ -1,15 +1,19 @@
-#WARNING! Your terminal appears to support less than 256 colors!
-#If your terminal supports 256 colors, please export the appropriate environment variable
-#_before_ loading this theme in your ~/.zshrc. In most terminal emulators, putting
-#export TERM="xterm-256color" at the top of your ~/.zshrc is sufficient.
+#                   ██
+#                  ░██
+#    ██████  ██████░██      ██████  █████
+#   ░░░░██  ██░░░░ ░██████ ░░██░░█ ██░░░██
+#      ██  ░░█████ ░██░░░██ ░██ ░ ░██  ░░
+#     ██    ░░░░░██░██  ░██ ░██   ░██   ██
+#    ██████ ██████ ░██  ░██░███   ░░█████
+#   ░░░░░░ ░░░░░░  ░░   ░░ ░░░     ░░░░░
 
 # Path to your oh-my-zsh installation.
 ZSH=/home/david/.oh-my-zsh
 
 # Z
-. /home/david/z.sh
+. /usr/local/src/z/z.sh
 
-archey
+#  archey
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -20,26 +24,37 @@ archey
 #ZSH_THEME="cobalt2"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
-POWERLEVEL9K_MODE='awesome-fontconfig'
+#POWERLEVEL9K_MODE='awesome-fontconfig'
+#POWERLEVEL9K_MODE='awesome-patched'
+#POWERLEVEL9K_MODE='flat'
 POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
-POWERLEVEL9K_LINUX_ICON=$'\uF201'
+#POWERLEVEL9K_LINUX_ICON=$'\uF201'
+POWERLEVEL9K_LINUX_ICON=''
 POWERLEVEL9K_LOAD_ICON=''
 POWERLEVEL9K_HOME_ICON=''
 POWERLEVEL9K_HOME_SUB_ICON=''
 POWERLEVEL9K_FOLDER_ICON=''
-POWERLEVEL9K_VCS_BRANCH_ICON=$'\UF126 '
+#POWERLEVEL9K_VCS_BRANCH_ICON=$'\UF126'
+POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status os_icon dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time load)
 POWERLEVEL9K_STATUS_VERBOSE=false
 POWERLEVEL9K_STATUS_OK_BACKGROUND='022'
+#POWERLEVEL9K_STATUS_ERROR_BACKGROUND='000'
 POWERLEVEL9K_TIME_FOREGROUND='000'
 POWERLEVEL9K_TIME_BACKGROUND='007'
-#POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND="black"
-#POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND="white"
-#POWERLEVEL9K_LOAD_WARNING_BACKGROUND="black"
-#POWERLEVEL9K_LOAD_WARNING_FOREGROUND="white"
-#POWERLEVEL9K_LOAD_NORMAL_BACKGROUND="black"
-#POWERLEVEL9K_LOAD_NORMAL_FOREGROUND="white"
+POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND="black"
+POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND="red"
+POWERLEVEL9K_LOAD_WARNING_BACKGROUND="black"
+POWERLEVEL9K_LOAD_WARNING_FOREGROUND="022"
+POWERLEVEL9K_LOAD_NORMAL_BACKGROUND="black"
+POWERLEVEL9K_LOAD_NORMAL_FOREGROUND="yellow"
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='black'
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='yellow'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='black'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='011'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='011'
 
 #vi /home/david/.oh-my-zsh/custom/themes/powerlevel9k/functions/icons.zsh
 
@@ -87,18 +102,20 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored comple
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
+HISTSIZE=
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/share/webapps/composer/bin"
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-export PHP_INI='/etc/php/php.ini'
-export DRUSH_INI='/usr/local/share/drush/drush.ini'
-export PHP_OPTIONS='-d memory_limit="1024M"'
-export DRUSH_NOCOLOR=FALSE
+#export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/share/webapps/composer/bin"
+#export PATH="$HOME/.composer/vendor/bin:$PATH"
+#export PHP_INI='/etc/php/php.ini'
+#export DRUSH_INI='/usr/local/share/drush/drush.ini'
+#export PHP_OPTIONS='-d memory_limit="1024M"'
+#export DRUSH_NOCOLOR=FALSE
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 tput init
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -106,7 +123,10 @@ tput init
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
+#export LANG=en_US.UTF-8
+
+# xterm-256color
+#export TERM="xterm-256color"
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -129,9 +149,15 @@ vi(){
     echo -e \\033c
 }
 
-alias sudovi="sudo vim"
+# Vim Quick edit mode
+vv(){
+	vim --noplugin $*
+    echo -e \\033c
+}
+
+#alias sudovi="sudo vim"
 alias grep='grep --color=auto'
-alias soz='. ~/.zshrc'
+alias .z='. ~/.zshrc'
 
 # Opens Macvim with open -a, for opening new cmd lines files
 # mvim () { ([[ -z $@ ]] || touch "$@" ) && open -a MacVim "$@"; }
@@ -161,6 +187,27 @@ alias ehttpd="sudovi /etc/httpd/conf/httpd.conf"
 alias evhosts="sudovi /etc/httpd/conf/extra/httpd-vhosts.conf"
 alias eenv="sudovi /etc/environment"
 alias selenium="java -jar /home/david/selenium-server-standalone-2.37.0.jar"
+
+# System
+alias rxr="xrdb ~/.Xresources"
+alias cfc="fc-cache -fv ~/.local/share/fonts"
+alias lmf="fc-list | grep .local/share/fonts"
+#sudo fc-cache -vf
+#fc-cache
+#fc-list
+#sudo mkfontscale
+#sudo mkfontdir
+#xrdb -q
+#systemctl --failed
+#sudo localectl set-locale en_US.UTF-8
+#vi +PluginInstall +qall
+#fc-match FontAwesome 				#search font if installed
+#urxvt -fn "xft:FontAwesome" 		#test urxvt with passed font
+#pacman -Qqen | grep z 				#list installed pacman packages
+#echo "\uF008" "\uF20A" "\uE20E"
+#echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699" "\uE0B0"
+#xset q								#list system settings
+#xset +fp /home/david/.local/share/fonts #define new font path
 
 # Launcher
 alias clock="tty-clock -c -s"
@@ -250,8 +297,8 @@ u       restore closed tab (unwind the 'd' command)
 
 # Plugins
 
-source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.oh-my-zsh/custom/plugins/zsh-256color/zsh-256color.plugin.zsh
+#source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source ~/.oh-my-zsh/custom/plugins/zsh-256color/zsh-256color.plugin.zsh
 source ~/.dot/vendor/powerline/powerline/powerline/bindings/zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
@@ -259,9 +306,11 @@ source ~/.dot/vendor/powerline/powerline/powerline/bindings/zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+	extract
     git
-    zsh-syntax-highlighting
-    zsh-256color
+    #zsh-syntax-highlighting
+    #zsh-256color
+	z
 )
 
  #
