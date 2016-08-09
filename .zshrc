@@ -8,7 +8,6 @@
 #   ░░░░░░ ░░░░░░  ░░   ░░ ░░░     ░░░░░
 
 
-POWERLEVEL9K_MODE='awesome-fontconfig'
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 case $HOST in
@@ -20,18 +19,25 @@ case $HOST in
 
                 #archey
 
+				# Powerlevel9k
+                POWERLEVEL9K_LOAD_ICON=''
+                POWERLEVEL9K_HOME_ICON=''
+                POWERLEVEL9K_HOME_SUB_ICON=''
+                POWERLEVEL9K_FOLDER_ICON=''
+				POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+
                 # Alias
                 alias ezsh="vi ~/.dot/.zshrc"
                 alias evim="vi ~/.dot/.vimrc"
                 alias ei3="vi ~/.dot/.config/i3/config"
 
-                POWERLEVEL9K_LOAD_ICON=''
-                POWERLEVEL9K_HOME_ICON=''
-                POWERLEVEL9K_HOME_SUB_ICON=''
-                POWERLEVEL9K_FOLDER_ICON=''
 				;;
 
   "octogone" | "captan.local")
+
+				# Powerlevel9k
+				POWERLEVEL9K_MODE='awesome-fontconfig'
+
                 # Path to your oh-my-zsh installation.
                 export ZSH=/Users/david/.oh-my-zsh
 
@@ -55,7 +61,6 @@ esac
 # phpbrew
 [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
 
-#POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 #POWERLEVEL9K_LINUX_ICON=$'\uF201'
 POWERLEVEL9K_LINUX_ICON=''
 POWERLEVEL9K_APPLE_ICON=''
