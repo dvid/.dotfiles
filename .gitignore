@@ -1,5 +1,6 @@
 *.swp
 *.swo
 .vim/.netrwhist
+.DS_Store
 
 /vendor/
