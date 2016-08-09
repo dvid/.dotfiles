@@ -8,6 +8,9 @@
 #   ░░░░░░ ░░░░░░  ░░   ░░ ░░░     ░░░░░
 
 
+POWERLEVEL9K_MODE='awesome-fontconfig'
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
 case $HOST in
   "Manjaro") 	# Z
                 . /usr/local/src/z/z.sh
@@ -21,6 +24,11 @@ case $HOST in
                 alias ezsh="vi ~/.dot/.zshrc"
                 alias evim="vi ~/.dot/.vimrc"
                 alias ei3="vi ~/.dot/.config/i3/config"
+
+                POWERLEVEL9K_LOAD_ICON=''
+                POWERLEVEL9K_HOME_ICON=''
+                POWERLEVEL9K_HOME_SUB_ICON=''
+                POWERLEVEL9K_FOLDER_ICON=''
 				;;
 
   "octogone" | "captan.local")
@@ -47,26 +55,10 @@ esac
 # phpbrew
 [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-
-#ZSH_THEME="robbyrussell"
-#ZSH_THEME="cobalt2"
-ZSH_THEME="powerlevel9k/powerlevel9k"
-
-#POWERLEVEL9K_MODE='awesome-fontconfig'
-#POWERLEVEL9K_MODE='awesome-patched'
-#POWERLEVEL9K_MODE='flat'
 #POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 #POWERLEVEL9K_LINUX_ICON=$'\uF201'
 POWERLEVEL9K_LINUX_ICON=''
 POWERLEVEL9K_APPLE_ICON=''
-POWERLEVEL9K_LOAD_ICON=''
-POWERLEVEL9K_HOME_ICON=''
-POWERLEVEL9K_HOME_SUB_ICON=''
-POWERLEVEL9K_FOLDER_ICON=''
 #POWERLEVEL9K_VCS_BRANCH_ICON=$'\UF126'
 POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
