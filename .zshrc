@@ -7,13 +7,45 @@
 #    ██████ ██████ ░██  ░██░███   ░░█████
 #   ░░░░░░ ░░░░░░  ░░   ░░ ░░░     ░░░░░
 
-# Path to your oh-my-zsh installation.
-ZSH=/home/david/.oh-my-zsh
 
-# Z
-. /usr/local/src/z/z.sh
+case $HOST in
+  "Manjaro") 	# Z
+                . /usr/local/src/z/z.sh
 
-#  archey
+                # Path to your oh-my-zsh installation.
+                ZSH=/home/david/.oh-my-zsh
+
+                #archey
+
+                # Alias
+                alias ezsh="vi ~/.dot/.zshrc"
+                alias evim="vi ~/.dot/.vimrc"
+                alias ei3="vi ~/.dot/.config/i3/config"
+				;;
+
+  "octogone" | "captan.local")
+                # Path to your oh-my-zsh installation.
+                export ZSH=/Users/david/.oh-my-zsh
+
+                #oh-my-zsh
+                source $ZSH/oh-my-zsh.sh
+
+                # Alias
+                alias ezsh="vi ~/.dot/.zshrc"
+                alias evim="vi ~/.dot/.vimrc"
+                alias ei3="vi ~/.dot/.config/i3/config"
+				;;
+
+  *)			echo "No Host defined"
+
+                alias ezsh="vi ~/.zshrc"
+				alias evim="vi ~/.vimrc"
+				alias ei3="vi ~/.config/i3/config"
+				;;
+esac
+
+# phpbrew
+[[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -162,22 +194,6 @@ alias .z='. ~/.zshrc'
 # Opens Macvim with open -a, for opening new cmd lines files
 # mvim () { ([[ -z $@ ]] || touch "$@" ) && open -a MacVim "$@"; }
 
-# Files Edit
-case $HOST in
-  "Manjaro") 	alias ezsh="vi ~/.dot/.zshrc"
-    			alias evim="vi ~/.dot/.vimrc"
-    			alias ei3="vi ~/.dot/.config/i3/config"
-				;;
-  "octogone") 	alias ezsh="vi ~/.dot/.zshrc"
-    			alias evim="vi ~/.dot/.vimrc"
-    			alias ei3="vi ~/.dot/.config/i3/config"
-				;;
-  *)			echo "No Host defined"
-  				alias ezsh="vi ~/.zshrc"
-				alias evim="vi ~/.vimrc"
-				alias ei3="vi ~/.config/i3/config"
-				;;
-esac
 
 alias szsh=". ~/.zshrc"
 alias emycnf="sudovi /etc/mysql/my.cnf"
