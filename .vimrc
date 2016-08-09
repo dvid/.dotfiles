@@ -48,7 +48,7 @@ if machine == "Manjaro"
     " Powerline is only set vim
     set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
 
-elseif 	machine == "octogone"
+elseif 	machine == "captan.local" || machine == "octogone"
 
 	noremap <S-Up> 10k<cr>
 	noremap <S-Down> 10j<cr>
