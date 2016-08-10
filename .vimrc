@@ -37,8 +37,8 @@ let machine = substitute(system('hostname'), "\n", "", "")
 
 if machine == "Manjaro"
 
-	let shiftup = "<Esc>[b"
-	let shiftdown = "<Esc>[a"
+	let shiftup = "<Esc>[a"
+	let shiftdown = "<Esc>[b"
 	let altleft="<Esc><Esc>[D"
 	let altright="<Esc><Esc>[C"
 
@@ -183,8 +183,8 @@ set ignorecase              " Make searches case-insensitive.
 " :map <A-key>
 
 " Jump
-execute "noremap " . shiftup . " 10j<CR>"
-execute "noremap " . shiftdown . " 10k<CR>"
+execute "noremap " . shiftup . " 10k<CR>"
+execute "noremap " . shiftdown . " 10j<CR>"
 
 " Edit .vimrc file
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
@@ -698,6 +698,9 @@ map <C-K> <C-W>k<C-W>_
 " :.,.+4m 21                move 5 lines starting at current line to after line 21
 " :,+4m14                   same (. for current line is assumed)
 " Ctrl wo                   fullscreen current buffer
+" w / b                     word /back
+" f + char                  find char
+" ci + char                 change inside
 "
 " 							Vim Vinegar
 "

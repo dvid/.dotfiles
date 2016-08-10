@@ -21,7 +21,6 @@ case $HOST in
 
 				# Powerlevel9k
                 POWERLEVEL9K_LOAD_ICON=''
-                POWERLEVEL9K_HOME_ICON=''
                 POWERLEVEL9K_HOME_SUB_ICON=''
                 POWERLEVEL9K_FOLDER_ICON=''
 				POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
@@ -34,6 +33,8 @@ case $HOST in
 				;;
 
   "octogone" | "captan.local")
+                # Z
+                . /Users/david/.oh-my-zsh/plugins/z/z.sh
 
 				# Powerlevel9k
 				POWERLEVEL9K_MODE='awesome-fontconfig'
@@ -64,6 +65,7 @@ esac
 #POWERLEVEL9K_LINUX_ICON=$'\uF201'
 POWERLEVEL9K_LINUX_ICON=''
 POWERLEVEL9K_APPLE_ICON=''
+POWERLEVEL9K_HOME_ICON=''
 #POWERLEVEL9K_VCS_BRANCH_ICON=$'\UF126'
 POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
@@ -137,7 +139,7 @@ HISTSIZE=
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# User configuration
+export EDITOR=vim
 
 #export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/share/webapps/composer/bin"
 #export PATH="$HOME/.composer/vendor/bin:$PATH"
