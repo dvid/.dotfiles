@@ -410,10 +410,10 @@ augroup END
 
 " }}}
 
-" Enable Whitespace by default
+" Whitespace enabled by default
 let g:better_whitespace_verbosity=1
-let b:better_whitespace_enabled=1
-autocmd BufReadPre,FileReadPre * EnableWhitespace
+"let b:better_whitespace_enabled=1
+"autocmd BufReadPre,FileReadPre * EnableWhitespace
 
 " Colored statusline in insert mode
 au InsertEnter * hi StatusLine guibg=#0B4C5F
@@ -711,3 +711,6 @@ map <C-K> <C-W>k<C-W>_
 " R                         Rename
 " s                         Change sort
 " . file                    Delete file
+
+" Visual mode highlight
+" :highlight Visual cterm=NONE ctermbg=0 ctermfg=NONE guibg=Grey40

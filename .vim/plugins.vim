@@ -19,6 +19,8 @@ Plugin 'vim-scripts/utl.vim'
 Plugin 'vitorgalvao/autoswap_mac'
 Plugin 'gavinbeatty/dragvisuals.vim'
 Plugin 'dvid/vim-changeling'
+Plugin 'joequery/Stupid-EasyMotion'
+"Plugin 'easymotion/vim-easymotion'
 
 "--------------------------  Themes  ---------------------------"
 
@@ -38,7 +40,7 @@ Plugin 'effkay/argonaut.vim'
 Plugin 'kristiandupont/shades-of-teal'
 Plugin 'widatama/vim-phoenix'
 Plugin 'fxn/vim-monochrome'
-Plugin 'vim-scripts/oceandeep' 
+Plugin 'vim-scripts/oceandeep'
 Plugin 'pbrisbin/vim-colors-off'
 Plugin 'ninja/sky'
 
