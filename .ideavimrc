@@ -12,6 +12,7 @@
 "map <leader><Shift-up> :action 10j<CR>
 "map <leader><Shift-down> :action 10k<CR>
 
+" Allow Shift Arrows
 nmap <S-Up> v<Up>
 nmap <S-Down> v<Down>
 nmap <S-Left> v<Left>
@@ -24,6 +25,13 @@ imap <S-Up> <Esc>v<Up>
 imap <S-Down> <Esc>v<Down>
 imap <S-Left> <Esc>v<Left>
 imap <S-Right> <Esc>v<Right>
+
+" Allow tabbing to indent
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
 
 "let mapleader = " "
 
