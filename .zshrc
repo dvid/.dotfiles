@@ -42,6 +42,10 @@ case $HOST in
                 # Path to your oh-my-zsh installation.
                 export ZSH=/Users/david/.oh-my-zsh
 
+                # ValueError: unknown locale: UTF-8 vim
+                export LC_ALL=en_US.UTF-8
+                export LANG=en_US.UTF-8
+
                 #oh-my-zsh
                 source $ZSH/oh-my-zsh.sh
 
@@ -93,6 +97,9 @@ POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='011'
 #GOTHAM_SHELL="$HOME/.oh-my-zsh/custom/themes/gotham.sh"
 #[[ -s $GOTHAM_SHELL ]] && source $GOTHAM_SHELL
 
+# Editor
+export EDITOR=vim
+
 #autoload -Uz colors && colors
 #autoload -U compinit colors zcalc
 #compinit
@@ -138,8 +145,6 @@ HISTSIZE=
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-
-export EDITOR=vim
 
 #export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/share/webapps/composer/bin"
 #export PATH="$HOME/.composer/vendor/bin:$PATH"
