@@ -152,7 +152,7 @@ HISTSIZE=
 #export DRUSH_INI='/usr/local/share/drush/drush.ini'
 #export PHP_OPTIONS='-d memory_limit="1024M"'
 #export DRUSH_NOCOLOR=FALSE
-export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+export PATH="$HOME/.composer/vendor/bin/:$PATH"
 tput init
 
 # export MANPATH="/usr/local/man:$MANPATH"
