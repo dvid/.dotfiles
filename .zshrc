@@ -32,15 +32,15 @@ case $HOST in
 
 				;;
 
-  "octogone" | "captan.local")
+  "octogone" | "captan.local" | "gbw-l-m0013.local")
                 # Z
-                . /Users/david/.oh-my-zsh/plugins/z/z.sh
+                . ~/.oh-my-zsh/plugins/z/z.sh
 
 				# Powerlevel9k
 				POWERLEVEL9K_MODE='awesome-fontconfig'
 
                 # Path to your oh-my-zsh installation.
-                export ZSH=/Users/david/.oh-my-zsh
+                export ZSH=~/.oh-my-zsh
 
                 # ValueError: unknown locale: UTF-8 vim
                 export LC_ALL=en_US.UTF-8
