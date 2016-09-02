@@ -79,6 +79,8 @@ ln -s ~/.dot/.vim ~/.vim
 vim +PluginInstall +qall
 ln -s ~/.dot/.oh-my-zsh/custom/themes/gotham ~/.oh-my-zsh/custom/themes/
 ln -s ~/.dot/vendor/bhilburn/powerlevel9k ~/.oh-my-zsh/custom/themes
+ln -s ~/.dot/.gitignore_global ~/
+git config --global core.excludesfile '~/.gitignore_global'
 
 # Install powerline font + fontawesome located ~/.dot/fonts
 https://github.com/gabrielelana/awesome-terminal-fonts/wiki/OS-X
