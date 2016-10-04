@@ -254,6 +254,7 @@ alias shutdown="sudo shutdown -h now"
 # Git
 alias gs="git status"
 alias gfh="git log -p"                  #let git generate the patches for each log entry
+alias grl="git reset --soft HEAD\^"     #Reset unpushed local commits
 
 # Grep - search string in folder,
 alias ssf="grep -rnw . -e ''"
