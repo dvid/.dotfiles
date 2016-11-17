@@ -221,3 +221,7 @@ defaults write com.apple.finder CreateDesktop -bool false
 # cask
 brew cask install google-chrome
 brew cask install firefox
+
+# Fonts Sierra update:
+install Sauce Code Pro Nerd Font Complete from https://github.com/ryanoasis/nerd-fonts
+
