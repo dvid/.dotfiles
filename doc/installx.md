@@ -225,3 +225,6 @@ brew cask install firefox
 # Fonts Sierra update:
 install Sauce Code Pro Nerd Font Complete from https://github.com/ryanoasis/nerd-fonts
 
+# Brew services management
+brew tap gapple/services
+brew services start elasticsearch
