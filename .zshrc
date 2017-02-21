@@ -29,7 +29,13 @@ case $HOST in
                 alias ezsh="vi ~/.dot/.zshrc"
                 alias evim="vi ~/.dot/.vimrc"
                 alias ei3="vi ~/.dot/.config/i3/config"
-
+				alias emycnf="sudo vi /etc/mysql/my.cnf"
+				alias evhosts="sudo vi /etc/httpd/conf/extra/httpd-vhosts.conf"
+				alias ephpini="sudo vi /etc/php/php.ini"
+				alias ehttpd="sudo vi /etc/httpd/conf/httpd.conf"
+				alias arestart="sudo systemctl restart httpd"
+				alias eenv="sudo vi /etc/environment"
+				alias selenium="java -jar /home/david/selenium-server-standalone-2.37.0.jar"
 				;;
 
   "octogone" | "captan.local" | "gbw-l-m0013.local")
@@ -53,6 +59,11 @@ case $HOST in
                 alias ezsh="vi ~/.dot/.zshrc"
                 alias evim="vi ~/.dot/.vimrc"
                 alias ei3="vi ~/.dot/.config/i3/config"
+				alias emycnf="sudo vi /etc/my.cnf"
+				alias evhosts="sudo vi /private/etc/apache2/extra/httpd-vhosts.conf"
+				alias ephpini="sudo vi /etc/php.ini"
+				alias ehttpd="sudo vi /etc/apache2/httpd.conf"
+				alias arestart="sudo apachectl restart"
 				;;
 
   *)			echo "No Host defined"
@@ -194,54 +205,30 @@ vv(){
     echo -e \\033c
 }
 
-#alias sudovi="sudo vim"
-alias grep='grep --color=auto'
-alias .z='. ~/.zshrc'
-
 # Opens Macvim with open -a, for opening new cmd lines files
 # mvim () { ([[ -z $@ ]] || touch "$@" ) && open -a MacVim "$@"; }
 
-
-alias szsh=". ~/.zshrc"
-alias emycnf="sudovi /etc/mysql/my.cnf"
-alias ehosts="sudovi /etc/hosts"
-alias ephpini="sudovi /etc/php/php.ini"
-alias ehttpd="sudovi /etc/httpd/conf/httpd.conf"
-alias evhosts="sudovi /etc/httpd/conf/extra/httpd-vhosts.conf"
-alias eenv="sudovi /etc/environment"
-alias selenium="java -jar /home/david/selenium-server-standalone-2.37.0.jar"
+# Alias Common
+alias grep='grep --color=auto'
+alias ehosts="sudo vi /etc/hosts"
 
 # System
 alias rxr="xrdb ~/.Xresources"
 alias cfc="fc-cache -fv ~/.local/share/fonts"
 alias lmf="fc-list | grep .local/share/fonts"
-#sudo fc-cache -vf
-#fc-cache
-#fc-list
-#sudo mkfontscale
-#sudo mkfontdir
-#xrdb -q
-#systemctl --failed
-#sudo localectl set-locale en_US.UTF-8
-#vi +PluginInstall +qall
-#fc-match FontAwesome 				#search font if installed
-#urxvt -fn "xft:FontAwesome" 		#test urxvt with passed font
-#pacman -Qqen | grep z 				#list installed pacman packages
-#echo "\uF008" "\uF20A" "\uE20E"
-#echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699" "\uE0B0"
-#xset q								#list system settings
-#xset +fp /home/david/.local/share/fonts #define new font path
+alias pbcopy="xclip -selection c"
+alias pbpaste="xclip -selection clipboard -o"
+alias timer="echo n7Dv23kh | pbcopy && firefox 'https://webgate.ec.europa.eu/fpfis/timeclock/timeclock.php'"
 
 # Launcher
 alias clock="tty-clock -c -s"
 alias pstorm="/usr/local/bin/pstorm"
 alias aconftest="apachectl configtest"
 alias astatus="systemctl status httpd.service"
-#alias arestart="sudo systemctl restart httpd"
-alias arestart="sudo apachectl restart"
 alias sshs="sudo systemctl start sshd.service"
 alias sshd="sudo systemctl enable sshd.service"
 alias sshdev="ssh isa@s-cnect-isadru"
+alias sqlre="mysql.server restart"
 
 # Manjaro updates
 alias linstalk="mhwd-kernel -li" 		#list installed kernels
@@ -257,6 +244,7 @@ alias shutdown="sudo shutdown -h now"
 alias gs="git status"
 alias gfh="git log -p"                  #let git generate the patches for each log entry
 alias grl="git reset --soft HEAD\^"     #Reset unpushed local commits
+alias gpr="git remote prune origin"		#Git prune
 
 # Grep - search string in folder,
 alias ssf="grep -rnw . -e ''"
@@ -286,38 +274,22 @@ assignProxy(){
    assignProxy $proxy_value $no_proxy_value
  }
 
-alias pbcopy="xclip -selection c"
-alias pbpaste="xclip -selection clipboard -o"
-alias timer="echo n7Dv23kh | pbcopy && firefox 'https://webgate.ec.europa.eu/fpfis/timeclock/timeclock.php'"
-
-alias hvimium="echo '
-Vimium shortcuts:
-
-h       scroll left
-j       scroll down
-k       scroll up
-l       scroll right
-gg      scroll to top of the page
-G       scroll to bottom of the page
-f       activate link hints mode to open in current tab
-F       activate link hints mode to open in new tab
-r       reload
-gf      view source
-zi      zoom in
-zo      zoom out
-/       enter find mode -- esc to cancel
-n       cycle forward to the next find match
-N       cycle backward to the previous find match
-i       enter insert mode -- esc to exit
-yy      copy the current url to the clipboard
-ba      go back in history
-fw      go forward in history
-J       go one tab left
-K       go one tab right
-t       create tab
-d       close current tab
-u       restore closed tab (unwind the 'd' command)
-'"
+#sudo fc-cache -vf
+#fc-cache
+#fc-list
+#sudo mkfontscale
+#sudo mkfontdir
+#xrdb -q
+#systemctl --failed
+#sudo localectl set-locale en_US.UTF-8
+#vi +PluginInstall +qall
+#fc-match FontAwesome 				#search font if installed
+#urxvt -fn "xft:FontAwesome" 		#test urxvt with passed font
+#pacman -Qqen | grep z 				#list installed pacman packages
+#echo "\uF008" "\uF20A" "\uE20E"
+#echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699" "\uE0B0"
+#xset q								#list system settings
+#xset +fp /home/david/.local/share/fonts #define new font path
 
 # Plugins
 
@@ -370,3 +342,45 @@ ex() {
     echo "'$1' is not a valid file"
   fi
 }
+
+
+###    ###
+### UZ ###
+###    ###
+
+alias con='bin/console'
+alias brews='brew services start elasticsearch@1.7'
+alias eelastic='sudo vi /usr/local/opt/elasticsearch@1.7/config/elasticsearch.yml'
+
+###    ###
+## HELP ##
+###    ###
+
+alias hvimium="echo '
+Vimium shortcuts:
+
+h       scroll left
+j       scroll down
+k       scroll up
+l       scroll right
+gg      scroll to top of the page
+G       scroll to bottom of the page
+f       activate link hints mode to open in current tab
+F       activate link hints mode to open in new tab
+r       reload
+gf      view source
+zi      zoom in
+zo      zoom out
+/       enter find mode -- esc to cancel
+n       cycle forward to the next find match
+N       cycle backward to the previous find match
+i       enter insert mode -- esc to exit
+yy      copy the current url to the clipboard
+ba      go back in history
+fw      go forward in history
+J       go one tab left
+K       go one tab right
+t       create tab
+d       close current tab
+u       restore closed tab (unwind the 'd' command)
+'"
