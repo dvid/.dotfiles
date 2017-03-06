@@ -242,9 +242,11 @@ alias shutdown="sudo shutdown -h now"
 
 # Git
 alias gs="git status"
-alias gfh="git log -p"                  #let git generate the patches for each log entry
 alias grl="git reset --soft HEAD\^"     #Reset unpushed local commits
 alias gpr="git remote prune origin"		#Git prune
+alias gh="git log -p"                  #let git generate the patches for each log entry
+alias gfh="git log --follow -p -- "		#Show file history / gitk
+alias glog="git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\n--abbrev-commit --date=relative"
 
 # Grep - search string in folder,
 alias ssf="grep -rnw . -e ''"
