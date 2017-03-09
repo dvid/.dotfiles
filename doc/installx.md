@@ -223,6 +223,7 @@ brew cask install google-chrome
 brew cask install firefox
 
 # Fonts Sierra update:
+# https://github.com/bhilburn/powerlevel9k/issues/235
 install Sauce Code Pro Nerd Font Complete from https://github.com/ryanoasis/nerd-fonts
 
 # Brew services management
