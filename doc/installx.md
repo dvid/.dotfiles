@@ -65,6 +65,10 @@ sudo apachectl start
 date.timezone = Europe/Brussels
 memory_limit = 512M
 
+# PHP extensions
+phpbrew ext install soap
+# uncomment extension=php_soap.dll in php.ini
+
 # Composer
 curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer

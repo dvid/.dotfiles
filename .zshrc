@@ -61,7 +61,7 @@ case $HOST in
                 alias ei3="vi ~/.dot/.config/i3/config"
 				alias emycnf="sudo vi /etc/my.cnf"
 				alias evhosts="sudo vi /private/etc/apache2/extra/httpd-vhosts.conf"
-				alias ephpini="sudo vi /etc/php.ini"
+				alias ephpini="sudo vi ~/.phpbrew/php/php-5.6.4/etc/php.ini"
 				alias ehttpd="sudo vi /etc/apache2/httpd.conf"
 				alias arestart="sudo apachectl restart"
 				;;
@@ -86,7 +86,7 @@ POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time load)
 #POWERLEVEL9K_STATUS_VERBOSE=false
-POWERLEVEL9K_OK_ICON=''
+#POWERLEVEL9K_OK_ICON=''
 POWERLEVEL9K_STATUS_OK_BACKGROUND='000'
 POWERLEVEL9K_STATUS_OK_FOREGROUND='yellow'
 POWERLEVEL9K_STATUS_ERROR_BACKGROUND='000'
