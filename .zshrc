@@ -27,27 +27,37 @@ case $HOST in
                 #archey
 
                 # Alias
+				alias reboot="sudo shutdown -r now"
+				alias shutdown="sudo shutdown -h now"
                 alias ezsh="vi ~/.dot/.zshrc"
                 alias evim="vi ~/.dot/.vimrc"
                 alias ei3="vi ~/.dot/.config/i3/config"
+				alias eenv="sudo vi /etc/environment"
+				alias exre="vi ~/.Xresources"
+				alias rxre="xrdb ~/.Xresources"
+				alias cfc="fc-cache -fv ~/.local/share/fonts"
+				alias lfl="fc-list | grep .local/share/fonts"
+				alias lfi="fc-list | grep " 	#fontname as argument
+				alias mfi="fc-match " 			#fontname as argument
+				alias urxvtfont="urxvt -fn " 	#"xft:TerminessTTF Nerd Font"
+				alias pli="pacman -Qqen | grep " #list installed pacman packages
+				alias pbcopy="xclip -selection c"
+				alias pbpaste="xclip -selection clipboard -o"
+				alias timer="echo n7Dv23kh | pbcopy && firefox 'https://webgate.ec.europa.eu/fpfis/timeclock/timeclock.php'"
+				alias clock="tty-clock -c -s"
+				alias pstorm="/usr/local/bin/pstorm"
+				alias aconftest="apachectl configtest"
+				alias astatus="systemctl status httpd.service"
+				alias sshs="sudo systemctl start sshd.service"
+				alias sshd="sudo systemctl enable sshd.service"
+				alias sshdev="ssh isa@s-cnect-isadru"
+				alias sqlre="mysql.server restart"
 				alias emycnf="sudo vi /etc/mysql/my.cnf"
 				alias evhosts="sudo vi /etc/httpd/conf/extra/httpd-vhosts.conf"
 				alias ephpini="sudo vi /etc/php/php.ini"
 				alias ehttpd="sudo vi /etc/httpd/conf/httpd.conf"
 				alias arestart="sudo systemctl restart httpd"
-				alias eenv="sudo vi /etc/environment"
 				alias selenium="java -jar /home/david/selenium-server-standalone-2.37.0.jar"
-				alias reboot="sudo shutdown -r now"
-				alias shutdown="sudo shutdown -h now"
-				alias exre="vi ~/.Xresources"
-
-				# urxvt -fn "xft:TerminessTTF Nerd Font"
-				# xrdb ~/.Xresource
-				# fc-list | grep nerd
-				# fc-cache -vf ~/.local/share/fonts/
-				# sudo pacman -S yaourt
-				# yaourt -Syy
-				# yaourt -S nerd-fonts-complete
 				;;
 
   "octogone" | "captan.local" | "gbw-l-m0013.local")
@@ -121,18 +131,8 @@ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='011'
 POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
 POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='011'
 
-#vi /home/david/.oh-my-zsh/custom/themes/powerlevel9k/functions/icons.zsh
-
-#GOTHAM_SHELL="$HOME/.oh-my-zsh/custom/themes/gotham.sh"
-#[[ -s $GOTHAM_SHELL ]] && source $GOTHAM_SHELL
-
 # Editor
 export EDITOR=vim
-
-#autoload -Uz colors && colors
-#autoload -U compinit colors zcalc
-#compinit
-#colors
 
 setopt correct          # Auto correct mistakes
 setopt extendedglob     # Extended globbing
@@ -149,34 +149,10 @@ setopt autocd
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="dd/mm/yyyy"
 HISTSIZE=
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
 #export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/share/webapps/composer/bin"
-#export PATH="$HOME/.composer/vendor/bin:$PATH"
 #export PHP_INI='/etc/php/php.ini'
 #export DRUSH_INI='/usr/local/share/drush/drush.ini'
 #export PHP_OPTIONS='-d memory_limit="1024M"'
@@ -185,14 +161,7 @@ export PATH="$HOME/.composer/vendor/bin/:$PATH"
 tput init
 
 # export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-#export LANG=en_US.UTF-8
-
-# xterm-256color
-#export TERM="xterm-256color"
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -201,56 +170,35 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Alias
 # Vim Quick edit mode
-# Used also by git
+# also used by git
 vi(){
 	vim $*
     echo -e \\033c
 }
 
-# Vim Quick edit mode
+# Vim fast edit mode
 vv(){
 	vim --noplugin $*
     echo -e \\033c
 }
 
-# Opens Macvim with open -a, for opening new cmd lines files
+# Opens Macvim with open -a argument. 
+# Needed to open files through cmd line.
 # mvim () { ([[ -z $@ ]] || touch "$@" ) && open -a MacVim "$@"; }
 
 # Alias Common
 alias grep='grep --color=auto'
 alias ehosts="sudo vi /etc/hosts"
 
-# System
-alias rxr="xrdb ~/.Xresources"
-alias cfc="fc-cache -fv ~/.local/share/fonts"
-alias lmf="fc-list | grep .local/share/fonts"
-alias pbcopy="xclip -selection c"
-alias pbpaste="xclip -selection clipboard -o"
-alias timer="echo n7Dv23kh | pbcopy && firefox 'https://webgate.ec.europa.eu/fpfis/timeclock/timeclock.php'"
-
-# Launcher
-alias clock="tty-clock -c -s"
-alias pstorm="/usr/local/bin/pstorm"
-alias aconftest="apachectl configtest"
-alias astatus="systemctl status httpd.service"
-alias sshs="sudo systemctl start sshd.service"
-alias sshd="sudo systemctl enable sshd.service"
-alias sshdev="ssh isa@s-cnect-isadru"
-alias sqlre="mysql.server restart"
-
 # Git
 alias gs="git status"
-alias grl="git reset --soft HEAD\^"     #Reset unpushed local commits
+alias grh="git reset --soft HEAD\^"     #Reset unpushed local commits
 alias gpr="git remote prune origin"		#Git prune
-alias gh="git log -p"                  #let git generate the patches for each log entry
+alias gh="git log -p"                   #let git generate the patches for each log entry
 alias gfh="git log --follow -p -- "		#Show file history / gitk
 alias glog="git log --all --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'\n--abbrev-commit --date=relative"
 alias gsl="git stash list"
@@ -286,33 +234,13 @@ assignProxy(){
    assignProxy $proxy_value $no_proxy_value
  }
 
-#sudo fc-cache -vf
-#fc-cache
-#fc-list
-#sudo mkfontscale
-#sudo mkfontdir
-#xrdb -q
-#systemctl --failed
-#sudo localectl set-locale en_US.UTF-8
-#vi +PluginInstall +qall
-#fc-match FontAwesome 				#search font if installed
-#urxvt -fn "xft:FontAwesome" 		#test urxvt with passed font
-#pacman -Qqen | grep z 				#list installed pacman packages
-#echo "\uF008" "\uF20A" "\uE20E"
-#echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699" "\uE0B0"
-#xset q								#list system settings
-#xset +fp /home/david/.local/share/fonts #define new font path
+###     ###
+# Plugins #
+###     ###
 
-# Plugins
-
-#source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source ~/.oh-my-zsh/custom/plugins/zsh-256color/zsh-256color.plugin.zsh
 source ~/.dot/vendor/powerline/powerline/powerline/bindings/zsh
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+# Oh-my-zsh Plugins
 plugins=(
 	extract
     git
@@ -321,16 +249,9 @@ plugins=(
 	z
 )
 
- #
- #
- #    if [ "$#" -eq  "0" ]
- #    then
- #        echo "No arguments supplied"
- #    else
- #        echo "Hello world"
- #    fi
-
-# Functions
+###     ###
+#Functions#
+###     ###
 
 # ex - archive extractor
 # usage: ex <file>
@@ -396,3 +317,23 @@ t       create tab
 d       close current tab
 u       restore closed tab (unwind the 'd' command)
 '"
+
+# sudo pacman -S yaourt
+# yaourt -Syy
+# yaourt -S nerd-fonts-complete
+#sudo mkfontscale
+#sudo mkfontdir
+#systemctl --failed
+#sudo localectl set-locale en_US.UTF-8
+#
+#echo "\uF008" "\uF20A" "\uE20E"
+#echo "\ue0b0 \u00b1 \ue0a0 \u27a6 \u2718 \u26a1 \u2699" "\uE0B0"
+#xset q								#list system settings
+#xset +fp /home/david/.local/share/fonts #define new font path
+
+#    if [ "$#" -eq  "0" ]
+#    then
+#        echo "No arguments supplied"
+#    else
+#        echo "Hello world"
+#    fi
