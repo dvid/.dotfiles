@@ -11,19 +11,20 @@
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 case $HOST in
-  "Manjaro") 	# Z
-                . /usr/local/src/z/z.sh
+  "Manjaro") 	
+				# Powerlevel9k Mode
+				# POWERLEVEL9K_MODE='awesome-fontconfig'
+				POWERLEVEL9K_MODE='nerdfont-complete'
+				# POWERLEVEL9K_MODE='awesome-patched'
+                # POWERLEVEL9K_LOAD_ICON=''
+                # POWERLEVEL9K_HOME_SUB_ICON=''
+                # POWERLEVEL9K_FOLDER_ICON=''
+				# POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=$'\uE0B3'
 
                 # Path to your oh-my-zsh installation.
                 ZSH=/home/david/.oh-my-zsh
 
                 #archey
-
-				# Powerlevel9k
-                POWERLEVEL9K_LOAD_ICON=''
-                POWERLEVEL9K_HOME_SUB_ICON=''
-                POWERLEVEL9K_FOLDER_ICON=''
-				POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
 
                 # Alias
                 alias ezsh="vi ~/.dot/.zshrc"
@@ -36,6 +37,17 @@ case $HOST in
 				alias arestart="sudo systemctl restart httpd"
 				alias eenv="sudo vi /etc/environment"
 				alias selenium="java -jar /home/david/selenium-server-standalone-2.37.0.jar"
+				alias reboot="sudo shutdown -r now"
+				alias shutdown="sudo shutdown -h now"
+				alias exre="vi ~/.Xresources"
+
+				# urxvt -fn "xft:TerminessTTF Nerd Font"
+				# xrdb ~/.Xresource
+				# fc-list | grep nerd
+				# fc-cache -vf ~/.local/share/fonts/
+				# sudo pacman -S yaourt
+				# yaourt -Syy
+				# yaourt -S nerd-fonts-complete
 				;;
 
   "octogone" | "captan.local" | "gbw-l-m0013.local")
@@ -74,20 +86,24 @@ case $HOST in
 				;;
 esac
 
+
+# fasd init
+eval "$(fasd --init auto)"
+
 # phpbrew
 [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
 
 #POWERLEVEL9K_LINUX_ICON=$'\uF201'
-POWERLEVEL9K_LINUX_ICON=''
 POWERLEVEL9K_APPLE_ICON=''
 POWERLEVEL9K_HOME_ICON=''
 #POWERLEVEL9K_VCS_BRANCH_ICON=$'\UF126'
 POWERLEVEL9K_COLOR_SCHEME='light'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs) #os_icon 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time load)
 #POWERLEVEL9K_STATUS_VERBOSE=false
 #POWERLEVEL9K_OK_ICON=''
 POWERLEVEL9K_STATUS_OK_BACKGROUND='000'
+#POWERLEVEL9K_STATUS_OK_BACKGROUND='000'
 POWERLEVEL9K_STATUS_OK_FOREGROUND='yellow'
 POWERLEVEL9K_STATUS_ERROR_BACKGROUND='000'
 POWERLEVEL9K_TIME_FOREGROUND='000'
@@ -229,16 +245,6 @@ alias sshs="sudo systemctl start sshd.service"
 alias sshd="sudo systemctl enable sshd.service"
 alias sshdev="ssh isa@s-cnect-isadru"
 alias sqlre="mysql.server restart"
-
-# Manjaro updates
-alias linstalk="mhwd-kernel -li" 		#list installed kernels
-alias llk="mhwd-kernel -l" 				#list linux kernels available
-alias ilk="sudo mhwd-kernel -i linux"	#install linux kernel version ex:linux41
-alias ums="sudo pacman -Syu"
-
-# Reboot - Shutdown
-alias reboot="sudo shutdown -r now"
-alias shutdown="sudo shutdown -h now"
 
 # Git
 alias gs="git status"

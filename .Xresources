@@ -64,6 +64,12 @@ URxvt*background:                     black
 URxvt*foreground:                     grey
 URxvt*saveLines:                      5000
 
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.letterSpace: 0
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
 ! Appearance
 !URxvt.font: xft:Consolas:size=10, xft:Inconsolata for Powerline
 !URxvt*font: xft:Monaco for Powerline:regular:size=10
@@ -71,10 +77,17 @@ URxvt*saveLines:                      5000
 !URxvt.font: xft:Inconsolata for Powerline:size=10, xft:InconsolataAwesome:size=10, xft: FontAwesome:style=regular:size=10
 !URxvt.font: xft:Meslo LG L Regular for Powerline:size=10
 !URxvt.font: xft:Anonymice Powerline:size=10, xft:Inconsolata for Powerline:size=10, xft:fontawesome-regular:size=10
-!URxvt.font: xft:Anonymice Powerline:size=10, xft:Anonymice Powerline Nerd Font Complete:size=10
+!URxvt.font: xft:Anonymice Powerline Nerd Font Complete:size=10
 !URxvt.font: xft:InconsolataAwesome:size=10
-
-URxvt.font: xft:Source Code Pro for Powerline:size=10
+!URxvt.font: xft:Terminus:size=11:antialias=true, Source Code Pro for Powerline:size=10
+!URxvt.font: xft:SourceCodeProForPowerline:size=10, xft: PowerlineSymbols:size=10 NF:pixelsize=9, xft:devicons:size=10
+!URxvt.font: xft:Source Code Pro for Powerline:size=10, xft:DejaVu Sans:pixelsize=18, xft:Inconsolata\ for\ Powerline:pixelsize=12←
+!!URxvt*font: xft:Source Code Pro for Powerline:pixelsize=13:antialias=true:hinting=true,xft:Source\ Code\ Pro\ Medium:pixelsize=13:antialias=true:hinting=true
+!URxvt.font: xft:Terminus:size=11:antialias=true, xft:TerminessTTF Nerd Font Mono
+URxvt.font: xft:FuraCode Nerd Font Mono, xft:Terminus
+!URxvt.font: xft:TerminessTTF Nerd Font Mono
+!!!!!URxvt.font: xft:Source Code Pro for Powerline:size=10,xft:Terminus:size=11:antialias=true, xft: PowerlineSymbols:size=10 NF:pixelsize=9, Powerline:size=10
+!!URxvt.font: xft:Source Code Pro for Powerline:size=10, xft: PowerlineSymbols:size=10 NF:pixelsize=9
 !URxvt.font: xft:Anonymice Powerline:size=10, xft: FontAwesome NF:pixelsize=9, xft:PowerlineSymbols NF:pixelsize=9, xft:devicons:size=10
 !URxvt.font: xft:SourceCodePro+Powerline+Awesome+Regular:size=10
 !URxvt.font: xft: Meslo LG M Regular for Powerline Nerd Font Complete Mono Windows Compatible:size=10
