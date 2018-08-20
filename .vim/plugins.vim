@@ -9,7 +9,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-vinegar'
-Plugin 'ntpeters/vim-better-whitespace'
+"Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'majutsushi/tagbar'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
