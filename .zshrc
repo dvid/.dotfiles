@@ -7,8 +7,38 @@
 #    ██████ ██████ ░██  ░██░███   ░░█████
 #   ░░░░░░ ░░░░░░  ░░   ░░ ░░░     ░░░░░
 
+echo "test"
+source ~/.bashrc
 
 ZSH_THEME="powerlevel9k/powerlevel9k"
+
+#POWERLEVEL9K_LINUX_ICON=$'\uF201'
+POWERLEVEL9K_APPLE_ICON=''
+POWERLEVEL9K_HOME_ICON=''
+#POWERLEVEL9K_VCS_BRANCH_ICON=$'\UF126'
+POWERLEVEL9K_COLOR_SCHEME='light'
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs) #os_icon 
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time load)
+#POWERLEVEL9K_STATUS_VERBOSE=false
+#POWERLEVEL9K_OK_ICON=''
+POWERLEVEL9K_STATUS_OK_BACKGROUND='000'
+#POWERLEVEL9K_STATUS_OK_BACKGROUND='000'
+POWERLEVEL9K_STATUS_OK_FOREGROUND='yellow'
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND='000'
+POWERLEVEL9K_TIME_FOREGROUND='000'
+POWERLEVEL9K_TIME_BACKGROUND='007'
+POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND="black"
+POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND="red"
+POWERLEVEL9K_LOAD_WARNING_BACKGROUND="black"
+POWERLEVEL9K_LOAD_WARNING_FOREGROUND="022"
+POWERLEVEL9K_LOAD_NORMAL_BACKGROUND="black"
+POWERLEVEL9K_LOAD_NORMAL_FOREGROUND="yellow"
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='black'
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='yellow'
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='black'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='011'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='011'
 
 case $HOST in
   "Manjaro") 	
@@ -60,7 +90,10 @@ case $HOST in
 				alias selenium="java -jar /home/david/selenium-server-standalone-2.37.0.jar"
 				;;
 
-  "octogone" | "captan.local" | "gbw-l-m0013.local")
+  "octogone" | "captan.local")
+				# phpbrew
+				[[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
+
                 # Z
                 . ~/.oh-my-zsh/plugins/z/z.sh
 
@@ -88,6 +121,38 @@ case $HOST in
 				alias arestart="sudo apachectl restart"
 				;;
 
+ "NGG123")
+				#export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+				# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+				#export PATH="$PATH:$HOME/.rvm/bin"
+
+                # ValueError: unknown locale: UTF-8 vim
+                export LC_ALL=en_US.UTF-8
+                export LANG=en_US.UTF-8
+
+				# Powerlevel9k
+				POWERLEVEL9K_MODE='awesome-fontconfig'
+
+                #oh-my-zsh
+                export ZSH=~/.oh-my-zsh
+				#source $ZSH/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+                #source $ZSH/oh-my-zsh.sh
+
+                # Alias
+                alias ezsh="vi ~/.dot/.zshrc"
+                alias evim="vi ~/.dot/.vimrc"
+				alias dockerls="docker container ls -a"
+				alias dicecontainer="denter dicespinner_dicespinner-app_1"
+				alias nsdcontainer="denter napoleonspinnerdeluxe_napoleonspinnerdeluxe-app_1"
+				alias test="ls -al"
+
+				function denter(){
+					if [ -z "$1" ]; then echo "\nPlease:\n denter [ContainerName]\n\nView:\n docker container ls\n" ;else docker exec -it "$1" /bin/bash ;fi;
+				}
+
+				;;
+
   *)			echo "No Host defined"
 
                 alias ezsh="vi ~/.zshrc"
@@ -96,40 +161,8 @@ case $HOST in
 				;;
 esac
 
-
 # fasd init
-eval "$(fasd --init auto)"
-
-# phpbrew
-[[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
-
-#POWERLEVEL9K_LINUX_ICON=$'\uF201'
-POWERLEVEL9K_APPLE_ICON=''
-POWERLEVEL9K_HOME_ICON=''
-#POWERLEVEL9K_VCS_BRANCH_ICON=$'\UF126'
-POWERLEVEL9K_COLOR_SCHEME='light'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs) #os_icon 
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time load)
-#POWERLEVEL9K_STATUS_VERBOSE=false
-#POWERLEVEL9K_OK_ICON=''
-POWERLEVEL9K_STATUS_OK_BACKGROUND='000'
-#POWERLEVEL9K_STATUS_OK_BACKGROUND='000'
-POWERLEVEL9K_STATUS_OK_FOREGROUND='yellow'
-POWERLEVEL9K_STATUS_ERROR_BACKGROUND='000'
-POWERLEVEL9K_TIME_FOREGROUND='000'
-POWERLEVEL9K_TIME_BACKGROUND='007'
-POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND="black"
-POWERLEVEL9K_LOAD_CRITICAL_FOREGROUND="red"
-POWERLEVEL9K_LOAD_WARNING_BACKGROUND="black"
-POWERLEVEL9K_LOAD_WARNING_FOREGROUND="022"
-POWERLEVEL9K_LOAD_NORMAL_BACKGROUND="black"
-POWERLEVEL9K_LOAD_NORMAL_FOREGROUND="yellow"
-POWERLEVEL9K_VCS_CLEAN_FOREGROUND='black'
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND='yellow'
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='black'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='011'
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='011'
+#eval "$(fasd --init auto)"
 
 # Editor
 export EDITOR=vim
@@ -149,7 +182,8 @@ setopt autocd
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
 
-HIST_STAMPS="dd/mm/yyyy"
+HISTCONTROL=ignoredups
+HIST_STAMPS="%d/%m/%y %T"
 HISTSIZE=
 
 #export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/usr/share/webapps/composer/bin"
@@ -157,11 +191,8 @@ HISTSIZE=
 #export DRUSH_INI='/usr/local/share/drush/drush.ini'
 #export PHP_OPTIONS='-d memory_limit="1024M"'
 #export DRUSH_NOCOLOR=FALSE
-export PATH="$HOME/.composer/vendor/bin/:$PATH"
-tput init
-
-# export MANPATH="/usr/local/man:$MANPATH"
-source $ZSH/oh-my-zsh.sh
+#export PATH="$HOME/.composer/vendor/bin/:$PATH"
+#tput init
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -234,20 +265,6 @@ assignProxy(){
    assignProxy $proxy_value $no_proxy_value
  }
 
-###     ###
-# Plugins #
-###     ###
-
-source ~/.dot/vendor/powerline/powerline/powerline/bindings/zsh
-
-# Oh-my-zsh Plugins
-plugins=(
-	extract
-    git
-    #zsh-syntax-highlighting
-    #zsh-256color
-	z
-)
 
 ###     ###
 #Functions#
@@ -337,3 +354,34 @@ u       restore closed tab (unwind the 'd' command)
 #    else
 #        echo "Hello world"
 #    fi
+#export PATH=$PATH:~/bin/slack-theme
+#export SLACK_THEME_SHELL_PROFILE="~/.zshrc"
+
+###     ###
+# Plugins #
+###     ###
+
+
+# Oh-my-zsh Plugins
+plugins=(
+	extract
+    git
+    #zsh-syntax-highlighting
+    #zsh-256color
+	#copyfile
+	#docker
+	#fasd
+	#history
+	#osx
+	#phing
+	#systemd
+	zsh-autosuggestions
+	z
+)
+
+# export MANPATH="/usr/local/man:$MANPATH"
+source $ZSH/oh-my-zsh.sh
+#ZSH_CUSTOM=$ZSH/custom
+
+#source ~/.dot/vendor/powerline/powerline/powerline/bindings/zsh
+#source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

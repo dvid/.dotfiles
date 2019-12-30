@@ -47,7 +47,7 @@ if machine == "Manjaro"
     " Powerline is only set vim
     set rtp+=~/.dot/vendor/powerline/powerline/powerline/bindings/vim/
 
-elseif 	machine == "captan.local" || machine == "octogone" || machine == "gbw-l-m0013.local"
+elseif 	machine == "captan.local" || machine == "octogone" || machine == "NGG123"
 
 	let shiftup = "<S-Up>"
 	let shiftdown = "<S-Down>"
