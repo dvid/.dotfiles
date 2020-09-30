@@ -8,7 +8,10 @@
 #   ░░░░░░ ░░░░░░  ░░   ░░ ░░░     ░░░░░
 
 
-ZSH_THEME="powerlevel9k/powerlevel9k"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+export ZSH=~/.oh-my-zsh
 
 case $HOST in
   "Manjaro") 	
@@ -60,9 +63,9 @@ case $HOST in
 				alias selenium="java -jar /home/david/selenium-server-standalone-2.37.0.jar"
 				;;
 
-  "octogone" | "captan.local" | "gbw-l-m0013.local")
+  "octogone" | "captan.local" | "gbw-l-m0013.local" | "WP2423" )
                 # Z
-                . ~/.oh-my-zsh/plugins/z/z.sh
+                #. ~/.oh-my-zsh/plugins/z/z.sh
 
 				# Powerlevel9k
 				POWERLEVEL9K_MODE='awesome-fontconfig'
@@ -98,7 +101,7 @@ esac
 
 
 # fasd init
-eval "$(fasd --init auto)"
+#eval "$(fasd --init auto)"
 
 # phpbrew
 [[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc
@@ -110,12 +113,12 @@ POWERLEVEL9K_HOME_ICON=''
 POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs) #os_icon 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time load)
-#POWERLEVEL9K_STATUS_VERBOSE=false
+POWERLEVEL9K_STATUS_VERBOSE=false
 #POWERLEVEL9K_OK_ICON=''
 POWERLEVEL9K_STATUS_OK_BACKGROUND='000'
-#POWERLEVEL9K_STATUS_OK_BACKGROUND='000'
 POWERLEVEL9K_STATUS_OK_FOREGROUND='yellow'
-POWERLEVEL9K_STATUS_ERROR_BACKGROUND='000'
+POWERLEVEL9K_STATUS_ERROR_FOREGROUND='black'
+POWERLEVEL9K_STATUS_ERROR_BACKGROUND='red'
 POWERLEVEL9K_TIME_FOREGROUND='000'
 POWERLEVEL9K_TIME_BACKGROUND='007'
 POWERLEVEL9K_LOAD_CRITICAL_BACKGROUND="black"
@@ -238,7 +241,7 @@ assignProxy(){
 # Plugins #
 ###     ###
 
-source ~/.dot/vendor/powerline/powerline/powerline/bindings/zsh
+source ~/.dotfiles/vendor/powerline/powerline/powerline/bindings/zsh
 
 # Oh-my-zsh Plugins
 plugins=(
@@ -337,3 +340,8 @@ u       restore closed tab (unwind the 'd' command)
 #    else
 #        echo "Hello world"
 #    fi
+
+# BEGIN SNIPPET: Platform.sh CLI configuration
+HOME=${HOME:-'/home/dpo'}
+export PATH="$HOME/"'.platformsh/bin':"$PATH"
+if [ -f "$HOME/"'.platformsh/shell-config.rc' ]; then . "$HOME/"'.platformsh/shell-config.rc'; fi # END SNIPPET
